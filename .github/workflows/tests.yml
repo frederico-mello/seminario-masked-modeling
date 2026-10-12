@@ -27,7 +27,7 @@ jobs:
       - name: Instalar uv e sincronizar o ambiente
         run: |
           python -m pip install --upgrade pip uv
-          uv sync
+          uv sync --locked
 
       - name: Rodar testes
         run: uv run pytest -q
