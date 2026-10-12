@@ -25,23 +25,14 @@ Comparar experimentalmente duas proporções de máscara, usando métricas e res
 ## Roteiro, com tempo total de 20 minutos
 
 | Tempo | Conteúdo |
-
 |---|---|
-
 | 00:00 a 02:00 | Título, integrantes, questão norteadora e motivação: aprender com dados sem anotação manual. |
-
 | 02:00 a 05:00 | Conceitos: auto-supervisão, máscara, alvo de predição, pré-treinamento e transferência. Introdução breve a BERT. |
-
 | 05:00 a 08:00 | Comparação de BERT, MAE e SimMIM: modalidade, conteúdo previsto, perda e arquitetura. |
-
 | 08:00 a 11:00 | Diagrama do processo MAE e explicação da arquitetura assimétrica. |
-
 | 11:00 a 15:00 | Derivação da função objetivo e pseudocódigo do treinamento. |
-
 | 15:00 a 18:00 | Experimento, métricas, visualizações e interpretação dos resultados obtidos. |
-
 | 18:00 a 19:00 | Aplicações, limitações e conclusões. |
-
 | 19:00 a 20:00 | Pergunta ou comentário final. |
 
 ## Diagrama de blocos proposto
