@@ -1,0 +1,12 @@
+# .mira.yaml - ajustes de review deste repositório.
+#
+# O workflow reutilizável já supre endpoint, credencial, modelo e os padrões;
+# este arquivo é mesclado POR CIMA (lista só o que este repo muda).
+
+filter:
+  max_comments: 5
+
+review:
+  walkthrough: true
+  include_summary: true
+  context_lines: 5
