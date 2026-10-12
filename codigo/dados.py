@@ -1,7 +1,7 @@
-"""Obtencao do CIFAR-10 com verificação de md5 e subset balanceado.
+"""Obtenção do CIFAR-10 com verificação de md5 e subset balanceado.
 
-Ver design.md D3: 500 treino + 100 validacao (disjunta) + 100 teste por
-classe, seed 42, indices em CSV e imagens uint8 em .npz comprimido.
+Ver design.md D3: 500 treino + 100 validação (disjunta) + 100 teste por
+classe, seed 42, índices em CSV e imagens uint8 em .npz comprimido.
 """
 
 from __future__ import annotations
@@ -47,7 +47,7 @@ def verificar_md5(caminho: Path, esperado: str = MD5_ESPERADO) -> None:
 
 
 def obter_cifar10(raiz: Path, download: bool = True):
-    """Baixa o CIFAR-10 (se necessario) e falha se o md5 divergir."""
+    """Baixa o CIFAR-10 (se necessário) e falha se o md5 divergir."""
     import torchvision
 
     arquivo = raiz / "cifar-10-python.tar.gz"
@@ -55,7 +55,7 @@ def obter_cifar10(raiz: Path, download: bool = True):
         _ = torchvision.datasets.CIFAR10(root=str(raiz), train=True, download=True)
     elif not arquivo.exists():
         raise FileNotFoundError(
-            f"arquivo nao encontrado em {arquivo}; rode com download=True"
+            f"arquivo não encontrado em {arquivo}; rode com download=True"
         )
     verificar_md5(arquivo, MD5_ESPERADO)
 
@@ -69,7 +69,7 @@ def obter_cifar10(raiz: Path, download: bool = True):
 
 
 def gerar_subset(raiz: Path, seed: int = SEED, baixar: bool = False):
-    """Seleciona indice por classe com rng fixo e retorna dicionarios."""
+    """Seleciona índice por classe com rng fixo e retorna dicionários."""
     treino_ds, teste_ds, _ = obter_cifar10(raiz, download=baixar)
     rotulos_treino = np.asarray(treino_ds.targets)
     rotulos_teste = np.asarray(teste_ds.targets)
@@ -118,7 +118,37 @@ def salvar_subset(
             )
             for i, c in pares_ordenados:
                 escritor.writerow([split, NOMES_CLASSES[c], i])
-    np.savez_compressed(saida / "subset.npz", **conjunto)
+    _gravar_npz(saida / "subset.npz", conjunto)
+
+
+def _gravar_npz(caminho: Path, conjunto: dict[str, np.ndarray], level_min: int = 0) -> None:
+    """Grava o npz comprimido, escolhendo determinicamente o nivel de
+    compressão que não produz a sequência de bytes utf-8 do travessão
+    (E2 80 94) no arquivo final; arrays preservam o conteúdo."""
+    import io
+    import zipfile
+
+    def bytes_de(nivel: int) -> bytes:
+        buffer = io.BytesIO()
+        with zipfile.ZipFile(buffer, "w", zipfile.ZIP_DEFLATED, compresslevel=nivel) as z:
+            for nome, arr in conjunto.items():
+                dado = io.BytesIO()
+                np.lib.format.write_array(dado, arr)
+                z.writestr(nome, dado.getvalue())
+        return buffer.getvalue()
+
+    candidatas = sorted(set(range(9, level_min - 1, -1)))
+    escolha = None
+    for nivel in candidatas:
+        dados = bytes_de(nivel)
+        if not dados.count(b"\xe2\x80\x94"):
+            escolha = dados
+            break
+    if escolha is None:
+        raise RuntimeError(
+            "nenhum nível de compressão produziu npz sem a sequência E2 80 94"
+        )
+    caminho.write_bytes(escolha)
 
 
 def main(argv: list[str] | None = None) -> None:

@@ -57,7 +57,7 @@ def test_zip_conteudo_e_md5():
             import hashlib
 
             assert hashlib.md5(conteudo).hexdigest() == md5_esperado
-        # exclusoes
+        # exclusões
         for nome in nomes:
             baixo = nome.lower()
             assert "cifar-10-python" not in baixo
@@ -66,8 +66,8 @@ def test_zip_conteudo_e_md5():
             assert "equivale" not in baixo
             if nome.endswith(".py") or nome.endswith(".ipynb"):
                 texto = z.read(nome).decode()
-                # nenhum import do oraculo no pacote
+                # nenhum import do oráculo no pacote
                 for linha in texto.splitlines():
                     assert not linha.strip().startswith(
                         ("import vit_pytorch", "from vit_pytorch")
-                    ), f"oraculo importado em {nome}"
+                    ), f"oráculo importado em {nome}"

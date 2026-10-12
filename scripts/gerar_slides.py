@@ -105,9 +105,9 @@ def verificar_limites(pr) -> None:
 
 def principal():
     m = pd.read_csv(RESULTADOS / "metricas.csv")
-    linha50 = m[m["condicao"] == "mascara_50"].iloc[0]
-    linha75 = m[m["condicao"] == "mascara_75"].iloc[0]
-    epocas = int(linha50["epocas"])
+    linha50 = m[m["condição"] == "mascara_50"].iloc[0]
+    linha75 = m[m["condição"] == "mascara_75"].iloc[0]
+    epocas = int(linha50["épocas"])
     batch = int(linha50["batch"])
     lr = float(linha50["lr"])
     tempo_epoca = float(linha50["tempo_epoca_medido_s"])
@@ -203,7 +203,7 @@ def principal():
         pr,
         "Resultados: reconstruções",
         RESULTADOS / "reconstrucoes.png",
-        "8 imagens fixas do teste (seed 42): original, mascarada e reconstrucao por condicao",
+        "8 imagens fixas do teste (seed 42): original, mascarada e reconstrução por condição",
     )
     slide_imagem(
         pr,

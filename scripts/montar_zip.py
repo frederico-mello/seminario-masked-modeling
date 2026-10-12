@@ -1,10 +1,10 @@
-"""Monta o zip de entrega, conferindo presenca e md5 de cada arquivo obrigatorio.
+"""Monta o zip de entrega, conferindo presença e md5 de cada arquivo obrigatório.
 
 Rode: uv run python scripts/montar_zip.py
-Verificacoes: se algum arquivo obrigatorio esta ausente, a montagem falha
+Verificações: se algum arquivo obrigatório está ausente, a montagem falha
 antes de gravar o zip. A lista de md5 fica em scripts/md5_pacote.csv.
-Exclusoes (spec pacote-entrega): dados brutos, checkpoints, validador do
-oraculo e testes de equivalencia nao entram no zip.
+Exclusões (spec pacote-entrega): dados brutos, checkpoints, validador do
+oráculo e testes de equivalência não entram no zip.
 """
 
 from __future__ import annotations
@@ -20,7 +20,7 @@ RAIZ = Path(__file__).resolve().parent.parent
 ZIP_ALVO = RAIZ / "seminario_masked_modeling.zip"
 REGISTRO_MD5 = RAIZ / "scripts" / "md5_pacote.csv"
 
-# arquivos obrigatorios: origem no repositorio -> destino dentro do zip
+# arquivos obrigatórios: origem no repositório -> destino dentro do zip
 OBRIGATORIOS = {
     "slides/seminario_masked_modeling.pptx": "slides/seminario_masked_modeling.pptx",
     "slides/seminario_masked_modeling.pdf": "slides/seminario_masked_modeling.pdf",
@@ -66,7 +66,7 @@ def conferir_obrigatorios() -> dict[str, Path]:
     ausentes = [c for c in OBRIGATORIOS if not (RAIZ / c).exists()]
     if ausentes:
         raise FileNotFoundError(
-            f"arquivos obrigatorios ausentes: {ausentes}; zip NAO gravado"
+            f"arquivos obrigatórios ausentes: {ausentes}; zip NÃO gravado"
         )
     return dict(OBRIGATORIOS)
 
@@ -79,7 +79,7 @@ def gravar_zip(origem_para_destino: dict[str, str]) -> None:
         for proibido in PROIBIDOS:
             if proibido in destino.lower():
                 raise RuntimeError(
-                    f"{destino} conteudo proibido no pacote ({proibido})"
+                    f"{destino} conteúdo proibido no pacote ({proibido})"
                 )
     temp = None
     with tempfile.TemporaryDirectory() as tmp:
@@ -90,7 +90,7 @@ def gravar_zip(origem_para_destino: dict[str, str]) -> None:
                 origem = RAIZ / destino_para_origem[destino]
                 z.write(origem, destino)
                 linhas.append((destino, md5(origem)))
-        # checagem final do zip em memoria antes de publica-lo
+        # checagem final do zip em memória antes de publicá-lo
         with zipfile.ZipFile(caminho_zip) as z:
             lista = z.namelist()
             assert sorted(lista) == destino_lista

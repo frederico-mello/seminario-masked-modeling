@@ -1,11 +1,11 @@
-"""MAE proprio em PyTorch puro para o seminario de Masked Modeling.
+"""MAE próprio em PyTorch puro para o seminário de Masked Modeling.
 
 Arquitetura (ver openspec, spec mae-modelo):
 - Entrada: imagem 32x32x3 com valores em [0,1], 16 patches de 8x8.
-- Encoder: dim 128, 4 blocos, 4 heads, processa somente os patches visiveis.
-- Decoder: dim 64, 2 blocos, 4 heads, previu 192 valores por patch (8x8x3).
+- Encoder: dim 128, 4 blocos, 4 heads, processa somente os patches visíveis.
+- Decoder: dim 64, 2 blocos, 4 heads, prevê 192 valores por patch (8x8x3).
 - Perda: MSE somente nos patches ocultos, em pixels brutos em [0,1].
-- Mascara aninhada: permutacao fixa dos 16 indices por imagem com seed 42.
+- Máscara aninhada: permutação fixa dos 16 índices por imagem com seed 42.
 """
 
 from __future__ import annotations
@@ -26,7 +26,7 @@ def patchify(imagens: torch.Tensor) -> torch.Tensor:
     b, c, h, w = imagens.shape
     p = 8
     if h % p != 0 or w % p != 0:
-        raise ValueError(f"dimensao {h}x{w} nao divisivel pelo patch {p}")
+        raise ValueError(f"dimensão {h}x{w} não divisível pelo patch {p}")
     if imagens.min() < 0.0 or imagens.max() > 1.0:
         raise ValueError("valores fora do intervalo [0,1]")
     patches = imagens.reshape(b, c, h // p, p, w // p, p)
@@ -46,9 +46,9 @@ def unpatchify(patches: torch.Tensor) -> torch.Tensor:
 
 
 def permutacoes_fixas(n_imagens: int, seed: int = SEMENTE_MASCARA) -> torch.Tensor:
-    """Permutacao fixa dos 16 indices de patch, uma por imagem, determinista.
+    """Permutação fixa dos 16 índices de patch, uma por imagem, determinista.
 
-    A 50% oculta os 8 primeiros indices; a 75%, os 12 primeiros.
+    A 50% oculta os 8 primeiros índices; a 75%, os 12 primeiros.
     """
     rng = np.random.default_rng(seed)
     perms = np.stack([rng.permutation(16) for _ in range(n_imagens)])
@@ -58,9 +58,9 @@ def permutacoes_fixas(n_imagens: int, seed: int = SEMENTE_MASCARA) -> torch.Tens
 def indices_ocultos(
     permutacoes: torch.Tensor, taxa: float
 ) -> torch.Tensor:
-    """Indices de patch ocultos para a taxa informada, a partir da permutacao fixa."""
+    """Índices de patch ocultos para a taxa informada, a partir da permutação fixa."""
     if taxa not in (0.5, 0.75):
-        raise ValueError(f"taxa suportada e 0.5 ou 0.75, recebido {taxa}")
+        raise ValueError(f"taxas suportadas: 0.5 ou 0.75; recebido {taxa}")
     n = permutacoes.shape[1]
     return permutacoes[:, : int(taxa * n)]
 
@@ -194,9 +194,9 @@ class MAE(nn.Module):
         """Frente do MAE.
 
         imagens: (B, C, 32, 32) em [0,1].
-        indices_mascarados: (B, n_ocultos) opcional; por padrao usa a
-        permutacao fixa com seed 42 (uma por imagem da lote, na ordem).
-        Retorna dict com perda, predicao completa (B,16,192) e indices.
+        indices_mascarados: (B, n_ocultos) opcional; por padrão usa a
+        permutação fixa com seed 42 (uma por imagem do lote, na ordem).
+        Retorna dict com perda, predição completa (B,16,192) e índices.
         """
         if imagens.min() < 0.0 or imagens.max() > 1.0:
             raise ValueError("valores fora do intervalo [0,1]")
@@ -262,7 +262,7 @@ def reconstrucao_completa(
     patches: torch.Tensor,
     indices_mascarados: torch.Tensor,
 ) -> torch.Tensor:
-    """Monta a imagem (B,C,32,32): visiveis mantidos, ocultos da predicao."""
+    """Monta a imagem (B,C,32,32): visíveis mantidos, ocultos da predição."""
     recon = patches.clone()
     lote = torch.arange(patches.shape[0], device=predicao.device)[:, None]
     recon[lote, indices_mascarados] = predicao[lote, indices_mascarados]
@@ -272,7 +272,7 @@ def reconstrucao_completa(
 def imagem_com_buracos(
     patches: torch.Tensor, indices_mascarados: torch.Tensor
 ) -> torch.Tensor:
-    """Imagem com patches ocultos zerados, para visualizacao."""
+    """Imagem com patches ocultos zerados, para visualização."""
     buracos = patches.clone()
     lote = torch.arange(patches.shape[0], device=buracos.device)[:, None]
     buracos[lote, indices_mascarados] = 0.0

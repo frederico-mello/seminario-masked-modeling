@@ -1,8 +1,8 @@
-"""Treino e avaliacao do MAE no subset CIFAR-10.
+"""Treino e avaliação do MAE no subset CIFAR-10.
 
-Sem fallback para CPU: se nao houver GPU CUDA, falha imediatamente.
-Mascara aninhada: permutacao fixa por imagem (seed 42), consistente entre
-epocas e entre as duas condicoes.
+Sem fallback para CPU: se não houver GPU CUDA, falha imediatamente.
+Máscara aninhada: permutação fixa por imagem (seed 42), consistente entre
+épocas e entre as duas condições.
 """
 
 from __future__ import annotations
@@ -23,7 +23,7 @@ from codigo.mae import MAE, indices_ocultos, permutacoes_fixas
 def exigir_cuda() -> torch.device:
     if not torch.cuda.is_available():
         raise RuntimeError(
-            "Nenhuma GPU CUDA disponivel: este experimento exige a GPU "
+            "Nenhuma GPU CUDA disponível: este experimento exige a GPU "
             "(torch compilado com cu130). Sem fallback para CPU."
         )
     dispositivo = torch.device("cuda")
@@ -52,7 +52,7 @@ def metrica_ponderada(perdas_e_pesos) -> float:
 
 
 def mse_lote(modelo, imagens_np, dispositivo, num_ocultos, permutacoes):
-    """MSE nos patches ocultos, com permutacao fixa por imagem."""
+    """MSE nos patches ocultos, com permutação fixa por imagem."""
     n = len(imagens_np)
     perdas = []
     with torch.no_grad():
@@ -78,7 +78,7 @@ def treinar(
     imprimir: bool = True,
     log_fn=print,
 ):
-    """Treino com AdamW. Retorna historico por epoca."""
+    """Treino com AdamW. Retorna histórico por época."""
     dados = np.load(npz_path)
     imagens_treino = dados["treino"]
     imagens_valid = dados["validacao"]
@@ -127,7 +127,7 @@ def treinar(
         historico["tempo_epoca"].append(dt)
         if imprimir:
             log_fn(
-                f"cond {config.taxa_mascara} epoca {epoca + 1}/{total_epocas}: "
+                f"condição {config.taxa_mascara} época {epoca + 1}/{total_epocas}: "
                 f"treino {treino_m:.4f} valid {val_m:.4f} ({dt:.1f}s)",
                 flush=True,
             )
@@ -135,7 +135,7 @@ def treinar(
 
 
 def medir_epoca(npz_path, batch: int, dispositivo, lr: float = 3e-4) -> float:
-    """Mede o tempo real de uma epoca com a config candidata (melhor de 3)."""
+    """Mede o tempo real de uma época com a config candidata (melhor de 3)."""
     tempo_melhor = float("inf")
     for _ in range(3):
         torch.manual_seed(42)
@@ -151,7 +151,7 @@ def medir_epoca(npz_path, batch: int, dispositivo, lr: float = 3e-4) -> float:
 def avaliar_teste_mse(
     modelo, npz_path, dispositivo, taxa: float, indices_globais: torch.Tensor
 ) -> float:
-    """MSE nos patches ocultos do teste com a mascara fixa da condicao."""
+    """MSE nos patches ocultos do teste com a máscara fixa da condição."""
     dados = np.load(npz_path)
     imagens = dados["teste"]
     perm = indices_globais[: len(imagens)]

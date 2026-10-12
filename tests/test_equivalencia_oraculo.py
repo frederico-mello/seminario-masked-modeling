@@ -1,9 +1,9 @@
-"""Teste de equivalencia entre o MAE proprio e o oraculo vit-pytorch.
+"""Teste de equivalência entre o MAE próprio e o oráculo vit-pytorch.
 
 Pesos e mascara identicos; tolerancias declaradas aqui:
-- perda: diferenca relativa ate 1e-5
-- reconstrucao (pixels por patch): erro absoluto maximo ate 1e-4
-Relatorio salvo em tests/relatorio_equivalencia.txt.
+- perda: diferença relativa até 1e-5
+- reconstrução (pixels por patch): erro absoluto máximo até 1e-4
+Relatório salvo em tests/relatorio_equivalencia.txt.
 """
 
 from __future__ import annotations
@@ -122,7 +122,7 @@ def rand_indices_fixos(indices_rand: torch.Tensor):
 
 def test_equivalencia_with_oraculo(tmp_path=None):
     perm = mae.permutacoes_fixas(8)
-    linhas = ["relatorio de equivalencia MAE proprio vs vit-pytorch 1.24.1", ""]
+    linhas = ["Relatório de equivalência: MAE próprio vs vit-pytorch 1.24.1", ""]
     maior_dif_perda = 0.0
     maior_dif_recon = 0.0
     for taxa in (0.5, 0.75):
@@ -187,21 +187,21 @@ def test_equivalencia_with_oraculo(tmp_path=None):
         maior_dif_perda = max(maior_dif_perda, dif_perda_rel)
         maior_dif_recon = max(maior_dif_recon, dif_recon)
         linhas.append(f"taxa={taxa}")
-        linhas.append(f"  perda proprio={float(perda_proprio):.8f} oraculo={float(perda_oraculo):.8f} rel_dif={dif_perda_rel:.3e}")
-        linhas.append(f"  forma predicao proprio={tuple(pred_proprio.shape)}")
-        linhas.append(f"  max_dif_reconstrucao={dif_recon:.3e}")
+        linhas.append(f"  perda próprio={float(perda_proprio):.8f} oráculo={float(perda_oraculo):.8f} dif_rel={dif_perda_rel:.3e}")
+        linhas.append(f"  forma da predição próprio={tuple(pred_proprio.shape)}")
+        linhas.append(f"  dif_máx_reconstrução={dif_recon:.3e}")
 
         assert pred_proprio.shape == (8, 16, 192)
         assert dif_perda_rel < TOLERANCIA_PERDA_REL, (
             f"perda diverge: rel={dif_perda_rel:.3e}"
         )
         assert dif_recon < TOLERANCIA_RECON_ABS, (
-            f"reconstrucao diverge: abs={dif_recon:.3e}"
+            f"reconstrução diverge: abs={dif_recon:.3e}"
         )
     linhas.append("")
-    linhas.append(f"tolerancia perda: rel < {TOLERANCIA_PERDA_REL}")
-    linhas.append(f"tolerancia reconstrucao: abs < {TOLERANCIA_RECON_ABS}")
-    linhas.append(f"maior diferenca observada: perda rel={maior_dif_perda:.3e} recon abs={maior_dif_recon:.3e}")
+    linhas.append(f"tolerância de perda: rel < {TOLERANCIA_PERDA_REL}")
+    linhas.append(f"tolerância de reconstrução: abs < {TOLERANCIA_RECON_ABS}")
+    linhas.append(f"maior diferença observada: perda rel={maior_dif_perda:.3e} recon abs={maior_dif_recon:.3e}")
     linhas.append("STATUS: PASSOU")
     RELATORIO.write_text("\n".join(linhas) + "\n")
 
