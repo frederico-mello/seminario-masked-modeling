@@ -1,0 +1,33 @@
+# Testes do projeto — roda a suíte completa em push/PR com o ambiente do uv.lock.
+# O grupo dev inclui o pytest e o oráculo de equivalência (vit-pytorch).
+
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Instalar uv e sincronizar o ambiente
+        run: |
+          python -m pip install --upgrade pip uv
+          uv sync
+
+      - name: Rodar testes
+        run: uv run pytest -q
