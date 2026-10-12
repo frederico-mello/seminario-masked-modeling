@@ -2,3 +2,15 @@
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
+
+# Dados brutos (verificado por md5 antes do uso, regenerado pelo script)
+dados/cifar10_raw/
+# Arquivos de teste de md5 corrompido
+dados/teste_md5/
+# Zip de entrega e copias de verificacao do pipeline
+seminario_masked_modeling.zip
+.zip_conteudo/
+# Checkpoints de treino (hash registrado em resultados/)
+checkpoints/
+# PNG de inspecao visual dos slides
+slides/png/
