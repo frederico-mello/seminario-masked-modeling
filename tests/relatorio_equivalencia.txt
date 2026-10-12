@@ -1,0 +1,15 @@
+relatorio de equivalencia MAE proprio vs vit-pytorch 1.24.1
+
+taxa=0.5
+  perda proprio=0.62131006 oraculo=0.62131006 rel_dif=0.000e+00
+  forma predicao proprio=(8, 16, 192)
+  max_dif_reconstrucao=9.537e-07
+taxa=0.75
+  perda proprio=0.71950322 oraculo=0.71950322 rel_dif=0.000e+00
+  forma predicao proprio=(8, 16, 192)
+  max_dif_reconstrucao=7.153e-07
+
+tolerancia perda: rel < 1e-05
+tolerancia reconstrucao: abs < 0.0001
+maior diferenca observada: perda rel=0.000e+00 recon abs=9.537e-07
+STATUS: PASSOU

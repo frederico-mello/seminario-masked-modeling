@@ -1,0 +1,5 @@
+schema: spec-driven
+created: 2026-10-12
+goal: "Pacote do seminário Masked Modeling: notebook MAE didático com
+  experimento CIFAR-10 (máscaras 50%/75%), resultados, slides pptx+pdf e zip
+  final, reproduzível"
