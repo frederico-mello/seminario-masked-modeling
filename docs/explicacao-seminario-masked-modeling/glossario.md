@@ -1,0 +1,97 @@
+# Glossário
+
+- **AdamW:** regra que ajusta os valores internos do modelo para reduzir o erro durante o treino.
+- **Array:** sequência organizada de números. Neste projeto, guarda pixels ou classes.
+- **Assimetria do MAE:** o encoder e o decoder têm tamanhos diferentes. Só o encoder processa os pedaços visíveis.
+- **Atenção:** cálculo que ajuda o modelo a relacionar partes diferentes de uma imagem.
+- **Batch ou lote:** grupo de imagens processado antes de ajustar os valores do modelo.
+- **BERT:** método de modelagem mascarada aplicado a texto. Aparece na apresentação, não como implementação principal.
+- **Branch ou ramo:** linha separada de mudanças no repositório. `main` é o ramo principal.
+- **Main:** nome convencional do ramo principal de um repositório.
+- **Pull request ou solicitação de integração:** mecanismo para revisar e integrar mudanças feitas em outro ramo.
+- **Cabeça de atenção:** parte de um bloco de atenção que calcula relações entre os pedaços da imagem. Várias cabeças observam relações diferentes.
+- **Checkpoint:** arquivo que guarda os valores aprendidos pelo modelo. Aqui, fica em `checkpoints/`.
+- **CI:** abreviação de integração contínua. Um serviço executa testes automaticamente quando há mudanças no código.
+- **CIFAR-10:** coleção oficial de 60.000 imagens pequenas, divididas em 10 classes.
+- **Classe de imagem:** categoria atribuída à imagem, como gato ou navio.
+- **Classe de programação:** molde que reúne informações e ações de um componente do programa.
+- **CPU:** processador de uso geral. Este projeto não a usa para substituir a GPU exigida pelo treino.
+- **CSV:** arquivo de texto que organiza dados em linhas e colunas.
+- **CUDA:** tecnologia que permite ao PyTorch fazer cálculos em uma GPU NVIDIA.
+- **`cu130`:** identificação da versão do PyTorch preparada para CUDA 13.0.
+- **Driver ou controlador:** programa que permite ao sistema operacional conversar com uma peça, como a placa gráfica.
+- **CVPR:** conferência internacional sobre visão computacional e reconhecimento de padrões. O artigo original do MAE foi publicado em 2022.
+- **Decoder ou decodificador:** parte do MAE que prevê os pixels dos pedaços escondidos.
+- **Dependência:** programa ou biblioteca de que o projeto precisa para funcionar.
+- **Diagrama de classes:** desenho das partes de programação e de como elas são compostas.
+- **Composição:** relação em que um componente é montado com partes menores.
+- **Diagrama de entidade-relacionamento:** desenho que mostra grupos de dados e suas relações. Neste guia, representa arquivos, não um banco de dados.
+- **`1..N`:** notação que significa um ou mais elementos.
+- **`float`:** tipo de número que aceita casas decimais.
+- **`int`:** tipo de número inteiro, sem casas decimais.
+- **`string`:** texto guardado como sequência de caracteres.
+- **Dimensão do modelo:** quantidade de valores usada para representar cada pedaço dentro do modelo.
+- **DOCX:** formato editável de documentos do Microsoft Word.
+- **Encoder ou codificador:** parte do MAE que interpreta apenas os pedaços visíveis.
+- **Especificação:** texto que descreve o comportamento esperado de um sistema ou de uma parte dele.
+- **Época:** uma passagem completa pelos exemplos de treino.
+- **Feed-forward:** etapa que transforma os valores recebidos por um bloco do modelo.
+- **Forward:** operação que leva dados de entrada pelo modelo até produzir uma resposta.
+- **Grafo de código:** mapa das ligações entre funções, classes e arquivos de um programa.
+- **GPU:** processador especializado em executar muitos cálculos em paralelo.
+- **Hash:** resumo calculado a partir do conteúdo de um arquivo. Ajuda a verificar se esse conteúdo mudou.
+- **Índice original:** posição de uma imagem no conjunto CIFAR-10 de origem.
+- **Jupyter Notebook:** documento com texto e blocos de código executáveis, como `codigo/notebook.ipynb`.
+- **LibreOffice:** conjunto de programas de escritório usado aqui para converter a apresentação em PDF.
+- **Learning rate ou taxa de aprendizado:** tamanho dos ajustes feitos nos valores do modelo. `lr` é a abreviação usada no CSV.
+- **Linear probing:** avaliação futura em que um classificador simples, um programa que escolhe uma categoria, usa as representações do modelo. Não faz parte do experimento atual.
+- **Lockfile:** arquivo que fixa as versões das dependências. Neste projeto, é `uv.lock`.
+- **MAE:** sigla de *Masked Autoencoder*, modelo que reconstrói pedaços escondidos. Aqui, não significa erro absoluto médio.
+- **Masked modeling ou modelagem mascarada:** exercício de esconder parte dos dados e pedir ao modelo que preveja ou reconstrua o que falta.
+- **Máscara:** indicação de quais pedaços da imagem ficam escondidos e quais ficam visíveis.
+- **Matplotlib:** biblioteca Python usada para desenhar gráficos.
+- **Markdown:** formato simples de texto que usa sinais como `#` para criar títulos e listas.
+- **MD5:** tipo de hash usado para detectar se o arquivo CIFAR-10 baixado está íntegro.
+- **Mermaid:** formato de texto usado para desenhar diagramas dentro de documentos.
+- **MSE:** erro quadrático médio. Compara valores previstos com valores corretos e dá mais peso a diferenças grandes. Aqui mede pixels escondidos.
+- **nbconvert:** ferramenta do Jupyter que executa um notebook pela linha de comando e salva seus resultados.
+- **NPZ:** arquivo compacto que pode guardar vários arrays do NumPy. O projeto usa esse formato para imagens e classes.
+- **NumPy:** biblioteca Python para organizar e calcular com sequências de números.
+- **OpenSpec:** conjunto de arquivos que descreve o comportamento esperado do sistema e de seus materiais.
+- **Oráculo de teste:** implementação independente usada como referência automática. Aqui é `vit-pytorch`, apenas durante os testes.
+- **Otimizador:** regra que orienta os ajustes dos valores do modelo durante o treino. Neste projeto, é AdamW.
+- **Pandas:** biblioteca Python para organizar e analisar tabelas de dados.
+- **Patch:** pedaço quadrado de uma imagem. Neste projeto, mede 8 por 8 pixels.
+- **PDF:** formato de documento voltado à leitura e impressão.
+- **Pixel:** menor ponto de uma imagem digital. Cada ponto tem valores que determinam sua cor.
+- **PNG:** formato de imagem usado para figuras e gráficos.
+- **Poppler:** conjunto de ferramentas para trabalhar com documentos PDF.
+- **pdftoppm:** ferramenta do Poppler que converte páginas de PDF em imagens.
+- **PPTX:** formato editável de apresentações do PowerPoint.
+- **Pré-treinado:** modelo que já passou por um treino anterior, antes de ser usado numa nova tarefa.
+- **Pytest:** ferramenta que executa testes automáticos em programas Python.
+- **Python:** linguagem de programação usada neste projeto.
+- **PyTorch:** biblioteca usada para definir e treinar o modelo.
+- **Representação:** resumo numérico interno que o modelo cria a partir dos pedaços visíveis.
+- **Script:** arquivo com instruções executadas pelo computador, como os que ficam em `scripts/`.
+- **Seed ou semente:** valor que torna escolhas aleatórias repetíveis quando o processo é repetido.
+- **SHA-256:** tipo de hash registrado para os arquivos de pesos do modelo.
+- **SimMIM:** outro método de modelagem mascarada para imagens. É comparado nos slides, não implementado aqui.
+- **Split ou divisão:** parte do conjunto de dados. Aqui, treino, validação ou teste.
+- **Subset ou subconjunto:** seleção menor retirada de um conjunto maior.
+- **Taxa de mascaramento:** proporção dos pedaços da imagem escondidos. As taxas testadas são 50% e 75%.
+- **Tensor:** bloco de números organizado em dimensões, como lote, cor, altura e largura da imagem.
+- **Token:** unidade numérica que representa um pedaço da imagem dentro do modelo.
+- **Torchvision:** complemento do PyTorch que oferece conjuntos de dados e ferramentas para imagens.
+- **Transformer:** tipo de modelo que relaciona partes de uma sequência, como os pedaços de uma imagem.
+- **uint8:** formato inteiro de 8 bits usado para armazenar pixels entre 0 e 255.
+- **int64:** formato inteiro de 64 bits usado para guardar os números das classes.
+- **uv:** ferramenta que instala as dependências Python do projeto e usa o arquivo `uv.lock`.
+- **Índice de pacotes:** endereço de onde uma ferramenta instala programas Python.
+- **`--no-dev`:** opção do uv para instalar as dependências de uso normal sem as ferramentas de desenvolvimento e teste.
+- **`--locked`:** opção do uv para usar o arquivo de versões fixadas e falhar se ele estiver desatualizado.
+- **vit-pytorch:** biblioteca Python que fornece a implementação usada como referência nos testes de equivalência.
+- **ViT-MAE:** modelo MAE baseado em Vision Transformer. Os slides citam um experimento complementar com um modelo público pré-treinado.
+- **Vision Transformer ou ViT:** arquitetura Transformer adaptada para imagens divididas em patches.
+- **Workflow ou fluxo automático:** sequência de comandos que um serviço executa, como os testes configurados no GitHub.
+- **ZIP:** arquivo compactado que reúne os materiais selecionados para entrega.

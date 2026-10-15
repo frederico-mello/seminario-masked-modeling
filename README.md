@@ -101,6 +101,7 @@ posterior: `uv run pytest tests/test_montar_zip.py`.
 
 ## Arquivos
 
+- [Guia explicativo do repositório](docs/explicacao-seminario-masked-modeling/README.md): visão simples da estrutura, dos dados, do fluxo do experimento e das entregas.
 - `pyproject.toml`, `uv.lock`: ambiente reprodutível (torch cu130, dev: vit-pytorch).
 - `codigo/mae.py`: implementação do MAE (patchify, máscara aninhada, encoder, decoder, perda).
 - `codigo/dados.py`: download do CIFAR-10 com verificação de md5 e subset seed 42.
