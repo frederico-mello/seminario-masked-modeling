@@ -1,6 +1,6 @@
 arquivo,md5
 LICENSE,a9a840f0fa0787883e68413667a5b41a
-README.md,54d63807270800a52d6469fb1d4ab081
+README.md,01cf24f8936c1a4631a3dbb474c869b1
 codigo/dados.py,4b90f365f2010ec6d6fdcfc8783fbd4a
 codigo/mae.py,da29e3bea38e75afc710bd1d82d9351f
 codigo/notebook.ipynb,94949ef661c8cbb2a8767a545df6c7d7
@@ -13,8 +13,8 @@ resultados/curva_perda.png,7e9b15e09486f8254532e9754cd2e850
 resultados/metricas.csv,8e3fc6e3b17c3b77586de56bf9bb3c91
 resultados/reconstrucoes.png,c87ccc385110dcde23e530ff7c25e6ef
 scripts/construir_notebook.py,62703f4bd4c13d83e1856f10fb1c7b39
-scripts/gerar_slides.py,2fb20bdf51f23205cf3f97aca50716dc
+scripts/gerar_slides.py,81d7f1ba3e950f1c5b65522ee8790f89
 scripts/montar_zip.py,97019e9df837ec083dc9e97cc8b47b25
-slides/seminario_masked_modeling.pdf,85c863d85eb1dd226d7f451c694ae454
-slides/seminario_masked_modeling.pptx,0491b22d2a1c8a450e870953aaebdf47
+slides/seminario_masked_modeling.pdf,bcc9b58ad6dff5eb2b52ce0c7bcbf93d
+slides/seminario_masked_modeling.pptx,bf599b6237060d9fccfa7b28fe2666be
 uv.lock,ddf8a155d494d76d6491a626841bff28
