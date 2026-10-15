@@ -1,0 +1,13 @@
+Diretório: . (raiz do repositório)
+Comando: uv run pytest -q
+Saída: 0
+........................................................................ [ 64%]
+.......................................                                  [100%]
+=============================== warnings summary ===============================
+tests/test_equivalencia_oraculo.py::test_equivalencia_with_oraculo
+  ./tests/test_equivalencia_oraculo.py:157: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+  Consider using tensor.detach() first. (Triggered internally at [caminho de compilação]:820.)
+    dif_perda_rel = float((perda_proprio - perda_oraculo).abs() / perda_oraculo.abs())
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+111 passed, 1 warning in 4.25s

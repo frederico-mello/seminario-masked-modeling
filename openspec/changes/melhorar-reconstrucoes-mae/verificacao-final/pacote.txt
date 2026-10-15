@@ -1,0 +1,2 @@
+zip gravado em ./seminario_masked_modeling.zip (34 arquivos)
+lista de md5 em ./scripts/md5_pacote.csv

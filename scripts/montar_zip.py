@@ -40,16 +40,62 @@ OBRIGATORIOS = {
     "resultados/metricas.csv": "resultados/metricas.csv",
     "resultados/curva_perda.png": "resultados/curva_perda.png",
     "resultados/reconstrucoes.png": "resultados/reconstrucoes.png",
+    "resultados/estudo-melhorar-reconstrucoes-mae/manifesto.json": "resultados/estudo-melhorar-reconstrucoes-mae/manifesto.json",
+    "resultados/estudo-melhorar-reconstrucoes-mae/historico.csv": "resultados/estudo-melhorar-reconstrucoes-mae/historico.csv",
+    "resultados/estudo-melhorar-reconstrucoes-mae/contador.jsonl": "resultados/estudo-melhorar-reconstrucoes-mae/contador.jsonl",
+    "resultados/estudo-melhorar-reconstrucoes-mae/resumo.json": "resultados/estudo-melhorar-reconstrucoes-mae/resumo.json",
+    "resultados/estudo-melhorar-reconstrucoes-mae/figuras/curvas_validacao.png": "resultados/estudo-melhorar-reconstrucoes-mae/figuras/curvas_validacao.png",
+    "resultados/estudo-melhorar-reconstrucoes-mae/figuras/melhores_validacao.png": "resultados/estudo-melhorar-reconstrucoes-mae/figuras/melhores_validacao.png",
+    "resultados/estudo-melhorar-reconstrucoes-mae/figuras/avaliacao_final.png": "resultados/estudo-melhorar-reconstrucoes-mae/figuras/avaliacao_final.png",
+    "resultados/estudo-melhorar-reconstrucoes-mae/ficha-visual/ficha_50.png": "resultados/estudo-melhorar-reconstrucoes-mae/ficha-visual/ficha_50.png",
+    "resultados/estudo-melhorar-reconstrucoes-mae/ficha-visual/ficha_75.png": "resultados/estudo-melhorar-reconstrucoes-mae/ficha-visual/ficha_75.png",
+    "resultados/estudo-melhorar-reconstrucoes-mae/ficha-visual/ficha_visual.json": "resultados/estudo-melhorar-reconstrucoes-mae/ficha-visual/ficha_visual.json",
+    "openspec/changes/melhorar-reconstrucoes-mae/apresentacao/ficha-rotulos.json": "resultados/estudo-melhorar-reconstrucoes-mae/ficha-visual/ficha-rotulos.json",
     "scripts/montar_zip.py": "scripts/montar_zip.py",
     "scripts/gerar_slides.py": "scripts/gerar_slides.py",
     "scripts/construir_notebook.py": "scripts/construir_notebook.py",
     "pyproject.toml": "pyproject.toml",
     "uv.lock": "uv.lock",
+    "openspec/changes/melhorar-reconstrucoes-mae/relatorio-fase-b.md": "relatorio-fase-b.md",
 }
+
+OBRIGATORIOS.update({
+    'openspec/changes/melhorar-reconstrucoes-mae/apresentacao/estado-v1.json': 'resultados/estudo-melhorar-reconstrucoes-mae/estado.json',
+    'resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/estado.json': 'resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/estado.json',
+    'openspec/changes/melhorar-reconstrucoes-mae/apresentacao/proveniencia.json': 'openspec/changes/melhorar-reconstrucoes-mae/apresentacao/proveniencia.json',
+    'openspec/changes/melhorar-reconstrucoes-mae/fontes-historicas/estudo_execucao_c0_v2.py': 'openspec/changes/melhorar-reconstrucoes-mae/fontes-historicas/estudo_execucao_c0_v2.py',
+    'codigo/__init__.py': 'codigo/__init__.py',
+    'codigo/estudo_avaliacao.py': 'codigo/estudo_avaliacao.py',
+    'codigo/estudo_baselines.py': 'codigo/estudo_baselines.py',
+    'codigo/estudo_candidatos.py': 'codigo/estudo_candidatos.py',
+    'codigo/estudo_checkpoints.py': 'codigo/estudo_checkpoints.py',
+    'codigo/estudo_execucao.py': 'codigo/estudo_execucao.py',
+    'codigo/estudo_execucao_c0_v2.py': 'codigo/estudo_execucao_c0_v2.py',
+    'codigo/estudo_historico.py': 'codigo/estudo_historico.py',
+    'codigo/estudo_mascaras.py': 'codigo/estudo_mascaras.py',
+    'codigo/estudo_orcamento.py': 'codigo/estudo_orcamento.py',
+    'codigo/estudo_orcamento_c0_v2.py': 'codigo/estudo_orcamento_c0_v2.py',
+    'codigo/estudo_selecao.py': 'codigo/estudo_selecao.py',
+    'codigo/estudo_ssim.py': 'codigo/estudo_ssim.py',
+    'codigo/estudo_visual.py': 'codigo/estudo_visual.py',
+    'codigo/configuracao_estudo.py': 'codigo/configuracao_estudo.py',
+    'codigo/configuracao_estudo_c0_v2.py': 'codigo/configuracao_estudo_c0_v2.py',
+    'scripts/executar_estudo_c0_v2.py': 'scripts/executar_estudo_c0_v2.py',
+    'scripts/retificar_validacao.py': 'scripts/retificar_validacao.py',
+    'scripts/gerar_relatorio_fase_b.py': 'scripts/gerar_relatorio_fase_b.py',
+    'openspec/changes/melhorar-reconstrucoes-mae/notas-finais.md': 'openspec/changes/melhorar-reconstrucoes-mae/notas-finais.md',
+    'openspec/changes/melhorar-reconstrucoes-mae/retificacao-validacao.md': 'openspec/changes/melhorar-reconstrucoes-mae/retificacao-validacao.md',
+    'openspec/changes/melhorar-reconstrucoes-mae/retificacao-validacao.json': 'openspec/changes/melhorar-reconstrucoes-mae/retificacao-validacao.json',
+    'openspec/changes/melhorar-reconstrucoes-mae/relatorio-fase-b.md': 'openspec/changes/melhorar-reconstrucoes-mae/relatorio-fase-b.md',
+    'resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/manifesto.json': 'resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/manifesto.json',
+    'resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/historico.jsonl': 'resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/historico.jsonl',
+    'resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/contador.jsonl': 'resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/contador.jsonl',
+    'resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/resumo.json': 'resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/resumo.json',
+    'resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/relatorio-c0-v2.md': 'resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/relatorio-c0-v2.md',
+})
 
 PROIBIDOS = (
     "cifar-10-python.tar.gz",
-    "checkpoints",
     "test_equivalencia",
     "test_mae",
     "test_dados",
@@ -80,6 +126,8 @@ def gravar_zip(origem_para_destino: dict[str, str]) -> None:
     destino_para_origem = {d: s for s, d in origem_para_destino.items()}
     destino_lista = sorted(destino_para_origem)
     for destino in destino_lista:
+        if "checkpoints" in Path(destino).parts or Path(destino).suffix in (".pt", ".pth"):
+            raise RuntimeError(f"{destino}: pesos proibidos no pacote")
         for proibido in PROIBIDOS:
             if proibido in destino.lower():
                 raise RuntimeError(
@@ -92,7 +140,10 @@ def gravar_zip(origem_para_destino: dict[str, str]) -> None:
         with zipfile.ZipFile(caminho_zip, "w", zipfile.ZIP_DEFLATED) as z:
             for destino in destino_lista:
                 origem = RAIZ / destino_para_origem[destino]
-                z.write(origem, destino)
+                info = zipfile.ZipInfo(destino, date_time=(2026, 10, 15, 0, 0, 0))
+                info.compress_type = zipfile.ZIP_DEFLATED
+                info.external_attr = 0o644 << 16
+                z.writestr(info, origem.read_bytes())
                 linhas.append((destino, md5(origem)))
         # checagem final do zip em memória antes de publicá-lo
         with zipfile.ZipFile(caminho_zip) as z:
@@ -101,7 +152,7 @@ def gravar_zip(origem_para_destino: dict[str, str]) -> None:
         caminho_zip.rename(ZIP_ALVO)
     REGISTRO_MD5.parent.mkdir(exist_ok=True)
     with open(REGISTRO_MD5, "w", newline="") as f:
-        w = csv.writer(f)
+        w = csv.writer(f, lineterminator="\n")
         w.writerow(["arquivo", "md5"])
         for linha in linhas:
             w.writerow(linha)

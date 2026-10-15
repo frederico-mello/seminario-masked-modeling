@@ -6,6 +6,7 @@ Rode: uv run python scripts/construir_notebook.py
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
@@ -48,7 +49,15 @@ de He et al. (2022)) no CIFAR-10. O notebook roda do zero:
 3. realiza patchify, máscara aninhada, treino em 50% e 75%;
 4. avalia o MSE nos patches ocultos do teste e gera `resultados/`.
 
-Semente global: 42. Dispositivo: somente GPU CUDA (sem fallback para CPU)."""
+Semente global: 42. Dispositivo: somente GPU CUDA (sem fallback para CPU).
+
+Este notebook descreve o experimento didático original, anterior ao estudo v1/v2.
+Não executa a retomada C0. No estudo posterior, a avaliação visual aberta de um
+único avaliador humano foi negativa nas duas taxas; o objetivo visual não foi
+atingido. As fichas não são cegas (o cabeçalho revela os métodos), sem notas
+individuais. Resultados exploratórios, sem confirmação ou superioridade universal.
+Consulte `../openspec/changes/melhorar-reconstrucoes-mae/notas-finais.md` e
+`../openspec/changes/melhorar-reconstrucoes-mae/retificacao-validacao.md`."""
     )
 )
 A(
@@ -400,6 +409,96 @@ NOTEBOOK = {
     "nbformat": 4,
     "nbformat_minor": 5,
 }
-ALVO.parent.mkdir(exist_ok=True)
-json.dump(NOTEBOOK, open(ALVO, "w"), ensure_ascii=False, indent=1)
-print("notebook gerado em", ALVO)
+
+# IDs das células Markdown em codigo/notebook.ipynb no HEAD anterior a esta
+# correção. O título Markdown é a chave estrutural única de cada seção.
+IDS_MARKDOWN_HEAD = {
+    "# Seminário: Masked Modeling em Deep Learning": "3d1e50f0",
+    "## 1. Ambiente e dispositivo": "6cb3f6fb",
+    "## 2. Dados: CIFAR-10 verificado por md5 e subset balanceado": "ee0775f4",
+    "## 3. Modelo MAE": "0d2b4fcd",
+    "### Mascara aninhada": "9a464cb9",
+    "## 4. Orçamento: previsto versus medido": "9e40c3a4",
+    "## 5. Treino das duas condições": "a1281943",
+    "## 6. Avaliacao: MSE nos patches ocultos do teste": "5de10c42",
+    "## 7. Figuras": "85d4702f",
+    "## 8. Encerramento": "6417ccbc",
+}
+
+
+def titulo_markdown(celula: dict) -> str | None:
+    """Retorna o primeiro título, usado como âncora estrutural da célula."""
+    for linha in "".join(celula.get("source", [])).splitlines():
+        titulo = linha.strip()
+        if titulo.startswith("#"):
+            return titulo
+    return None
+
+
+def preservar_ids_markdown(celulas: list[dict]) -> None:
+    """Restaura IDs do HEAD apenas quando o título identifica uma célula única."""
+    por_titulo = {}
+    for celula in celulas:
+        if celula.get("cell_type") != MD:
+            continue
+        titulo = titulo_markdown(celula)
+        if titulo in por_titulo:
+            raise ValueError(f"título Markdown duplicado: {titulo}")
+        if titulo is not None:
+            por_titulo[titulo] = celula
+
+    ausentes = sorted(set(IDS_MARKDOWN_HEAD) - set(por_titulo))
+    if ausentes:
+        raise ValueError(f"títulos Markdown da base não encontrados: {ausentes}")
+    if len(set(IDS_MARKDOWN_HEAD.values())) != len(IDS_MARKDOWN_HEAD):
+        raise ValueError("IDs Markdown da base não são únicos")
+    for titulo, identificador in IDS_MARKDOWN_HEAD.items():
+        por_titulo[titulo]["id"] = identificador
+
+
+def sanitizar_saidas(celulas: list[dict]) -> None:
+    """Remove caminhos locais dos textos, preservando avisos e resultados."""
+    for celula in celulas:
+        for saida in celula.get("outputs", []):
+            if "text" not in saida:
+                continue
+            saida["text"] = [
+                re.sub(
+                    r"/tmp/ipykernel_[^/\s]+/[^:\s]+\.py:\d+:\s*",
+                    "",
+                    re.sub(r"/home/[^\s]+/resultados", "resultados", linha),
+                )
+                for linha in saida["text"]
+            ]
+
+
+def gerar_notebook(alvo: Path = ALVO) -> None:
+    """Regenera o notebook documental sem executar suas células."""
+    notebook = json.loads(json.dumps(NOTEBOOK))
+
+    # Preserve resultados de células científicas cujo código permaneceu idêntico.
+    # A geração documental não executa células nem apaga evidências históricas.
+    if alvo.exists():
+        anterior = json.loads(alvo.read_text(encoding="utf-8"))
+        por_fonte = {
+            "".join(c["source"]): c
+            for c in anterior["cells"]
+            if c["cell_type"] == CODE
+        }
+        for celula in notebook["cells"]:
+            antiga = por_fonte.get("".join(celula["source"]))
+            if celula["cell_type"] == CODE and antiga is not None:
+                for chave in ("outputs", "execution_count", "metadata", "id"):
+                    if chave in antiga:
+                        celula[chave] = antiga[chave]
+
+    preservar_ids_markdown(notebook["cells"])
+    sanitizar_saidas(notebook["cells"])
+    alvo.parent.mkdir(exist_ok=True)
+    with alvo.open("w", encoding="utf-8") as arquivo:
+        json.dump(notebook, arquivo, ensure_ascii=False, indent=1)
+    print("notebook gerado em", alvo)
+
+
+if __name__ == "__main__":
+    gerar_notebook()

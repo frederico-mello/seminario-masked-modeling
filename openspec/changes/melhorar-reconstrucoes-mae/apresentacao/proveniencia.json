@@ -1,0 +1,10 @@
+{
+  "origem": "resultados/estudo-melhorar-reconstrucoes-mae/ficha-visual/ficha-rotulos.json",
+  "sha256_original": "a48dd87ceca2b1c72cdb048b7467187bb6e698c54b2b7806dd40a32a869695e0",
+  "alteracao": "Somente caminho absoluto substituído por caminho relativo; original preservado.",
+  "estado_v1": {
+    "origem": "resultados/estudo-melhorar-reconstrucoes-mae/estado.json",
+    "sha256_original": "e3ebc5c0a34cf5b9fc4110cf83852d0462f28544a368baad4dae66563026eae9",
+    "alteracao": "Somente caminhos pessoais convertidos para relativos, sem alterar métricas, épocas ou hashes."
+  }
+}

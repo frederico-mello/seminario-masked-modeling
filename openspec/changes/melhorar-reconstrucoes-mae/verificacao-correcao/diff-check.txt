@@ -1,0 +1,3 @@
+Diretório: . (raiz do repositório)
+Comando: git diff --check
+Saída: 0

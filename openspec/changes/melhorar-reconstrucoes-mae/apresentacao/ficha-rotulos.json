@@ -1,0 +1,30 @@
+{
+  "colunas": {
+    "0.5": {
+      "arquivo": "ficha_50.png",
+      "letra_para_candidato": {
+        "original": "A",
+        "controle_media_rgb": "B",
+        "controle_interpolacao": "C",
+        "C1": "D",
+        "C2": "E"
+      }
+    },
+    "0.75": {
+      "arquivo": "ficha_75.png",
+      "letra_para_candidato": {
+        "original": "A",
+        "controle_media_rgb": "B",
+        "controle_interpolacao": "C",
+        "C1": "D",
+        "C2": "E"
+      }
+    }
+  },
+  "ficha_json": {
+    "caminho": "resultados/estudo-melhorar-reconstrucoes-mae/ficha-visual/ficha_visual.json",
+    "sha256": "428e1c77c861a967dcd923ac769d2be550591a9ee4c2465999fc9ab685d6fbc9"
+  },
+  "avisos": "avaliação humana não realizada nesta fase; as notas ficam para os avaliadores humano(s); evidência qualitativa, sem alterar a seleção",
+  "caminho": "resultados/estudo-melhorar-reconstrucoes-mae/ficha-visual/ficha_visual.json"
+}

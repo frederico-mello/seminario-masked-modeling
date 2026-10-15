@@ -1,0 +1,21 @@
+{
+  "primeira_geracao": {
+    "codigo/notebook.ipynb": "ebd06bc607343cc2cc14d48705955d162b4adc65f7a16218da8b02a09b26247b",
+    "slides/seminario_masked_modeling.pptx": "761ac72ebef7448a0fbd9017d35f93a224d89bd8e7b369e025584db78da9b620",
+    "slides/seminario_masked_modeling.pdf": "9d95b3be24fbb91cc7b9046b64821d9890304331d2f7c7c531d664be2f23dbc7",
+    "seminario_masked_modeling.zip": "115633b5635910b736bfeec3223d7d942f69173839fa036f99a0c39e4e0584ca",
+    "scripts/md5_pacote.csv": "3b70c9a3469ced4824e548d686d5f89c7f44e8acf4207bb2d21742c2a4e51705",
+    "openspec/changes/melhorar-reconstrucoes-mae/retificacao-validacao.md": "0b39b364b461aeb440c0b2d90b000d8382bd407c4159b89f1e159ade0dc91aaa",
+    "openspec/changes/melhorar-reconstrucoes-mae/retificacao-validacao.json": "12e2844bbce0da59aa0fe80ebaa8546acf32192d9ebd1600a02e14a13ff33639"
+  },
+  "segunda_geracao": {
+    "codigo/notebook.ipynb": "ebd06bc607343cc2cc14d48705955d162b4adc65f7a16218da8b02a09b26247b",
+    "slides/seminario_masked_modeling.pptx": "761ac72ebef7448a0fbd9017d35f93a224d89bd8e7b369e025584db78da9b620",
+    "slides/seminario_masked_modeling.pdf": "9d95b3be24fbb91cc7b9046b64821d9890304331d2f7c7c531d664be2f23dbc7",
+    "seminario_masked_modeling.zip": "115633b5635910b736bfeec3223d7d942f69173839fa036f99a0c39e4e0584ca",
+    "scripts/md5_pacote.csv": "3b70c9a3469ced4824e548d686d5f89c7f44e8acf4207bb2d21742c2a4e51705",
+    "openspec/changes/melhorar-reconstrucoes-mae/retificacao-validacao.md": "0b39b364b461aeb440c0b2d90b000d8382bd407c4159b89f1e159ade0dc91aaa",
+    "openspec/changes/melhorar-reconstrucoes-mae/retificacao-validacao.json": "12e2844bbce0da59aa0fe80ebaa8546acf32192d9ebd1600a02e14a13ff33639"
+  },
+  "iguais": true
+}

@@ -1,0 +1,34 @@
+scripts/md5_pacote.csv:3: trailing whitespace.
++README.md,8bd17f17df3d698761b8334ec109d1ae
+scripts/md5_pacote.csv:12: trailing whitespace.
++relatorio-fase-b.md,1af0c40afcee3ff2dfd6208cfda5af81
+scripts/md5_pacote.csv:14: trailing whitespace.
++resultados/estudo-melhorar-reconstrucoes-mae/contador.jsonl,1310c0300f64dfbfc18f06f30d0a0992
+scripts/md5_pacote.csv:15: trailing whitespace.
++resultados/estudo-melhorar-reconstrucoes-mae/ficha-visual/ficha-rotulos.json,6298a1dff76e111e14c9a8f32e778410
+scripts/md5_pacote.csv:16: trailing whitespace.
++resultados/estudo-melhorar-reconstrucoes-mae/ficha-visual/ficha_50.png,ce33d77a6e1616789842242392ab6874
+scripts/md5_pacote.csv:17: trailing whitespace.
++resultados/estudo-melhorar-reconstrucoes-mae/ficha-visual/ficha_75.png,255a6b4b1e21247fc4a4307d2a60060d
+scripts/md5_pacote.csv:18: trailing whitespace.
++resultados/estudo-melhorar-reconstrucoes-mae/ficha-visual/ficha_visual.json,efd9b600227aad9f588913f83ed62908
+scripts/md5_pacote.csv:19: trailing whitespace.
++resultados/estudo-melhorar-reconstrucoes-mae/figuras/avaliacao_final.png,b36bdf8f8229c4ab44661c67c87ac498
+scripts/md5_pacote.csv:20: trailing whitespace.
++resultados/estudo-melhorar-reconstrucoes-mae/figuras/curvas_validacao.png,1c43124ba162621c966e169d76e6befd
+scripts/md5_pacote.csv:21: trailing whitespace.
++resultados/estudo-melhorar-reconstrucoes-mae/figuras/melhores_validacao.png,147c1974fe378f2987e8b43e8a4046c2
+scripts/md5_pacote.csv:22: trailing whitespace.
++resultados/estudo-melhorar-reconstrucoes-mae/historico.csv,8e0d8e9b2fe8831ef143e83de0a5defe
+scripts/md5_pacote.csv:23: trailing whitespace.
++resultados/estudo-melhorar-reconstrucoes-mae/manifesto.json,dccd7adf0f7eaf4e828cd884c6873a94
+scripts/md5_pacote.csv:24: trailing whitespace.
++resultados/estudo-melhorar-reconstrucoes-mae/resumo.json,c3a6a059c3376d20351bfc9d589f8517
+scripts/md5_pacote.csv:28: trailing whitespace.
++scripts/gerar_slides.py,5d2e27bdaf7343b1990ecbe5b8906cf8
+scripts/md5_pacote.csv:29: trailing whitespace.
++scripts/montar_zip.py,2ab831cb91b795225730598820499c8f
+scripts/md5_pacote.csv:33: trailing whitespace.
++slides/seminario_masked_modeling.pdf,2106d324af50c45185531d552df6596e
+scripts/md5_pacote.csv:34: trailing whitespace.
++slides/seminario_masked_modeling.pptx,c6abc9a1516512fa4d651481f5a904b2

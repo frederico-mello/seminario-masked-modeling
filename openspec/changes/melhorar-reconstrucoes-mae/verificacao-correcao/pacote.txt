@@ -1,0 +1,5 @@
+Diretório: . (raiz do repositório)
+Comando: uv run python scripts/montar_zip.py
+Saída: 0
+zip gravado em ./seminario_masked_modeling.zip (65 arquivos)
+lista de md5 em ./scripts/md5_pacote.csv

@@ -1,0 +1,346 @@
+{
+ "avaliacao_final": {
+  "candidatos": {
+   "0.5": {},
+   "0.75": {}
+  },
+  "controles": {
+   "0.5": {
+    "controle_interpolacao": {
+     "mse": 0.04507830591558013,
+     "ssim": 0.27285746083282775
+    },
+    "controle_media_rgb": {
+     "mse": 0.048648564948351125,
+     "ssim": 0.36548269190384136
+    }
+   },
+   "0.75": {
+    "controle_interpolacao": {
+     "mse": 0.05490416719717905,
+     "ssim": 0.2415922337471504
+    },
+    "controle_media_rgb": {
+     "mse": 0.05177896893711295,
+     "ssim": 0.36314372877448464
+    }
+   }
+  }
+ },
+ "codigo_hash": "e13ef0653e119b00",
+ "congelamento_final": {
+  "hash_manifesto": "f6fd9a10d3d1532e6a94b8be9882c187a30050434889d65efcda8a28881c332d",
+  "hash_selecao": "72bb04bd3a502dbf4caac81f3b096800f03e2f0b120c849e7352ec4c865eb24e",
+  "ids_visuais": {
+   "chave": {
+    "12985": "00407a239055abd70175f5a4d56164ecabce0f0f0cacf432ba1541a7bdb424e3",
+    "20736": "0031e7e9a5f890b3d7e3eded6eda236aa7108319b0df5f9270edf6e30c292347",
+    "25306": "0064f42dcd3d0c7d9eea4a6bd98f5db7f4acc582d1544a110773c4aec6680258",
+    "31327": "014a2ba701601e576c1457c26ac868b56865321f03200e0a541394e8970f54f9",
+    "33580": "0060bb9af1d02defda4280fd7c8350df153e1ce0e0a3b3920369e6f5cf459056",
+    "34029": "00d1849223d8fdd54109175c6153bbb154dc1631d7fd289f70fa2eef741b7095",
+    "45589": "01f596da964a013b00079b6c9255308b0f9821270424a062c431d20ab83213ab",
+    "6418": "00790cf8f31d56b67502b40488383f25965cabf4a265b880b876e93cf13724b9"
+   },
+   "ids": [
+    20736,
+    12985,
+    33580,
+    25306,
+    6418,
+    34029,
+    31327,
+    45589
+   ],
+   "versao": "visual-v1"
+  },
+  "regras": "regras-estudo-v1"
+ },
+ "controles": {
+  "0.5": {
+   "controle_interpolacao": {
+    "mse": 0.044741249229526145,
+    "ssim": 0.26908426121916745
+   },
+   "controle_media_rgb": {
+    "mse": 0.04911125797522254,
+    "ssim": 0.3555957976554935
+   }
+  },
+  "0.75": {
+   "controle_interpolacao": {
+    "mse": 0.05445818269508891,
+    "ssim": 0.2378438566199368
+   },
+   "controle_media_rgb": {
+    "mse": 0.051705957529135045,
+    "ssim": 0.3556298266001376
+   }
+  }
+ },
+ "decisao_c3": {
+  "elegivel": false,
+  "minutos_livres": 42.96533660983701,
+  "motivo": "C0 sem treinos completos (inviável pelo limiar de 1,2 s do piloto): o critério de média de MSE de C0 contra cada baseline não é verificável; C3 registrado como NÃO EXECUTADO"
+ },
+ "hash_manifesto": "f6fd9a10d3d1532e6a94b8be9882c187a30050434889d65efcda8a28881c332d",
+ "pilotos": {
+  "C0": {
+   "motivo": "época piloto excedeu 1.2s em ['0.5']; treinos completos não começam e o saldo não é gasto",
+   "taxas": {
+    "0.5": {
+     "exedeu_limiar": true,
+     "mse_validacao": 0.12466688758507372,
+     "perda_treino": 0.328215350484848,
+     "ssim_validacao": 0.021675564050145535,
+     "t_build": 0.7955885800038232,
+     "t_ciclo": 1.221510143004707
+    },
+    "0.75": {
+     "exedeu_limiar": false,
+     "mse_validacao": 0.1258238734230399,
+     "perda_treino": 0.33260515868663787,
+     "ssim_validacao": 0.021085846247431435,
+     "t_build": 0.007640013005584478,
+     "t_ciclo": 0.8870278020040132
+    }
+   },
+   "viavel": false
+  },
+  "C1": {
+   "motivo": "",
+   "taxas": {
+    "0.5": {
+     "exedeu_limiar": false,
+     "mse_validacao": 0.07387857438251376,
+     "perda_treino": 0.1720932758808136,
+     "ssim_validacao": 0.07036710500393005,
+     "t_build": 0.009166009011096321,
+     "t_ciclo": 1.0347794650006108
+    },
+    "0.75": {
+     "exedeu_limiar": false,
+     "mse_validacao": 0.07381360147614031,
+     "perda_treino": 0.17065683908462526,
+     "ssim_validacao": 0.06923450961162221,
+     "t_build": 0.012303627008805051,
+     "t_ciclo": 1.1598005470004864
+    }
+   },
+   "viavel": true
+  },
+  "C2": {
+   "motivo": "",
+   "taxas": {
+    "0.5": {
+     "exedeu_limiar": false,
+     "mse_validacao": 0.12396112181991338,
+     "perda_treino": 0.37263711733818056,
+     "ssim_validacao": 0.021968052370496843,
+     "t_build": 0.013936503994045779,
+     "t_ciclo": 1.0291091800027061
+    },
+    "0.75": {
+     "exedeu_limiar": false,
+     "mse_validacao": 0.12509876141697168,
+     "perda_treino": 0.3773550527095795,
+     "ssim_validacao": 0.021353925669043726,
+     "t_build": 0.008202141005313024,
+     "t_ciclo": 0.9939702289993875
+    }
+   },
+   "viavel": true
+  }
+ },
+ "selecao": {
+  "0.5": {
+   "elegiveis": [],
+   "motivo": "referência C0 sem treinos completos (inviável pelo limiar de 1,2 s do piloto): regra de elegibilidade contra C0 não pôde ser aplicada; ausência de melhoria demonstrada",
+   "motivos": {},
+   "vencedor": null
+  },
+  "0.75": {
+   "elegiveis": [],
+   "motivo": "referência C0 sem treinos completos (inviável pelo limiar de 1,2 s do piloto): regra de elegibilidade contra C0 não pôde ser aplicada; ausência de melhoria demonstrada",
+   "motivos": {},
+   "vencedor": null
+  }
+ },
+ "tempo": {
+  "por_candidato": {
+   "C0": 0.048529442300302136,
+   "C1": 22.712298067198585,
+   "C2": 18.24856081103087,
+   "C3": 0.0
+  },
+  "por_categoria": {
+   "avaliacao": 0.025275069633304764,
+   "avaliacao_final": 0.026850574633378223,
+   "consolidacao": 0.023402407816320192,
+   "piloto": 0.11955057066734298,
+   "treino_por_seed_taxa": 40.86643534204603
+  },
+  "principal_minutos": 41.06151396479637,
+  "reserva_minutos": 0.0
+ },
+ "treinos": {
+  "C0|10|0.5": {
+   "epocas": 0,
+   "estado": "inviavel",
+   "melhor": null,
+   "motivo": "época piloto excedeu 1.2s em ['0.5']; treinos completos não começam e o saldo não é gasto"
+  },
+  "C0|10|0.75": {
+   "epocas": 0,
+   "estado": "inviavel",
+   "melhor": null,
+   "motivo": "época piloto excedeu 1.2s em ['0.5']; treinos completos não começam e o saldo não é gasto"
+  },
+  "C0|20|0.5": {
+   "epocas": 0,
+   "estado": "inviavel",
+   "melhor": null,
+   "motivo": "época piloto excedeu 1.2s em ['0.5']; treinos completos não começam e o saldo não é gasto"
+  },
+  "C0|20|0.75": {
+   "epocas": 0,
+   "estado": "inviavel",
+   "melhor": null,
+   "motivo": "época piloto excedeu 1.2s em ['0.5']; treinos completos não começam e o saldo não é gasto"
+  },
+  "C0|30|0.5": {
+   "epocas": 0,
+   "estado": "inviavel",
+   "melhor": null,
+   "motivo": "época piloto excedeu 1.2s em ['0.5']; treinos completos não começam e o saldo não é gasto"
+  },
+  "C0|30|0.75": {
+   "epocas": 0,
+   "estado": "inviavel",
+   "melhor": null,
+   "motivo": "época piloto excedeu 1.2s em ['0.5']; treinos completos não começam e o saldo não é gasto"
+  },
+  "C1|10|0.5": {
+   "epocas": 200,
+   "estado": "completo",
+   "melhor": {
+    "epoca": 181,
+    "perda_validacao": 0.033555,
+    "ssim_validacao": 0.397872
+   },
+   "motivo": ""
+  },
+  "C1|10|0.75": {
+   "epocas": 185,
+   "estado": "interrompido",
+   "melhor": {
+    "epoca": 163,
+    "perda_validacao": 0.041888,
+    "ssim_validacao": 0.358202
+   },
+   "motivo": "envelope de treino_por_seed_taxa do escopo candidato esgotado: gasto 3.99 + previsto 0.03 > 4.00"
+  },
+  "C1|20|0.5": {
+   "epocas": 200,
+   "estado": "completo",
+   "melhor": {
+    "epoca": 198,
+    "perda_validacao": 0.033764,
+    "ssim_validacao": 0.398724
+   },
+   "motivo": ""
+  },
+  "C1|20|0.75": {
+   "epocas": 200,
+   "estado": "completo",
+   "melhor": {
+    "epoca": 200,
+    "perda_validacao": 0.041816,
+    "ssim_validacao": 0.362957
+   },
+   "motivo": ""
+  },
+  "C1|30|0.5": {
+   "epocas": 200,
+   "estado": "completo",
+   "melhor": {
+    "epoca": 183,
+    "perda_validacao": 0.03352,
+    "ssim_validacao": 0.400543
+   },
+   "motivo": ""
+  },
+  "C1|30|0.75": {
+   "epocas": 200,
+   "estado": "completo",
+   "melhor": {
+    "epoca": 197,
+    "perda_validacao": 0.041316,
+    "ssim_validacao": 0.364348
+   },
+   "motivo": ""
+  },
+  "C2|10|0.5": {
+   "epocas": 200,
+   "estado": "completo",
+   "melhor": {
+    "epoca": 200,
+    "perda_validacao": 0.036938,
+    "ssim_validacao": 0.366839
+   },
+   "motivo": ""
+  },
+  "C2|10|0.75": {
+   "epocas": 200,
+   "estado": "completo",
+   "melhor": {
+    "epoca": 191,
+    "perda_validacao": 0.044569,
+    "ssim_validacao": 0.343256
+   },
+   "motivo": ""
+  },
+  "C2|20|0.5": {
+   "epocas": 200,
+   "estado": "completo",
+   "melhor": {
+    "epoca": 198,
+    "perda_validacao": 0.037122,
+    "ssim_validacao": 0.365044
+   },
+   "motivo": ""
+  },
+  "C2|20|0.75": {
+   "epocas": 200,
+   "estado": "completo",
+   "melhor": {
+    "epoca": 200,
+    "perda_validacao": 0.044032,
+    "ssim_validacao": 0.343815
+   },
+   "motivo": ""
+  },
+  "C2|30|0.5": {
+   "epocas": 200,
+   "estado": "completo",
+   "melhor": {
+    "epoca": 184,
+    "perda_validacao": 0.038078,
+    "ssim_validacao": 0.357809
+   },
+   "motivo": ""
+  },
+  "C2|30|0.75": {
+   "epocas": 200,
+   "estado": "completo",
+   "melhor": {
+    "epoca": 193,
+    "perda_validacao": 0.043516,
+    "ssim_validacao": 0.346509
+   },
+   "motivo": ""
+  }
+ },
+ "versao_regras": "regras-estudo-v1",
+ "versao_split": "02cdb84acfac19d6"
+}

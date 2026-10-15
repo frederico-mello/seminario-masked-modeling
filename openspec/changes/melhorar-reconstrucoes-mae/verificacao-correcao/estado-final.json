@@ -1,0 +1,16 @@
+{
+  "checks_obrigatorios": "todos passaram",
+  "diretorio": ".",
+  "treino_piloto_inferencia_teste_novos": false,
+  "stage_executado": false,
+  "arquivos_propostos": 98,
+  "excluidos": [
+    "resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/pilotos/C0_seed10_taxa0.5/processo.log",
+    "resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/pilotos/C0_seed10_taxa0.5/resultado.json",
+    "resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/pilotos/C0_seed10_taxa0.75/processo.log",
+    "resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/pilotos/C0_seed10_taxa0.75/resultado.json",
+    "resultados/estudo-melhorar-reconstrucoes-mae/estado.json",
+    "resultados/estudo-melhorar-reconstrucoes-mae/ficha-visual/ficha-rotulos.json"
+  ],
+  "limites": "warning de tensor do oráculo; treino real C0 v2 não exercitado; sem certificação científica"
+}

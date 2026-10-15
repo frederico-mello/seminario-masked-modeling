@@ -1,0 +1,6 @@
+Diretório: . (raiz do repositório)
+Comando: verificação somente de leitura de _verificar_congelamento e inspeção do zip
+Resultado: 0
+Recusa esperada confirmada: hash dos fontes Python diverge do manifesto; execução impedida
+Sem caminhos pessoais em conteúdo textual do pacote; regex genérica do sanitizador não é caminho pessoal.
+Nenhuma execução científica iniciada.
