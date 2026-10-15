@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seminário Masked Modeling: como funciona</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { width: 1240px; background: #fff; color: #102033; font-family: Arial, sans-serif; padding: 40px 44px; line-height: 1.45; }
+  header { border-bottom: 4px solid #14283f; padding-bottom: 17px; margin-bottom: 18px; }
+  h1 { font-size: 34px; letter-spacing: -.5px; }
+  header p { color: #536477; font-size: 17px; margin-top: 5px; }
+  header small { display: block; color: #7b8a99; margin-top: 8px; font-family: monospace; }
+  h2 { font-size: 19px; margin: 18px 0 10px; }
+  .lead { font-size: 15px; }
+  .steps { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+  .step { display: flex; gap: 12px; border: 1px solid #dce4ec; border-left: 5px solid #2878c8; border-radius: 8px; padding: 10px 12px; background: #f7fafc; }
+  .num { flex: none; color: #2878c8; font-size: 24px; font-weight: 800; }
+  .step b { font-size: 14px; }
+  .step p { color: #536477; font-size: 12.5px; margin-top: 2px; }
+  .parts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .part { border: 1px solid #dce4ec; border-radius: 8px; overflow: hidden; }
+  .part b { display: block; padding: 8px 10px; color: white; font-size: 14px; }
+  .part p { padding: 9px 10px; color: #435365; font-size: 12.5px; min-height: 52px; }
+  .part code, code { font-family: monospace; background: #edf2ff; color: #294b89; border-radius: 3px; padding: 1px 4px; }
+  .p1 b { background: #2878c8; } .p2 b { background: #7151b8; } .p3 b { background: #17856b; } .p4 b { background: #cf6a28; }
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  td { border-bottom: 1px solid #e9eef3; padding: 5px 8px; vertical-align: top; }
+  td:first-child { width: 26%; font-weight: 700; }
+  .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .run { background: #14283f; color: #edf4fb; border-radius: 9px; padding: 13px 16px; }
+  .run b { display: block; margin-bottom: 7px; color: white; }
+  .run code { display: inline-block; margin: 3px 0; background: #243d58; color: #dceaff; }
+  .note { margin-top: 10px; font-size: 12px; color: #536477; }
+  footer { margin-top: 15px; padding-top: 8px; border-top: 1px solid #e9eef3; text-align: center; color: #7b8a99; font-size: 11px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Masked Modeling em Deep Learning</h1>
+  <p>Um modelo aprende a reconstruir partes escondidas de imagens.</p>
+  <small>Experimento didático com MAE e CIFAR-10</small>
+</header>
+<section>
+  <h2>1. O problema que o experimento ensina</h2>
+  <p class="lead">Em vez de depender de uma resposta preparada por uma pessoa, o modelo recebe uma imagem, vê alguns pedaços e tenta reconstruir os pedaços cobertos.</p>
+</section>
+<section>
+  <h2>2. A viagem de uma execução</h2>
+  <div class="steps">
+    <div class="step"><span class="num">1</span><div><b>Conferência dos dados</b><p>O CIFAR-10 é obtido e seu MD5 é comparado com o valor oficial.</p></div></div>
+    <div class="step"><span class="num">2</span><div><b>Seleção de imagens</b><p>Uma seleção equilibrada separa treino, validação e teste.</p></div></div>
+    <div class="step"><span class="num">3</span><div><b>Divisão em quadrados</b><p>Cada imagem é dividida em 16 partes de 8 por 8 pixels.</p></div></div>
+    <div class="step"><span class="num">4</span><div><b>Mascaramento</b><p>Uma condição esconde 8 quadrados; outra esconde 12.</p></div></div>
+    <div class="step"><span class="num">5</span><div><b>Medição da reconstrução</b><p>O erro é calculado nos pixels escondidos do conjunto de teste.</p></div></div>
+    <div class="step"><span class="num">6</span><div><b>Materiais de entrega</b><p>O projeto salva gráficos, slides e um ZIP de entrega.</p></div></div>
+  </div>
+</section>
+<section>
+  <h2>3. As peças principais</h2>
+  <div class="parts">
+    <div class="part p1"><b>Dados</b><p>Baixados, verificados e selecionados. <code>codigo/dados.py</code></p></div>
+    <div class="part p2"><b>Modelo</b><p>Interpreta partes visíveis e reconstrói as escondidas. <code>codigo/mae.py</code></p></div>
+    <div class="part p3"><b>Treino</b><p>Ajusta o modelo e calcula o erro. <code>codigo/treino.py</code></p></div>
+    <div class="part p4"><b>Entrega</b><p>Gera slides e confere arquivos do pacote. <code>scripts/</code></p></div>
+  </div>
+</section>
+<section class="twocol">
+  <div>
+    <h2>4. Onde está cada coisa</h2>
+    <table>
+      <tr><td><code>codigo/</code></td><td>Notebook, dados, modelo e treino.</td></tr>
+      <tr><td><code>dados/</code></td><td>Seleção de imagens e seus índices.</td></tr>
+      <tr><td><code>resultados/</code></td><td>Métricas e figuras registradas.</td></tr>
+      <tr><td><code>slides/</code></td><td>Apresentação e imagens complementares.</td></tr>
+      <tr><td><code>tests/</code></td><td>Verificações automáticas.</td></tr>
+    </table>
+  </div>
+  <div>
+    <h2>5. Dicionário rápido</h2>
+    <table>
+      <tr><td>MAE</td><td>Masked Autoencoder, modelo que reconstrói partes escondidas.</td></tr>
+      <tr><td>Patch</td><td>Quadrado pequeno retirado da imagem.</td></tr>
+      <tr><td>MSE</td><td>Média do erro quadrático entre pixels previstos e corretos.</td></tr>
+      <tr><td>CUDA</td><td>Forma de usar uma GPU NVIDIA nos cálculos.</td></tr>
+    </table>
+  </div>
+</section>
+<section>
+  <h2>6. Execução documentada</h2>
+  <div class="run">
+    <b>Comandos documentados no README</b>
+    <code>uv sync --no-dev</code><br>
+    <code>uv run --no-dev jupyter nbconvert --execute --to notebook --inplace codigo/notebook.ipynb</code><br>
+    <code>uv run --no-dev python scripts/gerar_slides.py</code>
+  </div>
+  <p class="note">O treino exige GPU NVIDIA com CUDA. A geração dos slides também precisa de LibreOffice e pdftoppm. O README detalha os requisitos e os arquivos gravados pelos comandos.</p>
+</section>
+<footer>Os demais capítulos detalham o funcionamento; o glossário explica os termos técnicos. Os comandos são descritos no repositório e não foram executados nesta documentação.</footer>
+</body>
+</html>

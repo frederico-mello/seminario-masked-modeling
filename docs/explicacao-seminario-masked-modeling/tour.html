@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tour: Masked Modeling</title>
+<style>
+  :root { --foreground: #182333; --muted-foreground: #637184; --border: #d9e0e8; --accent: #2878c8; --card: #ffffff; }
+  * { box-sizing: border-box; }
+  body { color: var(--foreground); }
+  .tour { width: min(700px, calc(100vw - 24px)); }
+  .tour h1 { margin: 0 0 4px; font-size: 20px; }
+  .tour .sub { color: var(--muted-foreground); font-size: 13px; margin-bottom: 14px; }
+  .tour details { border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 8px; margin-bottom: 8px; }
+  .tour summary { cursor: pointer; padding: 10px 13px; font-weight: 650; font-size: 14px; list-style: none; display: flex; gap: 9px; align-items: baseline; }
+  .tour summary::-webkit-details-marker { display: none; }
+  .tour summary .n { width: 20px; height: 20px; border-radius: 50%; flex: none; background: var(--accent); color: var(--card); font-size: 12px; display: inline-flex; align-items: center; justify-content: center; }
+  .tour details[open] summary { border-bottom: 1px solid var(--border); }
+  .tour .body { padding: 11px 13px 13px 42px; font-size: 13px; line-height: 1.55; }
+  .tour .body p { margin: 0 0 8px; }
+  .tour .body p:last-child { margin-bottom: 0; }
+  .tour code { font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; border: 1px solid var(--border); border-radius: 4px; padding: 0 4px; overflow-wrap: anywhere; }
+  .tour .muted { color: var(--muted-foreground); }
+  .tour .ft { margin-top: 10px; color: var(--muted-foreground); font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="tour">
+  <h1>Todo o experimento em cinco passos</h1>
+  <div class="sub">As cinco etapas podem ser abertas para acompanhar o projeto sem conhecimento prévio de aprendizado de máquina.</div>
+
+  <details open>
+    <summary><span class="n">1</span> O que o projeto faz</summary>
+    <div class="body">
+      <p>Ele ensina um modelo a reconstruir partes escondidas de imagens. O tema é <b>masked modeling</b>: esconder uma parte da entrada e usá-la como exercício de previsão.</p>
+      <p>O modelo principal é o <b>MAE</b>, sigla de Masked Autoencoder. Neste repositório, ela não significa erro absoluto médio.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="n">2</span> Como os dados são preparados</summary>
+    <div class="body">
+      <p>O projeto obtém o CIFAR-10, verifica seu MD5 e escolhe imagens equilibradas entre 10 classes.</p>
+      <p>São guardadas 5.000 imagens para treino, 1.000 para validação e 1.000 para teste. Cada imagem tem 32 por 32 pixels.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="n">3</span> O que acontece durante o treino</summary>
+    <div class="body">
+      <p>Cada imagem vira 16 pedaços quadrados, chamados <b>patches</b>. Uma condição esconde 8 pedaços e outra esconde 12.</p>
+      <p>O <b>encoder</b> interpreta apenas os pedaços visíveis. O <b>decoder</b> tenta reconstruir os pixels escondidos. O erro é medido por MSE, a média das diferenças quadráticas.</p>
+      <p class="muted">O treino exige uma GPU NVIDIA com CUDA e não muda para CPU se ela estiver ausente.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="n">4</span> Onde aparecem as evidências</summary>
+    <div class="body">
+      <p><code>resultados/metricas.csv</code> guarda as medidas. <code>curva_perda.png</code> mostra a mudança do erro. <code>reconstrucoes.png</code> compara imagens originais, cobertas e reconstruídas.</p>
+      <p>Os slides mostram também um experimento complementar público. Ele é separado dos números medidos pelo código deste repositório.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="n">5</span> Como executar e o que observar</summary>
+    <div class="body">
+      <p>O README descreve a instalação com <code>uv sync --no-dev</code> e a execução do notebook com Jupyter. O treino precisa de GPU CUDA. Para gerar slides também são necessários LibreOffice e <code>pdftoppm</code>.</p>
+      <p>Os comandos podem substituir dados e resultados. Uma cópia de trabalho preserva os arquivos existentes.</p>
+      <p class="muted">A leitura completa, os diagramas e o glossário estão nos arquivos Markdown deste pacote.</p>
+    </div>
+  </details>
+
+  <div class="ft">Os resultados valem para as duas taxas, a semente e o conjunto de teste registrados. Não demonstram uma regra geral.</div>
+</div>
+</body>
+</html>
