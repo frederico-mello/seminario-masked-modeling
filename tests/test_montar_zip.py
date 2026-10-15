@@ -36,7 +36,7 @@ def test_estudo_arquivos_no_pacote():
     do_estudo = [
         caminho for caminho in montar_zip.OBRIGATORIOS
         if caminho.startswith("resultados/estudo-melhorar-reconstrucoes-mae/")
-            or caminho.startswith("openspec/changes/melhorar-reconstrucoes-mae/")
+            or caminho.startswith("openspec/changes/archive/2026-10-15-melhorar-reconstrucoes-mae/")
     ]
     exigidos = [
         "resultados/estudo-melhorar-reconstrucoes-mae/manifesto.json",
@@ -49,8 +49,8 @@ def test_estudo_arquivos_no_pacote():
         "resultados/estudo-melhorar-reconstrucoes-mae/ficha-visual/ficha_50.png",
         "resultados/estudo-melhorar-reconstrucoes-mae/ficha-visual/ficha_75.png",
         "resultados/estudo-melhorar-reconstrucoes-mae/ficha-visual/ficha_visual.json",
-        "openspec/changes/melhorar-reconstrucoes-mae/apresentacao/ficha-rotulos.json",
-        "openspec/changes/melhorar-reconstrucoes-mae/relatorio-fase-b.md",
+        "openspec/changes/archive/2026-10-15-melhorar-reconstrucoes-mae/apresentacao/ficha-rotulos.json",
+        "openspec/changes/archive/2026-10-15-melhorar-reconstrucoes-mae/relatorio-fase-b.md",
     ]
     for exigido in exigidos:
         assert exigido in montar_zip.OBRIGATORIOS
@@ -109,7 +109,7 @@ def test_pacote_inclui_fontes_e_documentos_para_leitura_e_consolidacao():
     for fonte in fontes:
         assert str(fonte.relative_to(RAIZ)) in montar_zip.OBRIGATORIOS
     destinos = set(montar_zip.OBRIGATORIOS.values())
-    base = 'openspec/changes/melhorar-reconstrucoes-mae/'
+    base = 'openspec/changes/archive/2026-10-15-melhorar-reconstrucoes-mae/'
     for documento in ['notas-finais.md', 'retificacao-validacao.md',
                       'retificacao-validacao.json', 'relatorio-fase-b.md']:
         assert base + documento in destinos

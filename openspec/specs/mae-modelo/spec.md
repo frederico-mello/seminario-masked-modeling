@@ -28,22 +28,22 @@ O encoder SHALL processar apenas os patches não mascarados, e os patches mascar
 - **THEN** o encoder recebe 4 patches
 
 ### Requirement: Arquitetura do encoder e do decoder
-O encoder SHALL ter dimensão 128, 4 blocos Transformer e 4 cabeças de atenção. O decoder SHALL ter dimensão 64, 2 blocos Transformer e 4 cabeças de atenção, e SHALL prever os 192 valores de cada patch.
+O encoder SHALL ter dimensão 128, 4 blocos Transformer e 4 cabeças de atenção na configuração de referência. Candidatos do estudo SHALL declarar explicitamente qualquer variação de dimensão, blocos e cabeças. O decoder SHALL prever os 192 valores de cada patch.
 
 #### Scenario: Saída do decoder
-- **WHEN** o decoder recebe os tokens visíveis e os tokens de máscara
-- **THEN** ele produz uma predição de 192 valores para cada um dos 16 patches
+- **WHEN** o decoder recebe tokens visíveis e tokens de máscara
+- **THEN** produz uma predição de 192 valores para cada um dos 16 patches; os parâmetros de cada variante são declarados e associados à execução antes do treino
 
 ### Requirement: Perda somente nos patches ocultos
-O modelo SHALL calcular a perda como erro quadrático médio entre predição e alvo em pixels brutos, somente nos patches ocultos. Patches visíveis SHALL NOT contribuir para a perda.
+O MAE de referência SHALL calcular erro quadrático médio nos pixels brutos dos patches ocultos. Uma candidata pode declarar outra função de perda aplicada aos patches ocultos; pixels visíveis SHALL NOT contribuir para a perda de treino.
 
 #### Scenario: Perda sem patches visíveis
 - **WHEN** a perda é calculada para uma imagem com máscara
-- **THEN** o valor depende apenas dos patches ocultos
+- **THEN** seu valor depende apenas dos patches ocultos e, para a referência, é o MSE em pixels brutos
 
 #### Scenario: Escala de pixels
 - **WHEN** a perda é calculada
-- **THEN** os alvos são os pixels em [0,1], sem normalização por canal ou por patch
+- **THEN** os alvos são pixels em [0,1], sem normalização por canal ou por patch; variantes declaram fórmula e ponderações antes do treino
 
 ### Requirement: Mesmo comportamento que a referência de teste
 O modelo SHALL produzir, para mesma configuração, mesmos pesos e mesma máscara, formas de saída, perda e reconstrução compatíveis com a classe MAE do vit-pytorch dentro de tolerância numérica explícita.
@@ -55,3 +55,14 @@ O modelo SHALL produzir, para mesma configuração, mesmos pesos e mesma máscar
 #### Scenario: Oráculo fora da execução
 - **WHEN** o modelo é usado para treino e avaliação
 - **THEN** nenhum código do vit-pytorch é importado
+
+### Requirement: Configuração comum congelada
+O estudo SHALL usar batch 64, AdamW com learning rate 1e-4, weight decay 0,05, betas (0,9; 0,999), epsilon 1e-8, precisão float32, sem scheduler e sem clipping de gradiente em todos os candidatos. O restante da configuração C0 SHALL ser registrado literalmente no manifesto. Código, ambiente/lockfile, splits/índices e configuração completa SHALL ser identificados por versões e hashes antes do piloto e permanecer congelados durante o estudo.
+
+#### Scenario: Configuração comparável
+- **WHEN** um candidato é iniciado
+- **THEN** recebe a configuração comum congelada; somente a arquitetura de decoder declarada em C1, a função de perda declarada em C2 ou o residual declarado em C3 diferem de C0
+
+#### Scenario: Identidade de execução
+- **WHEN** um piloto ou treino é registrado
+- **THEN** seu evento aponta para hash Git/código, hash integral da configuração, versão do ambiente e lockfile, versão do split e índices originais

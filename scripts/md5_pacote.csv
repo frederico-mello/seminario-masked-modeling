@@ -24,12 +24,12 @@ codigo/preparar_dados.py,e863b1c0eedef50785845a1e1549901f
 codigo/treino.py,66c24efcff76e757355cbb46db9483b5
 dados/cifar10_subset/indices.csv,78f9b1f8ee18b8a0a74757e6278d6fa7
 dados/cifar10_subset/subset.npz,d268d205315337422d4d6bdba98206a2
-openspec/changes/melhorar-reconstrucoes-mae/apresentacao/proveniencia.json,a8d007f8962a75fd47bb2f0ffb45890e
-openspec/changes/melhorar-reconstrucoes-mae/fontes-historicas/estudo_execucao_c0_v2.py,8c2d799c592208da520128695f60c6ef
-openspec/changes/melhorar-reconstrucoes-mae/notas-finais.md,590df15bd2533d3fa467eba88c4d5494
-openspec/changes/melhorar-reconstrucoes-mae/relatorio-fase-b.md,1af0c40afcee3ff2dfd6208cfda5af81
-openspec/changes/melhorar-reconstrucoes-mae/retificacao-validacao.json,c7c0145a52438cb89cd63e71357cbe23
-openspec/changes/melhorar-reconstrucoes-mae/retificacao-validacao.md,7acd71cea595ebcf63e23ea42c37d316
+openspec/changes/archive/2026-10-15-melhorar-reconstrucoes-mae/apresentacao/proveniencia.json,a8d007f8962a75fd47bb2f0ffb45890e
+openspec/changes/archive/2026-10-15-melhorar-reconstrucoes-mae/fontes-historicas/estudo_execucao_c0_v2.py,8c2d799c592208da520128695f60c6ef
+openspec/changes/archive/2026-10-15-melhorar-reconstrucoes-mae/notas-finais.md,590df15bd2533d3fa467eba88c4d5494
+openspec/changes/archive/2026-10-15-melhorar-reconstrucoes-mae/relatorio-fase-b.md,1af0c40afcee3ff2dfd6208cfda5af81
+openspec/changes/archive/2026-10-15-melhorar-reconstrucoes-mae/retificacao-validacao.json,c7c0145a52438cb89cd63e71357cbe23
+openspec/changes/archive/2026-10-15-melhorar-reconstrucoes-mae/retificacao-validacao.md,7acd71cea595ebcf63e23ea42c37d316
 pyproject.toml,1a94031c932d7c723c6d237969c8a59c
 resultados/curva_perda.png,7e9b15e09486f8254532e9754cd2e850
 resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/contador.jsonl,40475dccb6dc4fd487c393a0ce967cd3
@@ -56,7 +56,7 @@ scripts/construir_notebook.py,e523e639a9413fd17ae2a49adf32f177
 scripts/executar_estudo_c0_v2.py,2a2be1998e2d5a255a5cf472b011d90e
 scripts/gerar_relatorio_fase_b.py,e518c4295b43efa7390776494c6874fe
 scripts/gerar_slides.py,f368d96141e64a4ee0039b984aa04cd2
-scripts/montar_zip.py,aa8beb57daa4477778f45d6597f3749b
+scripts/montar_zip.py,35a56f50f461fb23142c978462c9c02c
 scripts/retificar_validacao.py,f639522935e7af595491719f8d80ab2a
 slides/recursos-complementares/vitmae-fluxo-experimento.png,d829809d47c093e2db809a80e9b1bdc9
 slides/recursos-complementares/vitmae-grade-taxas.png,64c3e29309d8a69807bdb44aec53242b

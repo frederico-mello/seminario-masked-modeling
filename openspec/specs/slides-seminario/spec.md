@@ -41,13 +41,11 @@ A capa SHALL exibir "Frederico Maciel de Mello e Luan Pedro de Souza Silva" como
 - **THEN** os dois nomes completos aparecem e a data 16/10 está presente
 
 ### Requirement: Números medidos somente
-Os números do experimento próprio apresentados nos slides SHALL vir de `metricas.csv` ou de medições registradas pelo notebook, e SHALL NOT ser digitados à mão. Os números do experimento complementar SHALL vir unicamente do material complementar (MSEs do texto de conclusões do material complementar e gráfico do MSE por taxa em imagem versada no repositório), creditando o material na apresentação, e SHALL NOT ser apresentados como medição nossa.
+Os números do experimento próprio original nos slides SHALL vir de `metricas.csv` ou de medições registradas pelo notebook e SHALL NOT ser digitados à mão. Os números do novo estudo SHALL vir de seu histórico e resumo registrados. Números do experimento complementar SHALL vir unicamente de seu material de origem e SHALL ser identificados como externos.
 
 #### Scenario: Rastreio dos números
-- **WHEN** um número aparece em um slide
-- **THEN** para o experimento próprio ele existe em `resultados/` ou no registro de medição de treinamento
-- **AND** para o experimento complementar ele corresponde ao material complementar (0,0476 com 25%; 0,1403 com 75%; 0,3117 com 90%), com o gráfico do MSE por taxa em imagem versada no repositório e a fonte citada no slide
-- **AND** nenhum valor do experimento complementar é apresentado com delimitação de semente ou protocolo nossa
+- **WHEN** números do experimento próprio original, do novo estudo ou do experimento complementar aparecem em um slide
+- **THEN** cada número do experimento original existe em `resultados/` ou no registro do notebook; cada resultado do novo estudo consta no histórico ou resumo com protocolo e delimitação; e cada número complementar corresponde ao material de origem, com fonte citada e sem ser apresentado como medição própria
 
 ### Requirement: Idioma e pontuação
 Os slides SHALL estar em português brasileiro com acentuação correta, SHALL NOT conter o caractere travessão U+2014 e SHALL NOT conter palavra que exija acento escrita sem acento.
