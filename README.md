@@ -58,6 +58,47 @@ treino (previsto versus medido), treina as duas condições, avalia o teste e
 grava `resultados/`. Sem GPU CUDA o notebook falha com erro explícito: não há
 fallback silencioso para CPU.
 
+## Pré-requisitos de sistema
+
+Para regenerar os slides (pptx para pdf e png de inspeção) são necessários dois
+programas fora do ambiente Python:
+
+- **LibreOffice** (`soffice`): converte o `.pptx` gerado pelo script em `.pdf`,
+  em modo headless, pelo próprio `scripts/gerar_slides.py`.
+- **pdftoppm** (poppler-utils): converte o `.pdf` em um png por página para
+  inspeção visual, também chamado pelo script de slides.
+
+Forma de conferir a presença de cada um no sistema:
+
+```sh
+command -v soffice                  # caminho esperado: /usr/bin/soffice
+command -v pdftoppm                 # conversão de pdf em png
+```
+
+Sem LibreOffice ou sem pdftoppm, o script de slides falha com erro explícito
+(`check=True` no subprocesso): nesse caso, instale o programa ausente e rode
+novamente. O pdf e os pngs são saídas derivadas e regeneráveis.
+
+## Recuperando o pacote a partir do repositório
+
+O zip de entrega (`seminario_masked_modeling.zip`) não é versionado no git. Se
+o pacote não chegar ao destinatário ou se algum arquivo ficar desatualizado,
+regenere tudo na ordem abaixo, a partir da raiz do repositório:
+
+```sh
+uv sync                                     # ambiente completo (com grupo dev)
+uv run python codigo/preparar_dados.py --seed 42   # 1. dados: baixa CIFAR-10 (md5 verificado) e cria o subset
+uv run jupyter nbconvert --execute --to notebook --inplace codigo/notebook.ipynb
+                                            # 2. resultados: treina e grava resultados/ (exige GPU CUDA)
+uv run python scripts/gerar_slides.py       # 3. slides: regenera pptx, pdf e png
+uv run python scripts/montar_zip.py         # 4. empacotamento: grava o zip
+```
+
+O script de empacotamento confere a presença de cada arquivo obrigatório e
+falha nomeando o que falta antes de gravar o zip; ao gravar, regenera
+`scripts/md5_pacote.csv` com o md5 de cada arquivo do pacote. Conferência
+posterior: `uv run pytest tests/test_montar_zip.py`.
+
 ## Arquivos
 
 - `pyproject.toml`, `uv.lock`: ambiente reprodutível (torch cu130, dev: vit-pytorch).
