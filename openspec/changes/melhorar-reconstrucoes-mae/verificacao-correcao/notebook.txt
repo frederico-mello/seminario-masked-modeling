@@ -1,0 +1,4 @@
+Diretório: . (raiz do repositório)
+Comando: uv run python scripts/construir_notebook.py
+Saída: 0
+notebook gerado em ./codigo/notebook.ipynb

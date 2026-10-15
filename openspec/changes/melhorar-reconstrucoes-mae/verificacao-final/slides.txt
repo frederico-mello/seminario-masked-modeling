@@ -1,0 +1,5 @@
+limites ok nas 13 paginas
+pptx: ./slides/seminario_masked_modeling.pptx
+pdf: ./slides/seminario_masked_modeling.pdf
+png: 13 paginas em ./slides/png
+slides: 13

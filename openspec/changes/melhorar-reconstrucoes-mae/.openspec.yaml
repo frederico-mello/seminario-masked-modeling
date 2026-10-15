@@ -1,0 +1,4 @@
+schema: spec-driven
+created: 2026-10-15
+goal: Melhorar a qualidade numerica e visual das reconstrucoes do MAE em estudo
+  exploratorio reproduzivel com teto total de duas horas de treinamento

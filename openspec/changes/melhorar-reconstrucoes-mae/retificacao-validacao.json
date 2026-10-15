@@ -1,0 +1,226 @@
+{
+  "tipo": "retificação documental posterior, somente registros existentes",
+  "origens_sha256": {
+    "resultados/estudo-melhorar-reconstrucoes-mae/historico.csv": "6d54737fa3e977d906f56a3e4d5fedb2f3b12b94825cfbdf7985512bda6ebdf7",
+    "resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/manifesto.json": "26c3e2c9960e65941bd6d40100cf491f4b9a50997f1b548cb1ed418613c76d28",
+    "resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/historico.jsonl": "07cb33ba52097d30c5a1f02419ccde7282eedc1242cbd8579b340c8cece2d242",
+    "resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/contador.jsonl": "bf57749b308a5b4cd72ad3b2836456ca77645fbb6907212c2f9dce3ff32cb9af",
+    "resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/resumo.json": "16769afc5ba49baa0133c9e601e1352c1a83a687ddb5f6d8362c70e2c360ee6c",
+    "resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/relatorio-c0-v2.md": "2d3c80ae9bafdb44dc2a0574768940044402dd994c9b334b077e8c0fbf3850c9"
+  },
+  "fontes_atuais_sha256": {
+    "codigo/estudo_execucao_c0_v2.py": "5b10f4491bccc20696cc1ab621c35e352e0eac8b5ce872203416883a0a5b5d0b",
+    "scripts/retificar_validacao.py": "71c0be6b3e510522338f62b65775f6af953c0043571cfe5432096e2e7a38ec26"
+  },
+  "fonte_executor_original_sha256": "07f8496dd86744fcb3094bdf70537c148d5696cac55853bb769b38e4b003adef",
+  "inventario_fontes_original_sha256": "9eba0cb402003f739abfe18ade2b06d6160c57642a4342c7ba8a417934de7cf9",
+  "hash_manifesto_v2_original": "fda2ab28a44b9a74d6b02d5b19dc621687e1d5d98035fa2419716b0794ed4e16",
+  "selecao_controles": "evento=controle e estado=validacao explicitamente; nunca teste",
+  "selecao_candidatos": "evento=epoca; colunas perda_validacao e ssim_validacao; estado=concluido indica época completa",
+  "referencias_validacao": {
+    "candidatos": {
+      "C1": {
+        "0.5": {
+          "10": {
+            "epocas": 200,
+            "estado": "completo",
+            "melhor": {
+              "epoca": 181,
+              "mse": 0.033555,
+              "ssim": 0.397872
+            },
+            "final": {
+              "epoca": 200,
+              "mse": 0.033933,
+              "ssim": 0.400218
+            }
+          },
+          "20": {
+            "epocas": 200,
+            "estado": "completo",
+            "melhor": {
+              "epoca": 198,
+              "mse": 0.033764,
+              "ssim": 0.398724
+            },
+            "final": {
+              "epoca": 200,
+              "mse": 0.03444,
+              "ssim": 0.396323
+            }
+          },
+          "30": {
+            "epocas": 200,
+            "estado": "completo",
+            "melhor": {
+              "epoca": 183,
+              "mse": 0.03352,
+              "ssim": 0.400543
+            },
+            "final": {
+              "epoca": 200,
+              "mse": 0.033765,
+              "ssim": 0.402818
+            }
+          }
+        },
+        "0.75": {
+          "10": {
+            "epocas": 185,
+            "estado": "incompleto",
+            "melhor": {
+              "epoca": 163,
+              "mse": 0.041888,
+              "ssim": 0.358202
+            },
+            "final": {
+              "epoca": 185,
+              "mse": 0.042473,
+              "ssim": 0.360543
+            }
+          },
+          "20": {
+            "epocas": 200,
+            "estado": "completo",
+            "melhor": {
+              "epoca": 200,
+              "mse": 0.041816,
+              "ssim": 0.362957
+            },
+            "final": {
+              "epoca": 200,
+              "mse": 0.041816,
+              "ssim": 0.362957
+            }
+          },
+          "30": {
+            "epocas": 200,
+            "estado": "completo",
+            "melhor": {
+              "epoca": 197,
+              "mse": 0.041316,
+              "ssim": 0.364348
+            },
+            "final": {
+              "epoca": 200,
+              "mse": 0.041547,
+              "ssim": 0.365102
+            }
+          }
+        }
+      },
+      "C2": {
+        "0.5": {
+          "10": {
+            "epocas": 200,
+            "estado": "completo",
+            "melhor": {
+              "epoca": 200,
+              "mse": 0.036938,
+              "ssim": 0.366839
+            },
+            "final": {
+              "epoca": 200,
+              "mse": 0.036938,
+              "ssim": 0.366839
+            }
+          },
+          "20": {
+            "epocas": 200,
+            "estado": "completo",
+            "melhor": {
+              "epoca": 198,
+              "mse": 0.037122,
+              "ssim": 0.365044
+            },
+            "final": {
+              "epoca": 200,
+              "mse": 0.037487,
+              "ssim": 0.363728
+            }
+          },
+          "30": {
+            "epocas": 200,
+            "estado": "completo",
+            "melhor": {
+              "epoca": 184,
+              "mse": 0.038078,
+              "ssim": 0.357809
+            },
+            "final": {
+              "epoca": 200,
+              "mse": 0.038146,
+              "ssim": 0.361678
+            }
+          }
+        },
+        "0.75": {
+          "10": {
+            "epocas": 200,
+            "estado": "completo",
+            "melhor": {
+              "epoca": 191,
+              "mse": 0.044569,
+              "ssim": 0.343256
+            },
+            "final": {
+              "epoca": 200,
+              "mse": 0.045754,
+              "ssim": 0.343916
+            }
+          },
+          "20": {
+            "epocas": 200,
+            "estado": "completo",
+            "melhor": {
+              "epoca": 200,
+              "mse": 0.044032,
+              "ssim": 0.343815
+            },
+            "final": {
+              "epoca": 200,
+              "mse": 0.044032,
+              "ssim": 0.343815
+            }
+          },
+          "30": {
+            "epocas": 200,
+            "estado": "completo",
+            "melhor": {
+              "epoca": 193,
+              "mse": 0.043516,
+              "ssim": 0.346509
+            },
+            "final": {
+              "epoca": 200,
+              "mse": 0.043682,
+              "ssim": 0.347883
+            }
+          }
+        }
+      }
+    },
+    "controles": {
+      "0.5": {
+        "controle_interpolacao": {
+          "mse": 0.044741,
+          "ssim": 0.269084
+        },
+        "controle_media_rgb": {
+          "mse": 0.049111,
+          "ssim": 0.355596
+        }
+      },
+      "0.75": {
+        "controle_interpolacao": {
+          "mse": 0.054458,
+          "ssim": 0.237844
+        },
+        "controle_media_rgb": {
+          "mse": 0.051706,
+          "ssim": 0.35563
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,442 @@
+{
+  "ambiente": {
+    "cuda": "13.0",
+    "gpu": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+    "python": "3.13.13",
+    "torch": "2.14.1+cu130"
+  },
+  "configuracao": {
+    "candidato": {
+      "dim": 128,
+      "dim_decoder": 64,
+      "dim_head": 32,
+      "dim_head_decoder": 64,
+      "heads": 4,
+      "heads_decoder": 4,
+      "justificativa": "referencia do protocolo novo, isola o efeito do esquema de mascaras por identidade, epoca e seed",
+      "nome": "MAE direto retreinado",
+      "perda": "mse",
+      "peso_l1": null,
+      "profundidade": 4,
+      "profundidade_decoder": 2,
+      "residual": false
+    },
+    "comparacao": {
+      "epocas_incompletas_equivalem_a_200": false,
+      "escopo": "descritiva e somente na validação",
+      "sem_consultar_teste": true,
+      "sem_inferir_modelos_v1": true,
+      "sem_reavaliar_controles": true
+    },
+    "comum": {
+      "batch": 64,
+      "beta1": 0.9,
+      "beta2": 0.999,
+      "clipagem_gradiente": null,
+      "embaralhamento_treino": true,
+      "epsilon_adam": 1e-08,
+      "inicializacao_aleatoria": true,
+      "lr": 0.0001,
+      "otimizador": "AdamW",
+      "precisao": "float32",
+      "scheduler": null,
+      "weight_decay": 0.05
+    },
+    "diretorios": {
+      "v1_referencia": "resultados/estudo-melhorar-reconstrucoes-mae",
+      "v2": "resultados/estudo-melhorar-reconstrucoes-mae-c0-v2"
+    },
+    "epocas_maximas": 200,
+    "escopo": "somente C0; seeds 10, 20 e 30; taxas 0.5 e 0.75",
+    "limiar_piloto_segundos": 1.25,
+    "mascara_treino": "mascara-treino-v1",
+    "mascara_validacao_seed": 42,
+    "regua": {
+      "medida": "MSE e SSIM nos mesmos patches ocultos de validação da v1",
+      "ssim": {
+        "agregacao": "media_canais_por_pixel:media_pixels_patch:media_patches_ocultos:media_imagens_seed_taxa:mediana_seeds",
+        "c1": 0.0001,
+        "c2": 0.0009,
+        "divisor": "populacional",
+        "entrada": "[0,1]",
+        "epsilon_denominador": 1e-12,
+        "faixa_dinamica": 1.0,
+        "janela": 3,
+        "pad": "reflexao_sem_repetir_borda",
+        "sigma": 1.5,
+        "variancia_negativa": "limitada_a_zero"
+      }
+    },
+    "seeds_treino": [
+      10,
+      20,
+      30
+    ],
+    "taxas": [
+      0.5,
+      0.75
+    ],
+    "teto_execucao_segundos": 240,
+    "teto_global_segundos": 7200,
+    "teto_piloto_total_segundos": 120,
+    "teto_reserva_v2_segundos": 1800,
+    "versao": "c0-v2"
+  },
+  "consulta_teste": false,
+  "criado_em": "2026-10-15T16:10:05.902617-03:00",
+  "dados_treino_validacao": {
+    "treino": {
+      "dtype": "uint8",
+      "sha256": "5601ada78e75999d1ccda5fe16f508bb62d18fedb003e54fd4c6cdfd8205a90d",
+      "shape": [
+        5000,
+        32,
+        32,
+        3
+      ]
+    },
+    "validacao": {
+      "dtype": "uint8",
+      "sha256": "01e7b9fe18d18439d00512dccd6578aee463deded6e691ed2fa9c33d4307343e",
+      "shape": [
+        1000,
+        32,
+        32,
+        3
+      ]
+    }
+  },
+  "fontes_python": {
+    "algoritmo": "sha256 por caminho relativo e conteúdo",
+    "arquivos": {
+      "codigo/__init__.py": "a5f8094f4155276d26d2d95545c04b2ec4dc50bc2200c10d4d0542a4092db091",
+      "codigo/configuracao_estudo.py": "a05da33e2f8167f0bcf9e50dfb654b93a44a808189f22fe3a754c0af4b3d0e55",
+      "codigo/configuracao_estudo_c0_v2.py": "70ea87c41dae0e157a228570015885cda8aafadf6f188a634410e38a04ef431d",
+      "codigo/dados.py": "13a272d8ff2c08df5e6ec02abbf623b9a45e2e6b079fea043bb17e6f5042bb6e",
+      "codigo/estudo_avaliacao.py": "1f489dc2c4f933d994a800fb1bf8decf7625a3b9b6444d29ce147170d48963cc",
+      "codigo/estudo_baselines.py": "6c4e70237d1396c6d38a55144b75336b1de103b1c775505e7070bf883c92ca8c",
+      "codigo/estudo_candidatos.py": "3cd2e6da3c0803f2354799a00a1ed33c3cace51bdf09a9280f0bd7081a254df7",
+      "codigo/estudo_checkpoints.py": "a6681698ea363dbeb660a3e772a6e22f52bf1a72225db3849d764033af7b8f0c",
+      "codigo/estudo_execucao.py": "4935525684e41b8efa50424b4fbf7eb2e5b46d8a67f9062e186768b456852120",
+      "codigo/estudo_execucao_c0_v2.py": "07f8496dd86744fcb3094bdf70537c148d5696cac55853bb769b38e4b003adef",
+      "codigo/estudo_historico.py": "ea8f04967f204d4fc3f9fa2a348ba8330ec00e9749ed038d58840f4d6b701181",
+      "codigo/estudo_mascaras.py": "1fd205a78a0799f063af2afe73e6b6004c607f0472c903c18068f5fa407832a9",
+      "codigo/estudo_orcamento.py": "f01dcd0a2891548b408a90703fadc4ea4a87ee8be8a136b4df2f2b5274e3bbfc",
+      "codigo/estudo_orcamento_c0_v2.py": "0ee0304f3400a349d226a69681abe6229df180936916a6e005985772b8c5e827",
+      "codigo/estudo_selecao.py": "e0cf83f93dfd01ff1ed13720cd6d11b2e5159ec8a804c7d2cef1f4ad20159054",
+      "codigo/estudo_ssim.py": "2b211576ce822251413183e1553364c399e98d665f8505ecd9f4f7a68d71297e",
+      "codigo/estudo_visual.py": "12fd9854b5e05093b734a64e61ceab98522d24a5f7e410d5c2edb98d96903515",
+      "codigo/mae.py": "49bf5d2d01e80f555c2079f96fcc300fc1b12176e53365ca5052eef14fc2c246",
+      "codigo/preparar_dados.py": "b720a2ca80b98837dad74d68650f8114d6e50f0c99728ed124d84d786f34034f",
+      "codigo/treino.py": "6dde5507d4de6890d4fc5e47fb5a67a053c00dab148760e4e447da3694af6b5f",
+      "scripts/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scripts/construir_notebook.py": "cbf68a579fcca3a826429313a8bc3f8b8258e2ac103c7272c6b571dbc3b7df8b",
+      "scripts/executar_estudo_c0_v2.py": "e1f9dcc29b65e27e5c1368314b8c553d0241794142e42d5e0a05c3f6f758fcba",
+      "scripts/gerar_relatorio_fase_b.py": "7970924604c89b3c795cf6c8935445361776b3bd711d74c946560a649a3fd731",
+      "scripts/gerar_slides.py": "02ad61c620078e0dbfe9deb70b1b7d8c08443b0899e65173c2275c9bba30b13c",
+      "scripts/montar_zip.py": "305970d58a8f7e72fcfb55a89415db6fdd413729f686a9b2b0ed6473129b658c",
+      "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tests/test_dados.py": "eb007d22f084b6ce63889f9d32006abb136fd2cdcbf50169105c2670cb59eb83",
+      "tests/test_dados_md5.py": "7c3e4537f863903cf7edd0b63b39b311a25e707b0bc9a06041ad76e17dd400a9",
+      "tests/test_equivalencia_oraculo.py": "3740855279f98cd979b54401cfe9ff29318d0306db2ac41e0519236dad6e0fb5",
+      "tests/test_estudo_avaliacao.py": "9d91e5e7af018777aa540f6caea42a87fdf791ba1816f7e7ce99e465b4c33fd4",
+      "tests/test_estudo_baselines.py": "026513d50a0996dcd045a897aaa646d989e9ddd8273294aebf358a887cfbe2e0",
+      "tests/test_estudo_candidatos.py": "2f2a5a45dc82fda1abbd9a6119a265ce968abe3b02f75237309940500ed642a0",
+      "tests/test_estudo_checkpoints.py": "a1a2a2f121dc4a3f13cb580a62547519d195ea3088c4e9aa69a0a22baa809ec9",
+      "tests/test_estudo_historico.py": "cc6aa21c857ba9c3239c7aabde0e3173496dcd774c1f78eb2c2eca07e412991a",
+      "tests/test_estudo_mascaras.py": "7362a430b8a730a12dac8d9498809a7ac8de07a9efb5d9d7761eb6c330cf6228",
+      "tests/test_estudo_orcamento.py": "6d5be65c1b2eb9173a1ebae4eb6bc5b08cd1efb8ca26409848ecb05ea9ce4cad",
+      "tests/test_estudo_orcamento_c0_v2.py": "ddac57d6bf98947835fb66bb8381cf716ae07af9445413f59ca6febbbeb4b005",
+      "tests/test_estudo_selecao.py": "785cc0c179eb3787873b72dd05dc58a42ce0a7a7688255d603247f21c8b2f8f5",
+      "tests/test_estudo_visual.py": "662f4769538f1455b0e3c95ab0c2287fd017a5d099129cf81bddb4121253632a",
+      "tests/test_mae.py": "500e5890cec875706496d25fa793fbbddb1f7fa5beb12a08cddf57c760efc89a",
+      "tests/test_montar_zip.py": "673c7fa19472a765b305349c42c0b3768e048168fc3e9e50c237e69bcb386aac"
+    },
+    "sha256": "9eba0cb402003f739abfe18ade2b06d6160c57642a4342c7ba8a417934de7cf9"
+  },
+  "hash_configuracao": "0818e65052c935c8748a2475b99160e8b606256dc22614b64ecc8ecf27c324d8",
+  "hash_manifesto_v2": "fda2ab28a44b9a74d6b02d5b19dc621687e1d5d98035fa2419716b0794ed4e16",
+  "indices_treino_validacao_sha256": "8ab3c26222c8349e9b0260d7a5ca1e5ce6f96764e7e654958f9088e54e56e5fe",
+  "lockfile_sha256": "5ed81eed1698af6c9d19c2ff813ffd033b3e44e6b74b88a5a23c8267de1f0ced",
+  "referencias_v1": {
+    "codigo_hash_registrado": "e13ef0653e119b00",
+    "consumo_principal_ns": 2463690839072,
+    "consumo_total_ns": 2463690839072,
+    "contador_sha256": "6152650eecee6554c27ab22ca8fc39aea9ef8065f9f61737f2275027841f79a0",
+    "estado_sha256": "e3ebc5c0a34cf5b9fc4110cf83852d0462f28544a368baad4dae66563026eae9",
+    "historico_sha256": "6d54737fa3e977d906f56a3e4d5fedb2f3b12b94825cfbdf7985512bda6ebdf7",
+    "manifesto_sha256": "b87f36261eeabd348c8e4cd32f9002f4aecb112be75c1fdad794efba45743cad",
+    "reserva_consumida_ns": 0,
+    "resultados": {
+      "arquivos": {
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C0_10_0.5piloto.pt": {
+          "bytes": 4189170,
+          "sha256": "fdf0299e5cdd8f7a91ff76e50af829eb183b7627ee56f72dff7822c1146621ac"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C0_10_0.75piloto.pt": {
+          "bytes": 4189259,
+          "sha256": "1a12fb12819e5e1ebf9e8833494b6d5000399e61361c634aaced6bdff14a0f0e"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_10_0.5.pt": {
+          "bytes": 26596747,
+          "sha256": "17d8aa3ba02235fc6e99b4cd786c256d1788d25fffec221f754cab5bf5188635"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_10_0.5melhor.pt": {
+          "bytes": 6642665,
+          "sha256": "be5521f9f011d29945e02ea0152c33806e1cce832e041eadd4d00719a72daa1c"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_10_0.5piloto.pt": {
+          "bytes": 6650153,
+          "sha256": "6f78ad91ae77439e5d44e6caf8b32f8a89bc4681bc65af84f3cda483e6e4da85"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_10_0.75.pt": {
+          "bytes": 26597223,
+          "sha256": "d1db63779ffe2e57aff14b9eb10db3ce7bd472dc98ffcd83070e6a57ae3e433c"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_10_0.75melhor.pt": {
+          "bytes": 6642765,
+          "sha256": "c6cff1b595ad82e74449cbbf4d94804995026f9a0019e2eb506f7d0e3694ec9c"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_10_0.75piloto.pt": {
+          "bytes": 6650253,
+          "sha256": "63bd714d84014ac8bed13fd0c3dddd194f7320a28d6e2d038b5c6639ea699ccb"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_20_0.5.pt": {
+          "bytes": 26596747,
+          "sha256": "e897e2ea698ae97df639c3a853a0f955d72f04931802697e5d5e783b8a8f59af"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_20_0.5melhor.pt": {
+          "bytes": 6642665,
+          "sha256": "d8c23e05974dc44076aaa8dc9891f1a2795b228fd9b7cc47ca78ab91657aa70a"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_20_0.75.pt": {
+          "bytes": 26597223,
+          "sha256": "a60fb98f698363dd10877493782310547e9dcdf31f65b77ea71d3ca7b8389ec2"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_20_0.75melhor.pt": {
+          "bytes": 6642765,
+          "sha256": "0218af6cefd53e98ed0277c0f4b89c7175ee70664a6c28d066c9583181294804"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_30_0.5.pt": {
+          "bytes": 26596747,
+          "sha256": "221ac0652995c2ab37ac75bceda6bbdf9f03b406d74de07830dcb1e4591eef0f"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_30_0.5melhor.pt": {
+          "bytes": 6642665,
+          "sha256": "30462d0db67f402b6083d39ffaaee72053fcc1a9bb40bdc73dc0f73043a7bd45"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_30_0.75.pt": {
+          "bytes": 26597223,
+          "sha256": "64652023fbde8f4b9fec6b374cbf32b5ab4cc4f42dc92587c496acec17fe201f"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_30_0.75melhor.pt": {
+          "bytes": 6642765,
+          "sha256": "6b4ea0f62a8e073167ddb70c9736a0a89f979f0f1a2f6eec8240d9a01203db8d"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_10_0.5.pt": {
+          "bytes": 16753291,
+          "sha256": "c3f797c652fa373e18d0280f092c01f3b974004de06a6620ed43988da0cc5452"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_10_0.5melhor.pt": {
+          "bytes": 4182642,
+          "sha256": "fc287a742cb4aa70a7d6aaeaff3399fda1deac85920474982084eaf72edaf4d7"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_10_0.5piloto.pt": {
+          "bytes": 4189170,
+          "sha256": "c85a0b25826af8e0424e7dac874572c6313a22770f4646d8865b97d49ce23fdd"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_10_0.75.pt": {
+          "bytes": 16753712,
+          "sha256": "e940788aa8420b914bf49166a13c078c2547557236023219d2e73356b1c2a02e"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_10_0.75melhor.pt": {
+          "bytes": 4182731,
+          "sha256": "2d6f1b9ecd74863d1aa0a9934dd001dfb01c677bec43aac4ab1dd8a745677997"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_10_0.75piloto.pt": {
+          "bytes": 4189259,
+          "sha256": "6d14bf25d1de22a25694a6242679bf976117c248760a0273116cbb605260c5c4"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_20_0.5.pt": {
+          "bytes": 16753291,
+          "sha256": "7283fa6178f3147b6e1d02f66dd106e304582ba24909c4de64b8e17ed2f9392b"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_20_0.5melhor.pt": {
+          "bytes": 4182642,
+          "sha256": "25f0674ecf259cea29d35daa32350baa4fc4bf58bad6b1699b91a47360f056b0"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_20_0.75.pt": {
+          "bytes": 16753712,
+          "sha256": "f01834577d22a0df3b3c0276948e56ed2f76a3f6a5bbe987c6bfc26aa42a0408"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_20_0.75melhor.pt": {
+          "bytes": 4182731,
+          "sha256": "3d3865624abd872d726e893c32aa7a59de5f67b80bb0fc26d3ac1634d533c47d"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_30_0.5.pt": {
+          "bytes": 16753291,
+          "sha256": "8f0ba475cbb0692b34cc13d1411440945d83a5fdf28a0dba59f26e6ec8c85c1b"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_30_0.5melhor.pt": {
+          "bytes": 4182642,
+          "sha256": "14d3fdcd6fd779bff24a48d51daf1ed35b2dcb0efd65b624d7ada0a1bf86cf63"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_30_0.75.pt": {
+          "bytes": 16753712,
+          "sha256": "71109c99a496fb7048be582e04652fb2cef7268c5599647deeb2fc5d3db61ad6"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_30_0.75melhor.pt": {
+          "bytes": 4182731,
+          "sha256": "b1e694fc3142843aa783d83602edad45f30a9cff5481c57013f605f1ab50cbd7"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints/C1_s10_t0.5_final_epoca200_17d8aa3ba02235fc.pt": {
+          "bytes": 26596747,
+          "sha256": "17d8aa3ba02235fc6e99b4cd786c256d1788d25fffec221f754cab5bf5188635"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints/C1_s10_t0.5_melhor_epoca181_be5521f9f011d299.pt": {
+          "bytes": 6642665,
+          "sha256": "be5521f9f011d29945e02ea0152c33806e1cce832e041eadd4d00719a72daa1c"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints/C1_s10_t0.75_final_epoca185_d1db63779ffe2e57.pt": {
+          "bytes": 26597223,
+          "sha256": "d1db63779ffe2e57aff14b9eb10db3ce7bd472dc98ffcd83070e6a57ae3e433c"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints/C1_s10_t0.75_melhor_epoca163_c6cff1b595ad82e7.pt": {
+          "bytes": 6642765,
+          "sha256": "c6cff1b595ad82e74449cbbf4d94804995026f9a0019e2eb506f7d0e3694ec9c"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints/C1_s20_t0.5_final_epoca200_e897e2ea698ae97d.pt": {
+          "bytes": 26596747,
+          "sha256": "e897e2ea698ae97df639c3a853a0f955d72f04931802697e5d5e783b8a8f59af"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints/C1_s20_t0.5_melhor_epoca198_d8c23e05974dc440.pt": {
+          "bytes": 6642665,
+          "sha256": "d8c23e05974dc44076aaa8dc9891f1a2795b228fd9b7cc47ca78ab91657aa70a"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints/C1_s20_t0.75_final_epoca200_a60fb98f698363dd.pt": {
+          "bytes": 26597223,
+          "sha256": "a60fb98f698363dd10877493782310547e9dcdf31f65b77ea71d3ca7b8389ec2"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints/C1_s20_t0.75_melhor_epoca200_0218af6cefd53e98.pt": {
+          "bytes": 6642765,
+          "sha256": "0218af6cefd53e98ed0277c0f4b89c7175ee70664a6c28d066c9583181294804"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints/C1_s30_t0.5_final_epoca200_221ac0652995c2ab.pt": {
+          "bytes": 26596747,
+          "sha256": "221ac0652995c2ab37ac75bceda6bbdf9f03b406d74de07830dcb1e4591eef0f"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints/C1_s30_t0.5_melhor_epoca183_30462d0db67f402b.pt": {
+          "bytes": 6642665,
+          "sha256": "30462d0db67f402b6083d39ffaaee72053fcc1a9bb40bdc73dc0f73043a7bd45"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints/C1_s30_t0.75_final_epoca200_64652023fbde8f4b.pt": {
+          "bytes": 26597223,
+          "sha256": "64652023fbde8f4b9fec6b374cbf32b5ab4cc4f42dc92587c496acec17fe201f"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints/C1_s30_t0.75_melhor_epoca197_6b4ea0f62a8e0731.pt": {
+          "bytes": 6642765,
+          "sha256": "6b4ea0f62a8e073167ddb70c9736a0a89f979f0f1a2f6eec8240d9a01203db8d"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints/C2_s10_t0.5_final_epoca200_c3f797c652fa373e.pt": {
+          "bytes": 16753291,
+          "sha256": "c3f797c652fa373e18d0280f092c01f3b974004de06a6620ed43988da0cc5452"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints/C2_s10_t0.5_melhor_epoca200_fc287a742cb4aa70.pt": {
+          "bytes": 4182642,
+          "sha256": "fc287a742cb4aa70a7d6aaeaff3399fda1deac85920474982084eaf72edaf4d7"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints/C2_s10_t0.75_final_epoca200_e940788aa8420b91.pt": {
+          "bytes": 16753712,
+          "sha256": "e940788aa8420b914bf49166a13c078c2547557236023219d2e73356b1c2a02e"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints/C2_s10_t0.75_melhor_epoca191_2d6f1b9ecd74863d.pt": {
+          "bytes": 4182731,
+          "sha256": "2d6f1b9ecd74863d1aa0a9934dd001dfb01c677bec43aac4ab1dd8a745677997"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints/C2_s20_t0.5_final_epoca200_7283fa6178f3147b.pt": {
+          "bytes": 16753291,
+          "sha256": "7283fa6178f3147b6e1d02f66dd106e304582ba24909c4de64b8e17ed2f9392b"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints/C2_s20_t0.5_melhor_epoca198_25f0674ecf259cea.pt": {
+          "bytes": 4182642,
+          "sha256": "25f0674ecf259cea29d35daa32350baa4fc4bf58bad6b1699b91a47360f056b0"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints/C2_s20_t0.75_final_epoca200_f01834577d22a0df.pt": {
+          "bytes": 16753712,
+          "sha256": "f01834577d22a0df3b3c0276948e56ed2f76a3f6a5bbe987c6bfc26aa42a0408"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints/C2_s20_t0.75_melhor_epoca200_3d3865624abd872d.pt": {
+          "bytes": 4182731,
+          "sha256": "3d3865624abd872d726e893c32aa7a59de5f67b80bb0fc26d3ac1634d533c47d"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints/C2_s30_t0.5_final_epoca200_8f0ba475cbb0692b.pt": {
+          "bytes": 16753291,
+          "sha256": "8f0ba475cbb0692b34cc13d1411440945d83a5fdf28a0dba59f26e6ec8c85c1b"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints/C2_s30_t0.5_melhor_epoca184_14d3fdcd6fd779bf.pt": {
+          "bytes": 4182642,
+          "sha256": "14d3fdcd6fd779bff24a48d51daf1ed35b2dcb0efd65b624d7ada0a1bf86cf63"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints/C2_s30_t0.75_final_epoca200_71109c99a496fb70.pt": {
+          "bytes": 16753712,
+          "sha256": "71109c99a496fb7048be582e04652fb2cef7268c5599647deeb2fc5d3db61ad6"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/checkpoints/C2_s30_t0.75_melhor_epoca193_b1e694fc3142843a.pt": {
+          "bytes": 4182731,
+          "sha256": "b1e694fc3142843aa783d83602edad45f30a9cff5481c57013f605f1ab50cbd7"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/contador.jsonl": {
+          "bytes": 662262,
+          "sha256": "6152650eecee6554c27ab22ca8fc39aea9ef8065f9f61737f2275027841f79a0"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/estado.json": {
+          "bytes": 18816,
+          "sha256": "e3ebc5c0a34cf5b9fc4110cf83852d0462f28544a368baad4dae66563026eae9"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/ficha-visual/ficha-rotulos.json": {
+          "bytes": 857,
+          "sha256": "a48dd87ceca2b1c72cdb048b7467187bb6e698c54b2b7806dd40a32a869695e0"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/ficha-visual/ficha_50.png": {
+          "bytes": 143106,
+          "sha256": "c0595103e8e14b77729eee73f4f51a944b0b307f479789363acd4e84c93c7313"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/ficha-visual/ficha_75.png": {
+          "bytes": 161591,
+          "sha256": "dc0ff7c896f059adb5b49fac08934637e8b4671b8dec5bfc31aa1691f0954080"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/ficha-visual/ficha_visual.json": {
+          "bytes": 8757,
+          "sha256": "4d097e497a3e4b8ef7986f100642c3523b33abdac62a931be753ca58dc17ab67"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/figuras/avaliacao_final.png": {
+          "bytes": 13048,
+          "sha256": "98493fe4c387e83d3b9361fb83c883401884aa2512673cafe8ed9c8136341aff"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/figuras/curvas_validacao.png": {
+          "bytes": 82459,
+          "sha256": "4b43fbdf566d9b41a81da8f0220da6ddc1f0b57b885323b6361a6b421f14c36c"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/figuras/melhores_validacao.png": {
+          "bytes": 52896,
+          "sha256": "407c194b088d09171aabcdaead4cd4a5383615097eacc19980ad2292c60a07bc"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/historico.csv": {
+          "bytes": 430149,
+          "sha256": "6d54737fa3e977d906f56a3e4d5fedb2f3b12b94825cfbdf7985512bda6ebdf7"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/manifesto.json": {
+          "bytes": 2940,
+          "sha256": "b87f36261eeabd348c8e4cd32f9002f4aecb112be75c1fdad794efba45743cad"
+        },
+        "resultados/estudo-melhorar-reconstrucoes-mae/resumo.json": {
+          "bytes": 8805,
+          "sha256": "8c8e7c7e74fb08382c11620a60bb9ee2d0bdf48d3291338a82ffe66d8ece28d9"
+        }
+      },
+      "sha256_arvore": "4e0e50213113c937dbe2dc3bbc91771a865b487c4a3f960f77a6d3a1ebd48e54"
+    },
+    "resumo_sha256": "8c8e7c7e74fb08382c11620a60bb9ee2d0bdf48d3291338a82ffe66d8ece28d9"
+  },
+  "versao": "c0-v2"
+}

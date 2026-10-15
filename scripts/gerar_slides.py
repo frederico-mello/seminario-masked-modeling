@@ -6,14 +6,22 @@ vem do material complementar do grupo: assets versados em slides/recursos-comple
 e MSEs documentados no texto do material complementar (0,0476 com 25%; 0,1403 com 75%; 0,3117
 com 90%), sempre com crédito; a taxa de 50% aparece sem número porque o
 gráfico em imagem cobre o quadro.
-Roteiro de 12 slides (ver openspec/changes/mesclar-apresentacoes/design.md).
+Os números do estudo de retreinamento (melhorar-reconstrucoes-mae) vêm somente de
+resultados/estudo-melhorar-reconstrucoes-mae/resumo.json, também sem digitação manual.
+Roteiro de 13 slides (12 da roteiro anterior + 1 do estudo de retreinamento)
+(ver openspec/changes/mesclar-apresentacoes/design.md e
+openspec/changes/melhorar-reconstrucoes-mae/relatorio-fase-b.md).
 Rode: uv run python scripts/gerar_slides.py
 """
 
 from __future__ import annotations
 
+import json
 import subprocess
+import re
+import zipfile
 from pathlib import Path
+from statistics import median
 
 import pandas as pd
 from pptx import Presentation
@@ -24,6 +32,7 @@ from pptx.util import Inches, Pt
 
 RAIZ = Path(__file__).resolve().parent.parent
 RESULTADOS = RAIZ / "resultados"
+RESULTADOS_ESTUDO = RESULTADOS / "estudo-melhorar-reconstrucoes-mae"
 SLIDES = RAIZ / "slides"
 RECURSOS_COMPLEMENTARES = SLIDES / "recursos-complementares"
 PPTX = SLIDES / "seminario_masked_modeling.pptx"
@@ -301,6 +310,94 @@ def verificar_limites(pr) -> None:
     print(f"limites ok nas {i} paginas")
 
 
+def slide_estudo_retreinamento(pr):
+    """Slide do estudo de retreinamento: números somente de resumo.json."""
+    caminho_resumo = RESULTADOS_ESTUDO / "resumo.json"
+    if not caminho_resumo.exists():
+        raise FileNotFoundError(
+            f"resumo do estudo ausente: {caminho_resumo}; rode o estudo antes"
+        )
+    r = json.loads(caminho_resumo.read_text(encoding="utf-8"))
+
+    retificacao = json.loads((RAIZ / "openspec/changes/melhorar-reconstrucoes-mae/retificacao-validacao.json").read_text(encoding="utf-8"))
+    controles_validacao = retificacao["referencias_validacao"]["controles"]
+
+    def num(v, nd=4):
+        return f"{v:.{nd}f}".replace(".", ",")
+
+    def melhor_mediana(nome: str, taxa: str, campo: str) -> float | None:
+        valores = []
+        for chave, info in r["treinos"].items():
+            partes = chave.split("|")
+            if partes[0] == nome and partes[2] == taxa and info["melhor"]:
+                valores.append(info["melhor"][campo])
+        return median(valores) if valores else None
+
+    def piloto(nome: str, taxa: str) -> str:
+        pil = r["pilotos"].get(nome, {})
+        taxas = pil.get("taxas", {})
+        item = taxas.get(taxa)
+        if item is None:
+            return "não executado"
+        rotulo = num(item["t_ciclo"], 2) + " s"
+        if not item.get("exedeu_limiar"):
+            return rotulo
+        return f"{rotulo} (> limiar; candidato inviável)"
+
+    linhas = [["registro", "taxa 50%", "taxa 75%"]]
+    for nome, rotulo in (
+        ("C0", "C0: época piloto (s)"),
+        ("C1", "C1: piloto (s)"),
+        ("C2", "C2: piloto (s)"),
+    ):
+        linhas.append([rotulo, piloto(nome, "0.5"), piloto(nome, "0.75")])
+    for nome, rotulo in (
+        ("C1", "C1: MSE mediano na melhor validação"),
+        ("C2", "C2: MSE mediano na melhor validação"),
+    ):
+        valores = []
+        for taxa in ("0.5", "0.75"):
+            valor = melhor_mediana(nome, taxa, "perda_validacao")
+            valores.append(num(valor) if valor is not None else "sem treinos")
+        linhas.append([rotulo, valores[0], valores[1]])
+    col_50 = [
+        controles_validacao.get(taxa, {}).get("controle_media_rgb", {}).get("mse")
+        for taxa in ("0.5", "0.75")
+    ]
+    col_int = [
+        controles_validacao.get(taxa, {}).get("controle_interpolacao", {}).get("mse")
+        for taxa in ("0.5", "0.75")
+    ]
+    linhas.append([
+        "controle média RGB (validação)",
+        num(col_50[0]) if col_50[0] is not None else "não calculado",
+        num(col_50[1]) if col_50[1] is not None else "não calculado",
+    ])
+    linhas.append([
+        "controle interpolação (validação)",
+        num(col_int[0]) if col_int[0] is not None else "não calculado",
+        num(col_int[1]) if col_int[1] is not None else "não calculado",
+    ])
+    contadores = r["tempo"]
+    momento = f"{contadores['principal_minutos']:.1f}".replace(".", ",")
+    slide_tabela(
+        pr,
+        "Estudo de retreinamento: protocolo por identidade, época e seed",
+        linhas[0],
+        linhas[1:],
+        (
+            "Rodada v1: seeds 10, 20 e 30; máximo planejado de 200 épocas por taxa. "
+            "C1, seed 10 a 75%: 185 épocas efetivas. Sem C0 treinado, não há ganho demonstrado contra C0. "
+            f"V1: {momento} min principais, reserva intocada naquela rodada. "
+            "V2: pilotos inviáveis, seis treinos não iniciados; reserva consumida 0,209334139 min; "
+            "total v1 + v2: 41,270848124 min. Avaliação visual aberta de um avaliador humano: "
+            "ruim nas duas taxas, objetivo visual não atingido. Fichas não cegas (cabeçalho revela métodos). "
+            "Exploratório, sem confirmação ou superioridade universal. Fontes: histórico v1, contador v2, "
+            "notas-finais.md e retificacao-validacao.json (controles com estado=validacao)."
+        ),
+    )
+
+
 def principal():
     m = pd.read_csv(RESULTADOS / "metricas.csv")
     linha50 = m[m["condição"] == "mascara_50"].iloc[0]
@@ -478,7 +575,9 @@ def principal():
             f"Código do experimento complementar: {COLAB}",
         ],
     )
-    # 9. Aplicações por domínio
+    # 9. Estudo de retreinamento (melhorar-reconstrucoes-mae)
+    slide_estudo_retreinamento(pr)
+    # 10. Aplicações por domínio
     slide_bullets(
         pr,
         "Aplicações por domínio",
@@ -490,7 +589,7 @@ def principal():
             "Outras modalidades: linguagem natural, vídeos, áudio e aprendizado multimodal",
         ],
     )
-    # 10. Pós MAE e downstream
+    # 11. Pós MAE e downstream
     slide_bullets(
         pr,
         "Pós MAE e tarefas downstream",
@@ -503,7 +602,7 @@ def principal():
             "Eco do nosso diagrama: o decoder leve sai e o encoder pesado fica",
         ],
     )
-    # 11. Conclusões
+    # 12. Conclusões
     slide_bullets(
         pr,
         "Conclusões",
@@ -516,7 +615,7 @@ def principal():
             "Repetição com mais sementes e avaliação downstream continuam necessárias antes de generalizar",
         ],
     )
-    # 12. Referências
+    # 13. Referências
     slide = pr.slides.add_slide(pr.slide_layouts[5])
     slide.shapes.title.text = "Referências"
     slide.shapes.title.text_frame.paragraphs[0].font.size = Pt(30)
@@ -538,11 +637,25 @@ def principal():
     n_slides = len(pr.slides._sldIdLst)
     verificar_limites(pr)
     pr.save(PPTX)
+    with zipfile.ZipFile(PPTX) as arquivo:
+        entradas = [(nome, arquivo.read(nome)) for nome in sorted(arquivo.namelist())]
+    with zipfile.ZipFile(PPTX, "w") as arquivo:
+        for nome, conteudo in entradas:
+            info = zipfile.ZipInfo(nome, date_time=(2026, 10, 15, 0, 0, 0))
+            info.compress_type = zipfile.ZIP_DEFLATED
+            arquivo.writestr(info, conteudo)
     subprocess.run(
         ["/usr/bin/soffice", "--headless", "--convert-to", "pdf", "--outdir", str(SLIDES), str(PPTX)],
         check=True,
         capture_output=True,
     )
+    pdf = PDF.read_bytes()
+    pdf = re.sub(rb"D:\d{14}", b"D:20261015000000", pdf)
+    pdf = re.sub(rb"(?<=/ID \[ )[0-9A-Fa-f<> ]+(?=\])", lambda m: re.sub(rb"[0-9A-Fa-f]", b"0", m.group()), pdf)
+    pdf = re.sub(rb"(/ID\s*\[\s*<)([0-9A-Fa-f]+)(>\s*<)([0-9A-Fa-f]+)(>\s*\])",
+                 lambda m: m[1] + b"0" * len(m[2]) + m[3] + b"0" * len(m[4]) + m[5], pdf)
+    pdf = re.sub(rb"(?<=/DocChecksum /)[0-9A-Fa-f]+", lambda m: b"0" * len(m.group()), pdf)
+    PDF.write_bytes(pdf)
     # gera um PNG por página e confere a contagem
     pasta_png = SLIDES / "png"
     pasta_png.mkdir(exist_ok=True)

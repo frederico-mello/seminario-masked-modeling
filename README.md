@@ -25,6 +25,57 @@ não entra no pacote de entrega.
 
 Linear probing está fora do escopo deste trabalho: aparece como próximo passo.
 
+## Estudo de retreinamento (melhorar-reconstrucoes-mae)
+
+O registro abaixo descreve a rodada v1. A avaliação visual aberta posterior de
+um único avaliador humano considerou os resultados ruins nas duas taxas; o
+objetivo visual não foi atingido. Não houve avaliação cega nem notas individuais.
+As [notas finais](openspec/changes/melhorar-reconstrucoes-mae/notas-finais.md)
+registram também a ausência de treino completo C0 v2 e uma inconsistência
+de origem dos controles no relatório v2 original, corrigida externamente na
+[retificação de validação](openspec/changes/melhorar-reconstrucoes-mae/retificacao-validacao.md).
+A retificação usa somente eventos com `estado=validacao` do histórico existente,
+com dados individuais por seed e hashes de proveniência; o original permanece intacto.
+C1 a 75% tem SSIM mediano 0,362957 contra RGB de validação 0,355630;
+C2 a 50% tem 0,365044 contra RGB de validação 0,355596. Isso é descritivo,
+sem superioridade universal, confirmação independente ou ganho demonstrado contra C0.
+
+Estudo complementar, com protocolos congelados antes da execução (versão das
+regras com hash em
+`resultados/estudo-melhorar-reconstrucoes-mae/manifesto.json`): C0 (MAE direto
+retreinado), C1 (decoder de dimensão 128 e três blocos) e C2 (perda MSE mais
+0,1 L1), três seeds de treino (10, 20, 30), duas taxas (50% e 75%), máscara
+determinística por identidade, época e seed, régua fixa de validação e contadores
+cumulativos de orçamento (90 minutos principais mais 30 de reserva, jamais
+excedidos). Candidatos extras e o residual C3 só existem quando o critério
+frozen autoriza; no resultado desta execução, o piloto do C0 excedeu o limiar
+de 1,2 s por época e o candidato não foi treinado: nenhum vencedor foi
+declarado (ausência de melhoria demonstrada pela regra congelada), o resultado
+por candidato é exploratório e o conjunto de teste só foi consultado uma vez,
+depois do congelamento da seleção.
+
+Artefatos do estudo em `resultados/estudo-melhorar-reconstrucoes-mae/`:
+
+- `historico.csv`: registro append-only por época e evento (execução,
+  candidato, seed, taxa, perdas, SSIM, tempo, hashes e versões).
+- `contador.jsonl`: contador cumulativo de orçamento (teto 120 minutos,
+  principal e reserva separados).
+- `resumo.json`: resumo derivado do histórico (medias e medianas por seed,
+  controles, decisão de C3, seleção, avaliação final).
+- `figuras/`: curvas de validação, melhores de validação e avaliação final.
+- `ficha-visual/`: reconstruções dos oito IDs de inspeção nas duas taxas
+  (`ficha_50.png`, `ficha_75.png`), ficha preenchível sem cegamento efetivo
+  (`ficha_visual.json`) e mapeamento de rótulos (`ficha-rotulos.json`); o
+  registro original não contém notas; o julgamento posterior está nas notas finais.
+- `checkpoints/`: cópias imutáveis do melhor e do final por execução, com
+  SHA-256 e época registrados no histórico; ficam de fora do zip.
+
+O relatório completo da fase B fica em
+`openspec/changes/melhorar-reconstrucoes-mae/relatorio-fase-b.md` (dentro do
+pacote no mesmo caminho, além do alias `relatorio-fase-b.md`). Os resultados anteriores do notebook
+(`metricas.csv`, `curva_perda.png`, `reconstrucoes.png` e seus checkpoints)
+continuam intactos e identificáveis, com protocolo próprio.
+
 ## Como executar
 
 ### Se você recebeu o zip (seminario_masked_modeling.zip)
@@ -41,6 +92,14 @@ uv run --no-dev jupyter nbconvert --execute --to notebook --inplace codigo/noteb
 uv run --no-dev python scripts/gerar_slides.py   # regenera pptx, pdf e png dos slides
 uv run --no-dev python scripts/montar_zip.py     # remonta o zip com conferência de md5
 ```
+
+A execução do notebook acima é uma reprodução científica opcional e refaz treino
+e teste do experimento original; não é necessária para ler os resultados ou
+montar a entrega. A correção documental foi feita sem executar células científicas.
+O código atual difere dos fontes congelados: o gate v2 permanece ativo e recusa
+reexecutar o estudo com esses hashes. Não recongelar os resultados existentes.
+Para somente consolidar registros existentes, use
+`uv run --no-dev python scripts/retificar_validacao.py`, sem treino ou inferência.
 
 Todo comando do destinatário usa `--no-dev`: o `uv run` sem a opção
  ressincronizaria o ambiente e reinstalaria o grupo dev (vit-pytorch e pytest).
@@ -147,13 +206,17 @@ versado em `slides/recursos-complementares/`, que cobre o quadro completo.
 - `reconstrucoes.png`: 8 imagens fixas do teste (seed 42); para cada condição,
   original, versão mascarada e reconstrução.
 - `slides/*.pptx` e `slides/*.pdf` (e `slides/*.png` para inspeção visual, fora
-  do git): apresentação de 12 slides; números do experimento próprio lidos de
-  `metricas.csv`, números do experimento complementar creditados à implementação pública.
+  do git): apresentação de 13 slides; números do experimento próprio lidos de
+  `metricas.csv`, números do experimento complementar creditados à implementação pública
+  e números do estudo de retreinamento lidos de
+  `resultados/estudo-melhorar-reconstrucoes-mae/resumo.json` (slide 9).
 
-O zip de entrega (`seminario_masked_modeling.zip`) inclui ainda `uv.lock` e os
+O zip de entrega (`seminario_masked_modeling.zip`) inclui ainda `uv.lock`, os
 geradores (`scripts/gerar_slides.py`, `scripts/montar_zip.py`,
-`scripts/construir_notebook.py`) para que a sequência documentada funcione
-sem nada fora do pacote; testes e o oráculo ficam de fora.
+`scripts/construir_notebook.py`), o histórico, o resumo, as figuras e a ficha
+visual do estudo (`resultados/estudo-melhorar-reconstrucoes-mae/`) e o
+relatório da fase B, para que a sequência documentada funcione sem nada fora
+do pacote; testes, o oráculo e os checkpoints ficam de fora.
 
 ## Dados e referências
 

@@ -1,0 +1,120 @@
+arquivo	bytes	decisão
+README.md	12138	candidato após correções
+codigo/configuracao_estudo.py	6009	candidato após correções
+codigo/configuracao_estudo_c0_v2.py	2232	candidato após correções
+codigo/estudo_avaliacao.py	2683	candidato após correções
+codigo/estudo_baselines.py	5485	candidato após correções
+codigo/estudo_candidatos.py	5030	candidato após correções
+codigo/estudo_checkpoints.py	3954	candidato após correções
+codigo/estudo_execucao.py	55807	candidato após correções
+codigo/estudo_execucao_c0_v2.py	55857	candidato após correções
+codigo/estudo_historico.py	6466	candidato após correções
+codigo/estudo_mascaras.py	5122	candidato após correções
+codigo/estudo_orcamento.py	8900	candidato após correções
+codigo/estudo_orcamento_c0_v2.py	7982	candidato após correções
+codigo/estudo_selecao.py	4594	candidato após correções
+codigo/estudo_ssim.py	4751	candidato após correções
+codigo/estudo_visual.py	4449	candidato após correções
+logs/01-congelar.log	159	excluir
+logs/02-piloto.log	139	excluir
+logs/03-controles.log	260	excluir
+logs/04-treino.log	190	excluir
+logs/05-selecao.log	399	excluir
+logs/06-avaliacao-final.log	24	excluir
+logs/07-gerar-slides.log	453	excluir
+logs/08-montar-zip.log	298	excluir
+logs/09-validate.log	45	excluir
+logs/10-checks.log	892	excluir
+openspec/changes/melhorar-reconstrucoes-mae/.openspec.yaml	192	candidato após correções
+openspec/changes/melhorar-reconstrucoes-mae/aprovacao.md	4871	candidato após correções
+openspec/changes/melhorar-reconstrucoes-mae/design.md	21827	candidato após correções
+openspec/changes/melhorar-reconstrucoes-mae/emenda-c0-v2.md	3292	candidato após correções
+openspec/changes/melhorar-reconstrucoes-mae/notas-finais.md	2846	candidato após correções
+openspec/changes/melhorar-reconstrucoes-mae/proposal.md	4165	candidato após correções
+openspec/changes/melhorar-reconstrucoes-mae/relatorio-fase-b.md	16099	candidato após correções
+openspec/changes/melhorar-reconstrucoes-mae/revisao-final.md	11103	candidato após correções
+openspec/changes/melhorar-reconstrucoes-mae/specs/mae-modelo/spec.md	2375	candidato após correções
+openspec/changes/melhorar-reconstrucoes-mae/specs/melhorias-reconstrucao/spec.md	13847	candidato após correções
+openspec/changes/melhorar-reconstrucoes-mae/specs/pacote-entrega/spec.md	1000	candidato após correções
+openspec/changes/melhorar-reconstrucoes-mae/specs/slides-seminario/spec.md	923	candidato após correções
+openspec/changes/melhorar-reconstrucoes-mae/tasks.md	14054	candidato após correções
+openspec/changes/melhorar-reconstrucoes-mae/verificacao-final/diff-check.txt	2298	candidato após correções
+openspec/changes/melhorar-reconstrucoes-mae/verificacao-final/openspec.txt	45	candidato após correções
+openspec/changes/melhorar-reconstrucoes-mae/verificacao-final/pacote.txt	102	candidato após correções
+openspec/changes/melhorar-reconstrucoes-mae/verificacao-final/pytest.txt	795	candidato após correções
+openspec/changes/melhorar-reconstrucoes-mae/verificacao-final/slides.txt	159	candidato após correções
+openspec/changes/melhorar-reconstrucoes-mae/verificacao-final/stage-proposto.txt	3975	candidato após correções
+openspec/changes/melhorar-reconstrucoes-mae/verificacao-final/uv-sync.txt	60	candidato após correções
+resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/contador.jsonl	3950	candidato após correções
+resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/estado.json	3757	candidato após correções
+resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/historico.jsonl	1613	candidato após correções
+resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/manifesto.json	23680	candidato após correções
+resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/pilotos/C0_seed10_taxa0.5/piloto.pt	4181354	excluir
+resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/pilotos/C0_seed10_taxa0.5/processo.log	290	candidato após correções
+resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/pilotos/C0_seed10_taxa0.5/resultado.json	310	candidato após correções
+resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/pilotos/C0_seed10_taxa0.75/piloto.pt	4181354	excluir
+resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/pilotos/C0_seed10_taxa0.75/processo.log	292	candidato após correções
+resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/pilotos/C0_seed10_taxa0.75/resultado.json	312	candidato após correções
+resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/relatorio-c0-v2.md	7921	candidato após correções
+resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/resumo.json	10776	candidato após correções
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C0_10_0.5piloto.pt	4189170	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C0_10_0.75piloto.pt	4189259	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_10_0.5.pt	26596747	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_10_0.5melhor.pt	6642665	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_10_0.5piloto.pt	6650153	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_10_0.75.pt	26597223	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_10_0.75melhor.pt	6642765	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_10_0.75piloto.pt	6650253	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_20_0.5.pt	26596747	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_20_0.5melhor.pt	6642665	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_20_0.75.pt	26597223	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_20_0.75melhor.pt	6642765	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_30_0.5.pt	26596747	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_30_0.5melhor.pt	6642665	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_30_0.75.pt	26597223	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C1_30_0.75melhor.pt	6642765	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_10_0.5.pt	16753291	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_10_0.5melhor.pt	4182642	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_10_0.5piloto.pt	4189170	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_10_0.75.pt	16753712	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_10_0.75melhor.pt	4182731	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_10_0.75piloto.pt	4189259	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_20_0.5.pt	16753291	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_20_0.5melhor.pt	4182642	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_20_0.75.pt	16753712	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_20_0.75melhor.pt	4182731	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_30_0.5.pt	16753291	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_30_0.5melhor.pt	4182642	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_30_0.75.pt	16753712	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/checkpoints-trabalho/C2_30_0.75melhor.pt	4182731	excluir
+resultados/estudo-melhorar-reconstrucoes-mae/contador.jsonl	662262	candidato após correções
+resultados/estudo-melhorar-reconstrucoes-mae/estado.json	18816	candidato após correções
+resultados/estudo-melhorar-reconstrucoes-mae/ficha-visual/ficha-rotulos.json	857	candidato após correções
+resultados/estudo-melhorar-reconstrucoes-mae/ficha-visual/ficha_50.png	143106	candidato após correções
+resultados/estudo-melhorar-reconstrucoes-mae/ficha-visual/ficha_75.png	161591	candidato após correções
+resultados/estudo-melhorar-reconstrucoes-mae/ficha-visual/ficha_visual.json	8757	candidato após correções
+resultados/estudo-melhorar-reconstrucoes-mae/figuras/avaliacao_final.png	13048	candidato após correções
+resultados/estudo-melhorar-reconstrucoes-mae/figuras/curvas_validacao.png	82459	candidato após correções
+resultados/estudo-melhorar-reconstrucoes-mae/figuras/melhores_validacao.png	52896	candidato após correções
+resultados/estudo-melhorar-reconstrucoes-mae/historico.csv	430149	candidato após correções
+resultados/estudo-melhorar-reconstrucoes-mae/manifesto.json	2940	candidato após correções
+resultados/estudo-melhorar-reconstrucoes-mae/resumo.json	8805	candidato após correções
+scripts/executar_estudo_c0_v2.py	393	candidato após correções
+scripts/gerar_relatorio_fase_b.py	17356	candidato após correções
+scripts/gerar_slides.py	29391	candidato após correções
+scripts/md5_pacote.csv	2542	candidato após correções
+scripts/montar_zip.py	6196	candidato após correções
+slides/seminario_masked_modeling.pdf	613864	candidato após correções
+slides/seminario_masked_modeling.pptx	1168512	candidato após correções
+tests/relatorio_equivalencia.txt	538	excluir
+tests/test_estudo_avaliacao.py	3282	candidato após correções
+tests/test_estudo_baselines.py	5677	candidato após correções
+tests/test_estudo_candidatos.py	8282	candidato após correções
+tests/test_estudo_checkpoints.py	4464	candidato após correções
+tests/test_estudo_historico.py	6194	candidato após correções
+tests/test_estudo_mascaras.py	4993	candidato após correções
+tests/test_estudo_orcamento.py	7458	candidato após correções
+tests/test_estudo_orcamento_c0_v2.py	4201	candidato após correções
+tests/test_estudo_selecao.py	4944	candidato após correções
+tests/test_estudo_visual.py	7647	candidato após correções
+tests/test_montar_zip.py	4116	candidato após correções

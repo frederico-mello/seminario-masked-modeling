@@ -1,0 +1,4 @@
+Diretório: . (raiz do repositório)
+Comando: uv run python scripts/retificar_validacao.py
+Saída: 0
+Retificação gerada somente de registros existentes.

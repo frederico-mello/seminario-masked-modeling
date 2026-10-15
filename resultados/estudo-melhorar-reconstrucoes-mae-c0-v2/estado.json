@@ -1,0 +1,106 @@
+{
+  "contador_final": {
+    "global_ns": 2476250887420,
+    "saldo_global_ns": 4723749112580,
+    "saldo_v2_ns": 1787439951652,
+    "v1_principal_ns": 2463690839072,
+    "v1_reserva_ns": 0,
+    "v1_total_ns": 2463690839072,
+    "v2_ns": 12560048348
+  },
+  "execucao_finalizada": true,
+  "execucao_iniciada": true,
+  "hash_codigo": "9eba0cb402003f739abfe18ade2b06d6160c57642a4342c7ba8a417934de7cf9",
+  "hash_configuracao": "0818e65052c935c8748a2475b99160e8b606256dc22614b64ecc8ecf27c324d8",
+  "hash_manifesto_v2": "fda2ab28a44b9a74d6b02d5b19dc621687e1d5d98035fa2419716b0794ed4e16",
+  "hash_v1": "4e0e50213113c937dbe2dc3bbc91771a865b487c4a3f960f77a6d3a1ebd48e54",
+  "manifesto_congelado": true,
+  "pilotos": {
+    "0.5": {
+      "duracao_epoca_ns": 1430503879,
+      "estado": "inviavel",
+      "motivo": "época completa excedeu 1,25 s",
+      "resultado": {
+        "checkpoint_sha256": "bc755bb6448105d7ef6aeeef7afb6db196d0c3cc352d03168f5cd0fdac968959",
+        "duracao_epoca_ns": 1430503879,
+        "epoca": 1,
+        "mse_validacao": 0.12466688758507372,
+        "perda_treino": 0.328215350484848,
+        "seed": 10,
+        "ssim_validacao": 0.021675564050145535,
+        "taxa": 0.5,
+        "tipo": "piloto"
+      },
+      "viavel": false
+    },
+    "0.75": {
+      "duracao_epoca_ns": 1358304787,
+      "estado": "inviavel",
+      "motivo": "época completa excedeu 1,25 s",
+      "resultado": {
+        "checkpoint_sha256": "3292e74ed7bc3de1ba1775003c0d21b8f6960b967bab57845e7c9075dba4e2ec",
+        "duracao_epoca_ns": 1358304787,
+        "epoca": 1,
+        "mse_validacao": 0.1258238734230399,
+        "perda_treino": 0.33260515868663787,
+        "seed": 10,
+        "ssim_validacao": 0.021085846247431435,
+        "taxa": 0.75,
+        "tipo": "piloto"
+      },
+      "viavel": false
+    }
+  },
+  "treinos": {
+    "10|0.5": {
+      "checkpoints": {},
+      "duracao_ns": 0,
+      "epocas_concluidas": 0,
+      "estado": "inviavel_piloto",
+      "motivo": "C0 inviável para treino completo porque ao menos uma taxa do piloto excedeu 1,25 s ou ficou incompleta: [0.5, 0.75]; nenhum piloto foi repetido"
+    },
+    "10|0.75": {
+      "checkpoints": {},
+      "duracao_ns": 0,
+      "epocas_concluidas": 0,
+      "estado": "inviavel_piloto",
+      "motivo": "C0 inviável para treino completo porque ao menos uma taxa do piloto excedeu 1,25 s ou ficou incompleta: [0.5, 0.75]; nenhum piloto foi repetido"
+    },
+    "20|0.5": {
+      "checkpoints": {},
+      "duracao_ns": 0,
+      "epocas_concluidas": 0,
+      "estado": "inviavel_piloto",
+      "motivo": "C0 inviável para treino completo porque ao menos uma taxa do piloto excedeu 1,25 s ou ficou incompleta: [0.5, 0.75]; nenhum piloto foi repetido"
+    },
+    "20|0.75": {
+      "checkpoints": {},
+      "duracao_ns": 0,
+      "epocas_concluidas": 0,
+      "estado": "inviavel_piloto",
+      "motivo": "C0 inviável para treino completo porque ao menos uma taxa do piloto excedeu 1,25 s ou ficou incompleta: [0.5, 0.75]; nenhum piloto foi repetido"
+    },
+    "30|0.5": {
+      "checkpoints": {},
+      "duracao_ns": 0,
+      "epocas_concluidas": 0,
+      "estado": "inviavel_piloto",
+      "motivo": "C0 inviável para treino completo porque ao menos uma taxa do piloto excedeu 1,25 s ou ficou incompleta: [0.5, 0.75]; nenhum piloto foi repetido"
+    },
+    "30|0.75": {
+      "checkpoints": {},
+      "duracao_ns": 0,
+      "epocas_concluidas": 0,
+      "estado": "inviavel_piloto",
+      "motivo": "C0 inviável para treino completo porque ao menos uma taxa do piloto excedeu 1,25 s ou ficou incompleta: [0.5, 0.75]; nenhum piloto foi repetido"
+    }
+  },
+  "versao": "c0-v2",
+  "viabilidade_piloto_c0": {
+    "taxas_inviaveis": [
+      0.5,
+      0.75
+    ],
+    "viavel": false
+  }
+}

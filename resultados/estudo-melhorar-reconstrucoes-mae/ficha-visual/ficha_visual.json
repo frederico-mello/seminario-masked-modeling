@@ -1,0 +1,404 @@
+{
+ "ficha": {
+  "avaliacao_humana_realizada": false,
+  "avaliadores": 2,
+  "chave_selecao": {
+   "12985": "00407a239055abd70175f5a4d56164ecabce0f0f0cacf432ba1541a7bdb424e3",
+   "20736": "0031e7e9a5f890b3d7e3eded6eda236aa7108319b0df5f9270edf6e30c292347",
+   "25306": "0064f42dcd3d0c7d9eea4a6bd98f5db7f4acc582d1544a110773c4aec6680258",
+   "31327": "014a2ba701601e576c1457c26ac868b56865321f03200e0a541394e8970f54f9",
+   "33580": "0060bb9af1d02defda4280fd7c8350df153e1ce0e0a3b3920369e6f5cf459056",
+   "34029": "00d1849223d8fdd54109175c6153bbb154dc1631d7fd289f70fa2eef741b7095",
+   "45589": "01f596da964a013b00079b6c9255308b0f9821270424a062c431d20ab83213ab",
+   "6418": "00790cf8f31d56b67502b40488383f25965cabf4a265b880b876e93cf13724b9"
+  },
+  "escala": "1 problema grave; 3 mista/aceitável; 5 sem problema visível relevante",
+  "ids_selecionados": [
+   20736,
+   12985,
+   33580,
+   25306,
+   6418,
+   34029,
+   31327,
+   45589
+  ],
+  "itens": {
+   "12985": {
+    "C0": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "C1": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "C2": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "C3": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "controle_interpolacao": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "controle_media_rgb": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    }
+   },
+   "20736": {
+    "C0": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "C1": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "C2": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "C3": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "controle_interpolacao": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "controle_media_rgb": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    }
+   },
+   "25306": {
+    "C0": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "C1": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "C2": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "C3": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "controle_interpolacao": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "controle_media_rgb": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    }
+   },
+   "31327": {
+    "C0": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "C1": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "C2": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "C3": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "controle_interpolacao": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "controle_media_rgb": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    }
+   },
+   "33580": {
+    "C0": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "C1": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "C2": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "C3": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "controle_interpolacao": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "controle_media_rgb": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    }
+   },
+   "34029": {
+    "C0": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "C1": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "C2": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "C3": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "controle_interpolacao": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "controle_media_rgb": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    }
+   },
+   "45589": {
+    "C0": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "C1": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "C2": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "C3": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "controle_interpolacao": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "controle_media_rgb": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    }
+   },
+   "6418": {
+    "C0": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "C1": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "C2": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "C3": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "controle_interpolacao": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    },
+    "controle_media_rgb": {
+     "artefatos": null,
+     "borramento": null,
+     "comentario": null,
+     "cor": null,
+     "estrutura": null
+    }
+   }
+  },
+  "observacoes": "Evidência qualitativa; não mede reconhecimento e não altera a seleção numérica. Nenhuma avaliação humana foi realizada nesta fase; nota(s) somente depois da inferência validada.",
+  "ordem_apresentacao": null,
+  "preferencia_pareada": {
+   "C0_vs_C1": null,
+   "C0_vs_C2": null,
+   "C0_vs_C3": null,
+   "C0_vs_controle_interpolacao": null,
+   "C0_vs_controle_media_rgb": null,
+   "C1_vs_C2": null,
+   "C1_vs_C3": null,
+   "C1_vs_controle_interpolacao": null,
+   "C1_vs_controle_media_rgb": null,
+   "C2_vs_C3": null,
+   "C2_vs_controle_interpolacao": null,
+   "C2_vs_controle_media_rgb": null,
+   "C3_vs_controle_interpolacao": null,
+   "C3_vs_controle_media_rgb": null,
+   "controle_media_rgb_vs_controle_interpolacao": null
+  },
+  "rotulos_anonimizados": null,
+  "versao_ficha": "visual-v1",
+  "versao_split": "02cdb84acfac19d6"
+ },
+ "hash_ficha": "428e1c77c861a967dcd923ac769d2be550591a9ee4c2465999fc9ab685d6fbc9"
+}
