@@ -2,8 +2,8 @@
 Gera os slides do seminário (pptx + pdf + png) a partir de um mesmo script.
 Os números do experimento próprio vêm somente de resultados/metricas.csv
 (sem digitação manual). Os números e os visuais do experimento complementar
-vem do material do colega do grupo: assets versados em slides/recursos-colega/
-e MSEs documentados no texto dele (0,0476 com 25%; 0,1403 com 75%; 0,3117
+vem do material complementar do grupo: assets versados em slides/recursos-complementares/
+e MSEs documentados no texto do material complementar (0,0476 com 25%; 0,1403 com 75%; 0,3117
 com 90%), sempre com crédito; a taxa de 50% aparece sem número porque o
 gráfico em imagem cobre o quadro.
 Roteiro de 12 slides (ver openspec/changes/mesclar-apresentacoes/design.md).
@@ -25,7 +25,7 @@ from pptx.util import Inches, Pt
 RAIZ = Path(__file__).resolve().parent.parent
 RESULTADOS = RAIZ / "resultados"
 SLIDES = RAIZ / "slides"
-RECURSOS_COLEGA = SLIDES / "recursos-colega"
+RECURSOS_COMPLEMENTARES = SLIDES / "recursos-complementares"
 PPTX = SLIDES / "seminario_masked_modeling.pptx"
 PDF = SLIDES / "seminario_masked_modeling.pdf"
 COLAB = (
@@ -253,11 +253,11 @@ def slide_experimento_proprio(pr, titulo: str, balas: list[str],
     return slide
 
 
-def slide_experimento_colega(pr, titulo: str, config: list[str],
+def slide_experimento_complementar(pr, titulo: str, config: list[str],
                              rotulos: list[str], imagem_taxas: Path,
                              imagem_tabela: Path, imagem_visual: Path,
                              legenda: list[str]):
-    """Slide do experimento complementar (material do colega): banda larga com
+    """Slide do experimento complementar: banda larga com
     o fluxo em cima; na fileira de baixo, texto de configuração, grade de
     máscaras e reconstruções por taxa e gráfico do MSE; crédito e link do
     Colab na legenda."""
@@ -327,7 +327,7 @@ def principal():
         [
             "Estratégia de aprendizado em que parte dos dados de entrada é propositalmente ocultada (mascarada)",
             "O modelo é treinado para prever ou reconstruir a informação ausente",
-            "Ideia-chave (material do colega): o próprio dado fornece a supervisão",
+            "Ideia-chave: o próprio dado fornece a supervisão",
             "A parte original funciona como referência para verificar o que o modelo previu ou reconstruiu",
             "Quatro etapas: ocultar uma parte da entrada, usar o visível como contexto,",
             "prever ou reconstruir o conteúdo mascarado e aprender representações úteis dos dados",
@@ -453,35 +453,35 @@ def principal():
         "Reconstruções: 8 imagens fixas do teste (semente 42)",
         RESULTADOS / "reconstrucoes.png",
     )
-    # 8. Experimento complementar (material do colega)
-    slide_experimento_colega(
+    # 8. Experimento complementar
+    slide_experimento_complementar(
         pr,
         "Experimento complementar: ViT-MAE",
         [
-            "Configuração do material do colega:",
+            "Configuração do experimento complementar:",
             "MAE pré-treinado, arquitetura Vision Transformer (ViT)",
             "Entrada de 224x224 pixels, patches de 16x16",
             "Taxas avaliadas: 25%, 50%, 75% e 90%",
-            "MSEs documentados pelo colega:",
+            "MSEs documentados (experimento complementar):",
             "25%: 0,0476 | 75%: 0,1403 | 90%: 0,3117",
             "Menos informação visível torna a reconstrução mais desafiadora",
         ],
         [
             "Mascarado e reconstruído em cada taxa",
-            "Erro de reconstrução por taxa (colega)",
+            "Erro de reconstrução por taxa",
         ],
-        RECURSOS_COLEGA / "vitmae-fluxo-experimento.png",
-        RECURSOS_COLEGA / "vitmae-grafico-mse.png",
-        RECURSOS_COLEGA / "vitmae-grade-taxas.png",
+        RECURSOS_COMPLEMENTARES / "vitmae-fluxo-experimento.png",
+        RECURSOS_COMPLEMENTARES / "vitmae-grafico-mse.png",
+        RECURSOS_COMPLEMENTARES / "vitmae-grade-taxas.png",
         [
-            "Imagem superior: fluxo do experimento com MAE pré-treinado. Fonte: apresentação do colega do grupo; implementação pública: Hugging Face Transformers, ViTMAE, modelo facebook/vit-mae-base (Meta AI).",
-            f"Código do experimento do colega: {COLAB}",
+            "Imagem superior: fluxo do experimento com MAE pré-treinado. Experimento complementar do grupo; implementação pública: Hugging Face Transformers, ViTMAE, modelo facebook/vit-mae-base (Meta AI).",
+            f"Código do experimento complementar: {COLAB}",
         ],
     )
     # 9. Aplicações por domínio
     slide_bullets(
         pr,
-        "Aplicações por domínio (colega)",
+        "Aplicações por domínio",
         [
             "Pré-treinar com grandes volumes de dados não rotulados e transferir as representações",
             "Visão computacional: classificação, detecção de objetos, segmentação semântica, reconhecimento visual",
@@ -493,7 +493,7 @@ def principal():
     # 10. Pós MAE e downstream
     slide_bullets(
         pr,
-        "Pós MAE e tarefas downstream (colega)",
+        "Pós MAE e tarefas downstream",
         [
             "Pré-treinamento: o MAE usa grandes volumes de imagens não rotuladas; parte dos patches é mascarada e o modelo aprende a reconstruir",
             "Nesse processo, o encoder ViT aprende representações visuais das imagens",
@@ -511,7 +511,7 @@ def principal():
             "Reconstruir o que foi escondido não é o objetivo final: é o mecanismo para o modelo aprender boas representações",
             "O mascaramento aproveita dados não rotulados, em texto (BERT) e em imagens (MAE)",
             "No experimento próprio, 75% mascarado errou mais que 50%: nesta configuração, mascarar mais elevou o erro (semente única 42)",
-            "No experimento do colega com MAE pré-treinado público, as taxas maiores de mascaramento elevaram o MSE registrado no material dele",
+            "No experimento complementar com MAE pré-treinado público, as taxas maiores de mascaramento elevaram o MSE registrado no material complementar",
             "Leitura delimitada: qualidade visual da reconstrução não é prova de representações melhores",
             "Repetição com mais sementes e avaliação downstream continuam necessárias antes de generalizar",
         ],
@@ -529,8 +529,8 @@ def principal():
             ("Bao, H. et al. (2022). BEiT: BERT Pre-Training of Image Transformers. ICLR.", 13, False),
             ("Xie, Z.; Zhang, Z.; Lin, Y.; Bian, J.; Lin, L.; Zeng, D. (2022). SimMIM: A Simple Framework for Masked Image Modeling. CVPR.", 13, False),
             ("Krizhevsky, A.; Nair, V.; Hinton, G. (2009). CIFAR-10 (Canadian Institute for Advanced Research). Fonte dos dados deste trabalho, verificado por md5.", 13, False),
-            ("Crédito do experimento complementar: material do colega do grupo, com a implementação pública Hugging Face Transformers, ViTMAE, modelo facebook/vit-mae-base (Meta AI).", 13, False),
-            (f"Código do experimento do colega: {COLAB}", 12, False),
+            ("Crédito do experimento complementar do grupo: implementação pública Hugging Face Transformers, ViTMAE, modelo facebook/vit-mae-base (Meta AI).", 13, False),
+            (f"Código do experimento complementar: {COLAB}", 12, False),
         ],
     )
 

@@ -114,26 +114,26 @@ posterior: `uv run pytest tests/test_montar_zip.py`.
 - `dados/cifar10_subset/`: subset do experimento (`indices.csv` e `subset.npz`).
 - `checkpoints/`: pesos das duas condições (fora do zip, SHA-256 em `metricas.csv`).
 - `resultados/`: saídas geradas pelo notebook (abaixo).
-- `slides/recursos-colega/`: três PNGs do experimento complementar do colega,
-  extraídos da apresentação do colega do grupo (arquivo
+- `slides/recursos-complementares/`: três PNGs do experimento complementar do grupo,
+  extraídos da apresentação complementar do grupo (arquivo
   `Apresentação_final.pptx`) e usados no slide 8 com crédito:
   `vitmae-fluxo-experimento.png` (fluxo do experimento em 6 etapas),
   `vitmae-grade-taxas.png` (grade de mascarado e reconstruído nas taxas de
   25% a 90%) e `vitmae-grafico-mse.png` (gráfico do MSE por taxa).
 
-## Material do colega (crédito)
+## Experimento complementar (crédito)
 
-O experimento complementar apresentado no slide 8 vem do material do colega
+O experimento complementar apresentado no slide 8 vem do material complementar
 do grupo e não foi reproduzido por este repositório: número e visuais são
-creditados a ele. A implementação pública utilizada no experimento do colega
+creditados à implementação pública. A implementação pública utilizada no experimento complementar
 foi a ViTMAE do projeto Transformers da Hugging Face (modelo
-`facebook/vit-mae-base`, Meta AI). O código do experimento do colega está no
+`facebook/vit-mae-base`, Meta AI). O código do experimento complementar está no
 Colab <https://colab.research.google.com/drive/11BkUg8lzF079vWErYh5plimEVcF16gXN>.
-O material do colega traz o fluxo do experimento, a grade de máscaras e
+O material complementar traz o fluxo do experimento, a grade de máscaras e
 reconstruções por taxa e o gráfico do MSE por taxa. Os MSEs citados
 (0,0476 com 25%; 0,1403 com 75%; 0,3117 com 90%) são os documentados no
-texto do colega; o MSE da taxa de 50% aparece apenas no gráfico em imagem,
-versado em `slides/recursos-colega/`, que cobre o quadro completo.
+texto do material complementar; o MSE da taxa de 50% aparece apenas no gráfico em imagem,
+versado em `slides/recursos-complementares/`, que cobre o quadro completo.
 
 ## Conteúdo de `resultados/`
 
@@ -147,7 +147,7 @@ versado em `slides/recursos-colega/`, que cobre o quadro completo.
   original, versão mascarada e reconstrução.
 - `slides/*.pptx` e `slides/*.pdf` (e `slides/*.png` para inspeção visual, fora
   do git): apresentação de 12 slides; números do experimento próprio lidos de
-  `metricas.csv`, números do experimento do colega creditados a ele.
+  `metricas.csv`, números do experimento complementar creditados à implementação pública.
 
 O zip de entrega (`seminario_masked_modeling.zip`) inclui ainda `uv.lock` e os
 geradores (`scripts/gerar_slides.py`, `scripts/montar_zip.py`,

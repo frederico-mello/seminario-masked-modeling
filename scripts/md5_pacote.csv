@@ -1,6 +1,6 @@
 arquivo,md5
 LICENSE,a9a840f0fa0787883e68413667a5b41a
-README.md,2e330f27e1bc534dc7d95733636ad98d
+README.md,d195e20c0b90733104ea680b6f9b0153
 codigo/dados.py,4b90f365f2010ec6d6fdcfc8783fbd4a
 codigo/mae.py,da29e3bea38e75afc710bd1d82d9351f
 codigo/notebook.ipynb,94949ef661c8cbb2a8767a545df6c7d7
@@ -13,11 +13,11 @@ resultados/curva_perda.png,7e9b15e09486f8254532e9754cd2e850
 resultados/metricas.csv,8e3fc6e3b17c3b77586de56bf9bb3c91
 resultados/reconstrucoes.png,c87ccc385110dcde23e530ff7c25e6ef
 scripts/construir_notebook.py,62703f4bd4c13d83e1856f10fb1c7b39
-scripts/gerar_slides.py,bb0bb301353e9dd5230b3b1e3d6f7752
-scripts/montar_zip.py,912239f2cd5075f64a8c5a48a3cf9038
-slides/recursos-colega/vitmae-fluxo-experimento.png,d829809d47c093e2db809a80e9b1bdc9
-slides/recursos-colega/vitmae-grade-taxas.png,64c3e29309d8a69807bdb44aec53242b
-slides/recursos-colega/vitmae-grafico-mse.png,e4dc08372c86384a2367cf07c143aa3b
-slides/seminario_masked_modeling.pdf,053f20022dbec98aeaf781477b531b32
-slides/seminario_masked_modeling.pptx,f9a69ce0ac22dffc41e40676db405bd7
+scripts/gerar_slides.py,767f8f5736f7bb5465cfab3ae57f75b8
+scripts/montar_zip.py,4311c6b58f6ed8ad897101b19e09caf8
+slides/recursos-complementares/vitmae-fluxo-experimento.png,d829809d47c093e2db809a80e9b1bdc9
+slides/recursos-complementares/vitmae-grade-taxas.png,64c3e29309d8a69807bdb44aec53242b
+slides/recursos-complementares/vitmae-grafico-mse.png,e4dc08372c86384a2367cf07c143aa3b
+slides/seminario_masked_modeling.pdf,eb3be4c9e45ceecc1b913d33ba0f7d74
+slides/seminario_masked_modeling.pptx,c1e178ad463c3263ff815c27943f3d5d
 uv.lock,ddf8a155d494d76d6491a626841bff28
