@@ -2,7 +2,8 @@
 
 Rode: uv run python scripts/montar_zip.py
 Verificações: se algum arquivo obrigatório está ausente, a montagem falha
-antes de gravar o zip. A lista de md5 fica em scripts/md5_pacote.csv.
+antes de gravar o zip (incluindo os assets do experimento do colega em
+slides/recursos-colega/). A lista de md5 fica em scripts/md5_pacote.csv.
 Exclusões (spec pacote-entrega): dados brutos, checkpoints, validador do
 oráculo e testes de equivalência não entram no zip.
 """
@@ -24,6 +25,9 @@ REGISTRO_MD5 = RAIZ / "scripts" / "md5_pacote.csv"
 OBRIGATORIOS = {
     "slides/seminario_masked_modeling.pptx": "slides/seminario_masked_modeling.pptx",
     "slides/seminario_masked_modeling.pdf": "slides/seminario_masked_modeling.pdf",
+    "slides/recursos-colega/vitmae-fluxo-experimento.png": "slides/recursos-colega/vitmae-fluxo-experimento.png",
+    "slides/recursos-colega/vitmae-grade-taxas.png": "slides/recursos-colega/vitmae-grade-taxas.png",
+    "slides/recursos-colega/vitmae-grafico-mse.png": "slides/recursos-colega/vitmae-grafico-mse.png",
     "README.md": "README.md",
     "LICENSE": "LICENSE",
     "codigo/notebook.ipynb": "codigo/notebook.ipynb",

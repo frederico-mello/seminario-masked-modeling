@@ -1,6 +1,12 @@
 """
 Gera os slides do seminário (pptx + pdf + png) a partir de um mesmo script.
-Os números vêm somente de resultados/metricas.csv (sem digitação manual).
+Os números do experimento próprio vêm somente de resultados/metricas.csv
+(sem digitação manual). Os números e os visuais do experimento complementar
+vem do material do colega do grupo: assets versados em slides/recursos-colega/
+e MSEs documentados no texto dele (0,0476 com 25%; 0,1403 com 75%; 0,3117
+com 90%), sempre com crédito; a taxa de 50% aparece sem número porque o
+gráfico em imagem cobre o quadro.
+Roteiro de 12 slides (ver openspec/changes/mesclar-apresentacoes/design.md).
 Rode: uv run python scripts/gerar_slides.py
 """
 
@@ -19,8 +25,13 @@ from pptx.util import Inches, Pt
 RAIZ = Path(__file__).resolve().parent.parent
 RESULTADOS = RAIZ / "resultados"
 SLIDES = RAIZ / "slides"
+RECURSOS_COLEGA = SLIDES / "recursos-colega"
 PPTX = SLIDES / "seminario_masked_modeling.pptx"
 PDF = SLIDES / "seminario_masked_modeling.pdf"
+COLAB = (
+    "https://colab.research.google.com/drive/"
+    "11BkUg8lzF079vWErYh5plimEVcF16gXN"
+)
 
 
 def apresentacao() -> Presentation:
@@ -40,7 +51,7 @@ def slide_titulo(pr, titulo: str, subtitulo: str):
     return slide
 
 
-def slide_bullets(pr, titulo: str, itens: list[str]):
+def slide_bullets(pr, titulo: str, itens: list[str], tamanho: int = 17):
     slide = pr.slides.add_slide(pr.slide_layouts[1])
     slide.shapes.title.text = titulo
     slide.shapes.title.text_frame.paragraphs[0].font.size = Pt(30)
@@ -49,38 +60,29 @@ def slide_bullets(pr, titulo: str, itens: list[str]):
         par = corpo.paragraphs[0] if i == 0 else corpo.add_paragraph()
         par.text = item
         par.level = 0
-        par.font.size = Pt(17)
+        par.font.size = Pt(tamanho)
     return slide
 
 
-def slide_imagem(pr, titulo: str, caminho_imagem: Path, legenda: str = ""):
-    slide = pr.slides.add_slide(pr.slide_layouts[5])
-    slide.shapes.title.text = titulo
-    slide.shapes.title.text_frame.paragraphs[0].font.size = Pt(30)
-    if caminho_imagem.exists():
-        from PIL import Image
+def _imagem_ajustada(slide, caminho_imagem: Path, x: float, y: float,
+                     largura_disp: float, altura_disp: float):
+    """Insere a imagem centrada na célula (x, y) respeitando a proporção,
+    sem ultrapassar a área dada (verificar_limites falha se sair)."""
+    from PIL import Image
 
-        with Image.open(caminho_imagem) as im:
-            w, h = im.size
-        # area disponivel abaixo do titulo e acima da legenda
-        topo_min = 1.5
-        base_max = 6.8 if legenda else 7.1
-        altura_disp = base_max - topo_min
-        largura_disp = 12.0
-        escala = min(largura_disp / (w / 96.0), altura_disp / (h / 96.0))
-        largura = (w / 96.0) * escala
-        altura = (h / 96.0) * escala
-        topo = topo_min + max(0.0, (altura_disp - altura) / 2)
-        slide.shapes.add_picture(
-            str(caminho_imagem), Inches((13.333 - largura) / 2), Inches(topo),
-            width=Inches(largura), height=Inches(altura),
-        )
-    if legenda:
-        caixa = slide.shapes.add_textbox(Inches(0.67), Inches(6.95), Inches(12.0), Inches(0.45))
-        par = caixa.text_frame.paragraphs[0]
-        par.text = legenda
-        par.font.size = Pt(14)
-    return slide
+    if not caminho_imagem.exists():
+        raise FileNotFoundError(f"imagem obrigatória ausente: {caminho_imagem}")
+    with Image.open(caminho_imagem) as im:
+        w, h = im.size
+    escala = min(largura_disp / (w / 96.0), altura_disp / (h / 96.0))
+    largura = (w / 96.0) * escala
+    altura = (h / 96.0) * escala
+    slide.shapes.add_picture(
+        str(caminho_imagem),
+        Inches(x + (largura_disp - largura) / 2),
+        Inches(y + (altura_disp - altura) / 2),
+        width=Inches(largura), height=Inches(altura),
+    )
 
 
 CAIXA_FUNDO = RGBColor(0xEE, 0xF2, 0xF8)
@@ -146,7 +148,7 @@ def slide_diagrama(pr, titulo: str, blocos: list[str], nota: str):
         forma.line.fill.background()
         return forma
 
-    # fileira superior: imagem -> patches -> mascara -> codificador
+    # fileira superior: imagem -> patches -> máscara -> codificador
     for i, idx_bloco in enumerate(range(4)):
         caixa(blocos[idx_bloco], i, topo1)
         if i < 3:
@@ -156,7 +158,7 @@ def slide_diagrama(pr, titulo: str, blocos: list[str], nota: str):
                 topo1 + (altura_box - altura_seta) // 2,
                 largura_seta, altura_seta,
             )
-    # descida: codificador -> tokens de mascara
+    # descida: codificador -> tokens de máscara
     seta(
         MSO_SHAPE.DOWN_ARROW,
         margem + 3 * passo + (largura_box - largura_seta) // 2,
@@ -164,7 +166,7 @@ def slide_diagrama(pr, titulo: str, blocos: list[str], nota: str):
         largura_seta,
         topo2 - topo1 - altura_box - Inches(0.24),
     )
-    # fileira inferior em sentido oposto: tokens -> decod -> reconstrucao -> perda
+    # fileira inferior em sentido oposto: tokens -> decoder -> reconstrução -> perda
     ordem = list(reversed(range(4, 8)))
     for i, idx_bloco in enumerate(ordem):
         caixa(blocos[idx_bloco], i, topo2)
@@ -183,7 +185,7 @@ def slide_diagrama(pr, titulo: str, blocos: list[str], nota: str):
 
 
 def slide_tabela(pr, titulo: str, cabecalho: list[str], linhas: list[list[str]], nota: str):
-    """Tabela comparativa (primeira coluna: dimensao; demais: metodos)."""
+    """Tabela comparativa (primeira coluna: dimensão; demais: métodos)."""
     slide = pr.slides.add_slide(pr.slide_layouts[5])
     slide.shapes.title.text = titulo
     slide.shapes.title.text_frame.paragraphs[0].font.size = Pt(30)
@@ -217,43 +219,67 @@ def slide_tabela(pr, titulo: str, cabecalho: list[str], linhas: list[list[str]],
     return slide
 
 
-def slide_duas_imagens(pr, titulo: str, imagens: list[tuple[Path, str]], legenda: str):
-    """Empilha ate duas imagens com rotulo proprio para cada uma."""
-    from PIL import Image
-
+def slide_experimento_proprio(pr, titulo: str, balas: list[str],
+                              tabela_mse: list[tuple[str, str]],
+                              fonte_tabela: str, rotulo_imagem: str,
+                              caminho_imagem: Path):
+    """Slide compacto do experimento próprio: balas à esquerda, tabela de MSE
+    (lida de metricas.csv) à direita e imagem de reconstruções embaixo."""
     slide = pr.slides.add_slide(pr.slide_layouts[5])
     slide.shapes.title.text = titulo
     slide.shapes.title.text_frame.paragraphs[0].font.size = Pt(30)
-    alturas = [2.85, 1.95]
-    tops = [1.82, 5.02]
-    for i, (caminho, rotulo) in enumerate(imagens):
-        _caixa_texto(
-            slide, Inches(0.67), Inches(tops[i] - 0.37), Inches(12.0), Inches(0.34),
-            [(rotulo, 13, True)],
-        )
-        if caminho.exists():
-            with Image.open(caminho) as im:
-                w, h = im.size
-            largura_disp, altura_disp = 10.5, alturas[i]
-            escala = min(largura_disp / (w / 96.0), altura_disp / (h / 96.0))
-            largura = (w / 96.0) * escala
-            altura = (h / 96.0) * escala
-            slide.shapes.add_picture(
-                str(caminho),
-                Inches((13.333 - largura) / 2),
-                Inches(tops[i] + (altura_disp - altura) / 2),
-                width=Inches(largura), height=Inches(altura),
-            )
-    if legenda:
-        _caixa_texto(
-            slide, Inches(0.67), Inches(7.0), Inches(12.0), Inches(0.42),
-            [(legenda, 13, False)],
-        )
+    _caixa_texto(slide, Inches(0.67), Inches(1.45), Inches(6.9), Inches(3.0),
+                 [(texto, 14, False) for texto in balas])
+    n = len(tabela_mse) + 1
+    tabela = slide.shapes.add_table(
+        n, 2, Inches(8.0), Inches(1.6), Inches(4.5), Inches(0.55 * n),
+    ).table
+    tabela.cell(0, 0).text = "Condição"
+    tabela.cell(0, 1).text = "MSE de teste (ocultos)"
+    for r, (condicao, mse) in enumerate(tabela_mse, start=1):
+        tabela.cell(r, 0).text = condicao
+        tabela.cell(r, 1).text = mse
+    for r in range(n):
+        for c in range(2):
+            for par in tabela.cell(r, c).text_frame.paragraphs:
+                par.font.size = Pt(13)
+                par.font.bold = r == 0 or c == 0
+    fonte = _caixa_texto(slide, Inches(8.0), Inches(1.7) + Inches(0.55 * n),
+                         Inches(4.5), Inches(0.5), [(fonte_tabela, 11, False)])
+    fonte.word_wrap = True
+    _caixa_texto(slide, Inches(0.67), Inches(4.62), Inches(12.0), Inches(0.3),
+                 [(rotulo_imagem, 12, True)])
+    _imagem_ajustada(slide, caminho_imagem, 1.3, 4.95, 10.7, 2.4)
+    return slide
+
+
+def slide_experimento_colega(pr, titulo: str, config: list[str],
+                             rotulos: list[str], imagem_taxas: Path,
+                             imagem_tabela: Path, imagem_visual: Path,
+                             legenda: list[str]):
+    """Slide do experimento complementar (material do colega): banda larga com
+    o fluxo em cima; na fileira de baixo, texto de configuração, grade de
+    máscaras e reconstruções por taxa e gráfico do MSE; crédito e link do
+    Colab na legenda."""
+    slide = pr.slides.add_slide(pr.slide_layouts[5])
+    slide.shapes.title.text = titulo
+    slide.shapes.title.text_frame.paragraphs[0].font.size = Pt(30)
+    _imagem_ajustada(slide, imagem_taxas, 0.87, 1.25, 11.6, 2.25)
+    _caixa_texto(slide, Inches(0.67), Inches(3.58), Inches(2.4), Inches(0.44),
+                 [(rotulos[0], 11, True)])
+    _caixa_texto(slide, Inches(6.45), Inches(3.58), Inches(4.2), Inches(0.44),
+                 [(rotulos[1], 11, True)])
+    _caixa_texto(slide, Inches(3.05), Inches(3.95), Inches(3.3), Inches(2.8),
+                 [(texto, 12, False) for texto in config])
+    _imagem_ajustada(slide, imagem_visual, 0.75, 4.05, 2.15, 2.30)
+    _imagem_ajustada(slide, imagem_tabela, 6.45, 4.05, 4.15, 2.60)
+    _caixa_texto(slide, Inches(0.67), Inches(6.80), Inches(12.0), Inches(0.62),
+                 [(texto, 11, False) for texto in legenda])
     return slide
 
 
 def verificar_limites(pr) -> None:
-    """Falha se qualquer shape sair da area do slide."""
+    """Falha se qualquer shape sair da área do slide."""
     largura_slide = pr.slide_width
     altura_slide = pr.slide_height
     for i, slide in enumerate(pr.slides, start=1):
@@ -282,44 +308,45 @@ def principal():
     epocas = int(linha50["épocas"])
     batch = int(linha50["batch"])
     lr = float(linha50["lr"])
-    tempo_epoca = float(linha50["tempo_epoca_medido_s"])
-    orcamento = float(linha50["orcamento_previsto_min"])
     mse50 = float(linha50["mse_teste_ocultos"])
     mse75 = float(linha75["mse_teste_ocultos"])
     variacao = (mse75 - mse50) / mse50 * 100.0
 
     pr = apresentacao()
 
+    # 1. Capa
     slide_titulo(
         pr,
         "Masked Modeling em Deep Learning",
         "Frederico Maciel de Mello | Luan Pedro de Souza Silva\nSeminário, 16/10",
     )
+    # 2. O que é e ideia-chave
     slide_bullets(
         pr,
-        "Roteiro",
+        "O que é Masked Modeling",
         [
-            "O problema: aprender representações com conteúdo incompleto",
-            "Panorama: BERT, MAE e SimMIM",
-            "Fluxo do MAE: diagrama, equação da perda e pseudocódigo",
-            "Arquitetura e nossa implementação",
-            "Protocolo e orçamento de treino",
-            "Experimento: máscara de 50% contra 75%",
-            "Resultados, críticas e próximos passos",
-            "Aplicações e referências",
+            "Estratégia de aprendizado em que parte dos dados de entrada é propositalmente ocultada (mascarada)",
+            "O modelo é treinado para prever ou reconstruir a informação ausente",
+            "Ideia-chave (material do colega): o próprio dado fornece a supervisão",
+            "A parte original funciona como referência para verificar o que o modelo previu ou reconstruiu",
+            "Quatro etapas: ocultar uma parte da entrada, usar o visível como contexto,",
+            "prever ou reconstruir o conteúdo mascarado e aprender representações úteis dos dados",
         ],
     )
+    # 3. Por que usar e motivações
     slide_bullets(
         pr,
-        "O problema",
+        "Por que usar: motivações",
         [
-            "Supervisão cara: rotular milhões de imagens é custoso",
-            "Auto-supervisão: a própria imagem fornece o alvo",
-            "BERT: prever palavras ocultas do texto",
-            "Ideia do vision masking: ocultar partes da imagem e reconstruir",
-            "A hipótese (He et al., 2022): reconstruir obrigaria o modelo a representar objetos; exigiria avaliação downstream para confirmar",
+            "Treino de deep learning depende de grandes quantidades de dados rotulados, caros e demorados de obter",
+            "Masked modeling aproveita dados não rotulados: a tarefa de aprendizado nasce do próprio dado",
+            "Reduz a dependência de dados rotulados",
+            "Aprende representações relevantes dos dados",
+            "Explora o contexto e as relações entre as partes da entrada",
+            "Serve de pré-treinamento para modelos adaptados a outras tarefas depois",
         ],
     )
+    # 4. Panorama BERT x MAE x SimMIM
     slide_tabela(
         pr,
         "Panorama: BERT, MAE e SimMIM",
@@ -354,6 +381,7 @@ def principal():
         "decoder separado; a L1 do SimMIM faz regressão direta de pixels com cabeça linear leve sobre "
         "um encoder único, que admite proporções altas de máscara também",
     )
+    # 5. Diagrama de blocos do MAE
     slide_diagrama(
         pr,
         "Fluxo do MAE: da imagem à perda nos ocultos",
@@ -370,6 +398,7 @@ def principal():
         "Arquitetura assimétrica: o codificador só vê os patches visíveis e o decoder leve, "
         "descartado nas tarefas posteriores de reconhecimento (He et al., 2022)",
     )
+    # 6. Equação e pseudocódigo
     slide = pr.slides.add_slide(pr.slide_layouts[5])
     slide.shapes.title.text = "Equação da perda e pseudocódigo do treinamento"
     slide.shapes.title.text_frame.paragraphs[0].font.size = Pt(28)
@@ -403,83 +432,105 @@ def principal():
         ],
         mono=True,
     )
+    # 7. Experimento próprio CIFAR-10
+    slide_experimento_proprio(
+        pr,
+        "Experimento próprio no CIFAR-10",
+        [
+            "MAE próprio, escrito do zero em PyTorch puro (sem código de terceiros)",
+            f"Mesmo protocolo nas duas condições: {epocas} épocas, batch {batch}, lr {lr:.1e} (AdamW)",
+            "Semente única 42; subset balanceado verificado por md5; teste fixo de 1.000 imagens",
+            "Máscara aninhada: os patches ocultos a 50% também estão a 75%, isolando o efeito da taxa",
+            "50% oculta 8 dos 16 patches; 75% oculta 12 (custo por época diverge: 8 contra 4 tokens no encoder)",
+            f"MSE de 75% é {variacao:+.1f}% maior que o de 50%: nesta configuração, mascarar mais elevou o erro",
+            "Delimitação: evidência desta configuração, semente única; repetir com mais sementes e avaliar downstream antes de generalizar",
+        ],
+        [
+            ("Máscara 50%", f"{mse50:.4f}"),
+            ("Máscara 75%", f"{mse75:.4f}"),
+        ],
+        "Fonte: resultados/metricas.csv (semente 42)",
+        "Reconstruções: 8 imagens fixas do teste (semente 42)",
+        RESULTADOS / "reconstrucoes.png",
+    )
+    # 8. Experimento complementar (material do colega)
+    slide_experimento_colega(
+        pr,
+        "Experimento complementar: ViT-MAE",
+        [
+            "Configuração do material do colega:",
+            "MAE pré-treinado, arquitetura Vision Transformer (ViT)",
+            "Entrada de 224x224 pixels, patches de 16x16",
+            "Taxas avaliadas: 25%, 50%, 75% e 90%",
+            "MSEs documentados pelo colega:",
+            "25%: 0,0476 | 75%: 0,1403 | 90%: 0,3117",
+            "Menos informação visível torna a reconstrução mais desafiadora",
+        ],
+        [
+            "Mascarado e reconstruído em cada taxa",
+            "Erro de reconstrução por taxa (colega)",
+        ],
+        RECURSOS_COLEGA / "vitmae-fluxo-experimento.png",
+        RECURSOS_COLEGA / "vitmae-grafico-mse.png",
+        RECURSOS_COLEGA / "vitmae-grade-taxas.png",
+        [
+            "Imagem superior: fluxo do experimento com MAE pré-treinado. Fonte: apresentação do colega do grupo; implementação pública: Hugging Face Transformers, ViTMAE, modelo facebook/vit-mae-base (Meta AI).",
+            f"Código do experimento do colega: {COLAB}",
+        ],
+    )
+    # 9. Aplicações por domínio
     slide_bullets(
         pr,
-        "Arquitetura e implementação",
+        "Aplicações por domínio (colega)",
         [
-            "Patchify: imagem 32x32x3 em 16 patches de 8x8 (192 valores cada)",
-            "Encoder: somente os patches visíveis entram (ViT dim 128, 4 blocos, 4 heads)",
-            "Decoder leve: dim 64, 2 blocos, tokens de máscara + embedding posicional",
-            "Saída: 192 valores por patch oculto; o decoder é descartado em tarefas posteriores",
-            "MAE próprio em PyTorch puro (sem código de terceiros), validado contra oráculo fora do pacote",
-            "Máscara aninhada: permutação fixa por imagem com seed 42",
-            "50% oculta 8 patches; 75% oculta 12 (todos os da 50% também)",
+            "Pré-treinar com grandes volumes de dados não rotulados e transferir as representações",
+            "Visão computacional: classificação, detecção de objetos, segmentação semântica, reconhecimento visual",
+            "Imagens médicas: radiografias, tomografias e ressonâncias; pré-treinamento sem anotação; extração de características para diagnóstico",
+            "Sensoriamento remoto: uso e cobertura do solo, detecção de mudanças, imagens de satélite, monitoramento ambiental e agrícola",
+            "Outras modalidades: linguagem natural, vídeos, áudio e aprendizado multimodal",
         ],
     )
+    # 10. Pós MAE e downstream
     slide_bullets(
         pr,
-        "Protocolo e orçamento de treino",
+        "Pós MAE e tarefas downstream (colega)",
         [
-            "CIFAR-10 verificado por md5 antes de qualquer uso",
-            "Subset seed 42, balanceado: 500 treino, 100 validação e 100 teste por classe",
-            "Validação disjunta do treino; teste sai do split oficial e é usado só no fim",
-            "Métrica: MSE nos patches ocultos do conjunto de teste",
+            "Pré-treinamento: o MAE usa grandes volumes de imagens não rotuladas; parte dos patches é mascarada e o modelo aprende a reconstruir",
+            "Nesse processo, o encoder ViT aprende representações visuais das imagens",
+            "Depois do pré-treinamento, o decoder pode ser descartado: sua função principal era auxiliar a reconstrução",
+            "O encoder pré-treinado é reutilizado em tarefas downstream: classificação de imagens, detecção de objetos e segmentação semântica",
+            "Uso do encoder: extrator de características ou pesos ajustados por fine-tuning para a nova tarefa",
+            "Eco do nosso diagrama: o decoder leve sai e o encoder pesado fica",
         ],
     )
+    # 11. Conclusões
     slide_bullets(
         pr,
-        "Experimento: máscara de 50% contra 75%",
+        "Conclusões",
         [
-            f"Mesmo treino nas duas condições: {epocas} épocas, batch {batch}, lr {lr:.1e} (AdamW)",
-            "O custo computacional por época diverge: a 75% o encoder vê 4 tokens, a 50% vê 8",
-            f"Tempo medido por época (na condição 75%): {tempo_epoca:.2f} s",
-            f"Orçamento previsto: {orcamento:.0f} minutos para as duas condições somadas",
-            f"MSE de teste nos ocultos: 50% = {mse50:.4f} | 75% = {mse75:.4f}",
+            "Reconstruir o que foi escondido não é o objetivo final: é o mecanismo para o modelo aprender boas representações",
+            "O mascaramento aproveita dados não rotulados, em texto (BERT) e em imagens (MAE)",
+            "No experimento próprio, 75% mascarado errou mais que 50%: nesta configuração, mascarar mais elevou o erro (semente única 42)",
+            "No experimento do colega com MAE pré-treinado público, as taxas maiores de mascaramento elevaram o MSE registrado no material dele",
+            "Leitura delimitada: qualidade visual da reconstrução não é prova de representações melhores",
+            "Repetição com mais sementes e avaliação downstream continuam necessárias antes de generalizar",
         ],
     )
-    slide_duas_imagens(
-        pr,
-        "Resultados: reconstruções e curva de perda",
-        [
-            (RESULTADOS / "reconstrucoes.png", "Reconstruções: 8 imagens fixas do teste (seed 42)"),
-            (RESULTADOS / "curva_perda.png", "Curva de perda de validação: MSE nos patches ocultos por época"),
-        ],
-        "Esquerda: original, mascarada e reconstrução por condição; direita: as duas condições no mesmo eixo",
-    )
-    slide_bullets(
-        pr,
-        "Resultados, críticas e próximos passos",
-        [
-            f"75% oculta mais e é mais difícil: MSE {mse75:.4f} contra {mse50:.4f} a 50% ({variacao:+.1f}%)",
-            "Épocas, batch e lr igualados; a computação por época diverge (4 contra 8 tokens no encoder)",
-            "Máscara aninhada isola o efeito da taxa: os patches ocultos a 50% também estão a 75%",
-            "Evidência desta configuração: semente única 42, teste fixo de 1.000 imagens e máscara aninhada",
-            "Não generalizar: repetir com mais sementes e avaliar downstream antes de concluir",
-            "Qualidade visual da reconstrução não é prova de representações melhores",
-            "Dataset pequeno e didático: qualidade absoluta menor que a do paper",
-            "Linear probing e classificação downstream fora do escopo; próximo passo: linear probing em mais sementes",
-        ],
-    )
+    # 12. Referências
     slide = pr.slides.add_slide(pr.slide_layouts[5])
-    slide.shapes.title.text = "Aplicações e referências"
+    slide.shapes.title.text = "Referências"
     slide.shapes.title.text_frame.paragraphs[0].font.size = Pt(30)
     _caixa_texto(
-        slide, Inches(0.67), Inches(1.5), Inches(12.0), Inches(2.3),
+        slide, Inches(0.67), Inches(1.5), Inches(12.0), Inches(5.8),
         [
-            ("Aplicações das representações aprendidas:", 15, True),
-            ("BERT: compreensão de linguagem (busca, classificação e diálogo)", 14, False),
-            ("MAE: classificação, detecção e segmentação de imagens", 14, False),
-            ("SimMIM: classificação, detecção e segmentação em imagens", 14, False),
-        ],
-    )
-    _caixa_texto(
-        slide, Inches(0.67), Inches(3.35), Inches(12.0), Inches(3.5),
-        [
-            ("Referências:", 15, True),
-            ("Devlin, J.; Chang, M.; Lee, K.; Toutanova, K. (2019). BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. NAACL-HLT.", 12, False),
-            ("He, K.; Chen, X.; Xie, S.; Li, Y.; Dollár, P.; Girshick, R. (2022). Masked Autoencoders Are Scalable Vision Learners. CVPR.", 12, False),
-            ("Xie, Z.; Zhang, Z.; Lin, Y.; Bian, J.; Lin, L.; Zeng, D. (2022). SimMIM: A Simple Framework for Masked Image Modeling. CVPR.", 12, False),
-            ("Krizhevsky, A.; Nair, V.; Hinton, G. (2009). CIFAR-10 (Canadian Institute for Advanced Research). Fonte dos dados, verificado por md5.", 12, False),
+            ("Devlin, J.; Chang, M.; Lee, K.; Toutanova, K. (2019). BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. NAACL-HLT.", 13, False),
+            ("Dosovitskiy, A. et al. (2021). An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale. ICLR.", 13, False),
+            ("He, K.; Chen, X.; Xie, S.; Li, Y.; Dollár, P.; Girshick, R. (2022). Masked Autoencoders Are Scalable Vision Learners. CVPR.", 13, False),
+            ("Bao, H. et al. (2022). BEiT: BERT Pre-Training of Image Transformers. ICLR.", 13, False),
+            ("Xie, Z.; Zhang, Z.; Lin, Y.; Bian, J.; Lin, L.; Zeng, D. (2022). SimMIM: A Simple Framework for Masked Image Modeling. CVPR.", 13, False),
+            ("Krizhevsky, A.; Nair, V.; Hinton, G. (2009). CIFAR-10 (Canadian Institute for Advanced Research). Fonte dos dados deste trabalho, verificado por md5.", 13, False),
+            ("Crédito do experimento complementar: material do colega do grupo, com a implementação pública Hugging Face Transformers, ViTMAE, modelo facebook/vit-mae-base (Meta AI).", 13, False),
+            (f"Código do experimento do colega: {COLAB}", 12, False),
         ],
     )
 
@@ -492,7 +543,7 @@ def principal():
         check=True,
         capture_output=True,
     )
-    # gera um PNG por pagina e confere a contagem
+    # gera um PNG por página e confere a contagem
     pasta_png = SLIDES / "png"
     pasta_png.mkdir(exist_ok=True)
     for antigo in pasta_png.glob("pagina-*.png"):
