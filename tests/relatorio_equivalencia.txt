@@ -1,9 +1,9 @@
 Relatório de equivalência: MAE próprio vs vit-pytorch 1.24.1
 
 taxa=0.5
-  perda próprio=0.69412440 oráculo=0.69412440 dif_rel=0.000e+00
+  perda próprio=0.65196466 oráculo=0.65196466 dif_rel=0.000e+00
   forma da predição próprio=(8, 16, 192)
-  dif_máx_reconstrução=7.153e-07
+  dif_máx_reconstrução=5.960e-07
 taxa=0.75
   perda próprio=0.71950322 oráculo=0.71950322 dif_rel=0.000e+00
   forma da predição próprio=(8, 16, 192)
