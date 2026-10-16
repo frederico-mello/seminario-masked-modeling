@@ -26,8 +26,8 @@
 </head>
 <body>
 <div class="tour">
-  <h1>Todo o experimento em cinco passos</h1>
-  <div class="sub">As cinco etapas podem ser abertas para acompanhar o projeto sem conhecimento prévio de aprendizado de máquina.</div>
+  <h1>Todo o experimento em seis passos</h1>
+  <div class="sub">As etapas podem ser abertas para acompanhar o projeto sem conhecimento prévio de aprendizado de máquina.</div>
 
   <details open>
     <summary><span class="n">1</span> O que o projeto faz</summary>
@@ -57,15 +57,24 @@
   <details>
     <summary><span class="n">4</span> Onde aparecem as evidências</summary>
     <div class="body">
-      <p><code>resultados/metricas.csv</code> guarda as medidas. <code>curva_perda.png</code> mostra a mudança do erro. <code>reconstrucoes.png</code> compara imagens originais, cobertas e reconstruídas.</p>
+      <p><code>resultados/metricas.csv</code> guarda as medidas: 0,06084 com máscara de 50% e 0,07168 com 75%, ambos com 200 épocas. <code>curva_perda.png</code> mostra a mudança do erro. <code>reconstrucoes.png</code> compara imagens originais, cobertas e reconstruídas.</p>
       <p>Os slides mostram também um experimento complementar público. Ele é separado dos números medidos pelo código deste repositório.</p>
     </div>
   </details>
 
   <details>
-    <summary><span class="n">5</span> Como executar e o que observar</summary>
+    <summary><span class="n">5</span> O estudo de retreinamento</summary>
     <div class="body">
-      <p>O README descreve a instalação com <code>uv sync --no-dev</code> e a execução do notebook com Jupyter. O treino precisa de GPU CUDA. Para gerar slides também são necessários LibreOffice e <code>pdftoppm</code>.</p>
+      <p>Uma segunda parte testa se mudanças de arquitetura e de erro melhoram as reconstruções. As regras são congeladas antes de treinar: três sementes, duas taxas, até 200 épocas e 120 minutos de orçamento.</p>
+      <p>A referência C0 não passou do piloto de tempo, nas rodadas v1 e v2. Sem ela, a regra de ganho não pôde ser aplicada e <b>nenhum vencedor foi declarado</b>. A avaliação visual humana foi negativa nas duas taxas.</p>
+      <p>Os registros ficam em <code>resultados/estudo-melhorar-reconstrucoes-mae/</code> e <code>-c0-v2/</code>.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="n">6</span> Como executar e o que observar</summary>
+    <div class="body">
+      <p>O README descreve a instalação com <code>uv sync</code> e a execução do notebook com Jupyter. O treino precisa de GPU CUDA. Para gerar slides também são necessários LibreOffice e <code>pdftoppm</code>.</p>
       <p>Os comandos podem substituir dados e resultados. Uma cópia de trabalho preserva os arquivos existentes.</p>
       <p class="muted">A leitura completa, os diagramas e o glossário estão nos arquivos Markdown deste pacote.</p>
     </div>

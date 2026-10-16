@@ -38,12 +38,12 @@
 <body>
 <header>
   <h1>Masked Modeling em Deep Learning</h1>
-  <p>Um modelo aprende a reconstruir partes escondidas de imagens.</p>
+  <p>Um modelo aprende a reconstruir partes escondidas de imagens, e um estudo compara três variantes de treino.</p>
   <small>Experimento didático com MAE e CIFAR-10</small>
 </header>
 <section>
   <h2>1. O problema que o experimento ensina</h2>
-  <p class="lead">Em vez de depender de uma resposta preparada por uma pessoa, o modelo recebe uma imagem, vê alguns pedaços e tenta reconstruir os pedaços cobertos.</p>
+  <p class="lead">Em vez de depender de uma resposta preparada por uma pessoa, o modelo recebe uma imagem, vê alguns pedaços e tenta reconstruir os pedaços cobertos. É assim que se treina sem precisar de dados rotulados.</p>
 </section>
 <section>
   <h2>2. A viagem de uma execução</h2>
@@ -62,18 +62,18 @@
     <div class="part p1"><b>Dados</b><p>Baixados, verificados e selecionados. <code>codigo/dados.py</code></p></div>
     <div class="part p2"><b>Modelo</b><p>Interpreta partes visíveis e reconstrói as escondidas. <code>codigo/mae.py</code></p></div>
     <div class="part p3"><b>Treino</b><p>Ajusta o modelo e calcula o erro. <code>codigo/treino.py</code></p></div>
-    <div class="part p4"><b>Entrega</b><p>Gera slides e confere arquivos do pacote. <code>scripts/</code></p></div>
+    <div class="part p4"><b>Estudo e entrega</b><p>Regras congeladas, slides e conferência do pacote. <code>codigo/estudo_*.py</code>, <code>scripts/</code></p></div>
   </div>
 </section>
 <section class="twocol">
   <div>
     <h2>4. Onde está cada coisa</h2>
     <table>
-      <tr><td><code>codigo/</code></td><td>Notebook, dados, modelo e treino.</td></tr>
+      <tr><td><code>codigo/</code></td><td>Notebook, dados, modelo, treino e módulos do estudo.</td></tr>
       <tr><td><code>dados/</code></td><td>Seleção de imagens e seus índices.</td></tr>
-      <tr><td><code>resultados/</code></td><td>Métricas e figuras registradas.</td></tr>
+      <tr><td><code>resultados/</code></td><td>Métricas, figuras e registros das rodadas do estudo.</td></tr>
       <tr><td><code>slides/</code></td><td>Apresentação e imagens complementares.</td></tr>
-      <tr><td><code>tests/</code></td><td>Verificações automáticas.</td></tr>
+      <tr><td><code>tests/</code></td><td>17 arquivos de verificação automática.</td></tr>
     </table>
   </div>
   <div>
@@ -82,19 +82,30 @@
       <tr><td>MAE</td><td>Masked Autoencoder, modelo que reconstrói partes escondidas.</td></tr>
       <tr><td>Patch</td><td>Quadrado pequeno retirado da imagem.</td></tr>
       <tr><td>MSE</td><td>Média do erro quadrático entre pixels previstos e corretos.</td></tr>
+      <tr><td>SSIM</td><td>Medida de semelhança estrutural entre imagens.</td></tr>
       <tr><td>CUDA</td><td>Forma de usar uma GPU NVIDIA nos cálculos.</td></tr>
     </table>
   </div>
 </section>
 <section>
-  <h2>6. Execução documentada</h2>
+  <h2>6. O estudo de retreinamento e o que ele registrou</h2>
+  <table>
+    <tr><td>Candidatos</td><td>C0 é o MAE direto retreinado, C1 tem decoder maior, C2 usa perda mista de MSE e L1. Um quarto candidato residual só existiria com saldo e vitória da referência.</td></tr>
+    <tr><td>Regras congeladas</td><td>Três sementes, duas taxas, até 200 épocas, ganho mínimo definido contra C0 e 120 minutos de orçamento, com hash que prova que as regras não mudaram.</td></tr>
+    <tr><td>Resultado</td><td>C0 não passou do piloto de tempo nas rodadas v1 e v2. Sem referência, a regra de ganho não se aplica e nenhum vencedor foi declarado.</td></tr>
+    <tr><td>Tempo gasto</td><td>41,0615 minutos na alocação principal da v1; total de v1 e v2 em 41,270848124 minutos dos 120 permitidos.</td></tr>
+    <tr><td>Avaliação visual</td><td>Aberta, com um único avaliador, sem cegamento: considerou os resultados ruins nas duas taxas. O objetivo visual não foi atingido.</td></tr>
+  </table>
+</section>
+<section>
+  <h2>7. Execução documentada</h2>
   <div class="run">
     <b>Comandos documentados no README</b>
-    <code>uv sync --no-dev</code><br>
+    <code>uv sync</code><br>
     <code>uv run --no-dev jupyter nbconvert --execute --to notebook --inplace codigo/notebook.ipynb</code><br>
     <code>uv run --no-dev python scripts/gerar_slides.py</code>
   </div>
-  <p class="note">O treino exige GPU NVIDIA com CUDA. A geração dos slides também precisa de LibreOffice e pdftoppm. O README detalha os requisitos e os arquivos gravados pelos comandos.</p>
+  <p class="note">O treino exige GPU NVIDIA com CUDA 13.0. A geração dos slides também precisa de LibreOffice e pdftoppm. O README detalha os requisitos e os arquivos gravados pelos comandos.</p>
 </section>
 <footer>Os demais capítulos detalham o funcionamento; o glossário explica os termos técnicos. Os comandos são descritos no repositório e não foram executados nesta documentação.</footer>
 </body>

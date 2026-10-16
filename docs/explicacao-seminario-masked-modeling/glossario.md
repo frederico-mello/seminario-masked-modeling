@@ -1,6 +1,7 @@
 # Glossário
 
 - **AdamW:** regra que ajusta os valores internos do modelo para reduzir o erro durante o treino.
+- **Append-only:** arquivo que só recebe acréscimos. Nada é reescrito nem apagado.
 - **Array:** sequência organizada de números. Neste projeto, guarda pixels ou classes.
 - **Assimetria do MAE:** o encoder e o decoder têm tamanhos diferentes. Só o encoder processa os pedaços visíveis.
 - **Atenção:** cálculo que ajuda o modelo a relacionar partes diferentes de uma imagem.
@@ -10,11 +11,13 @@
 - **Main:** nome convencional do ramo principal de um repositório.
 - **Pull request ou solicitação de integração:** mecanismo para revisar e integrar mudanças feitas em outro ramo.
 - **Cabeça de atenção:** parte de um bloco de atenção que calcula relações entre os pedaços da imagem. Várias cabeças observam relações diferentes.
-- **Checkpoint:** arquivo que guarda os valores aprendidos pelo modelo. Aqui, fica em `checkpoints/`.
+- **Checkpoint:** arquivo que guarda os valores aprendidos pelo modelo. Aqui, ficam em `checkpoints/` e em `resultados/estudo-*/checkpoints/`.
 - **CI:** abreviação de integração contínua. Um serviço executa testes automaticamente quando há mudanças no código.
 - **CIFAR-10:** coleção oficial de 60.000 imagens pequenas, divididas em 10 classes.
 - **Classe de imagem:** categoria atribuída à imagem, como gato ou navio.
 - **Classe de programação:** molde que reúne informações e ações de um componente do programa.
+- **Congelamento:** ato de gravar as regras com hash antes da execução, de modo que qualquer alteração posterior seja detectável.
+- **Controle:** referência sem rede usada para comparar candidatos. Aqui são a média RGB dos visíveis e a interpolação espacial.
 - **CPU:** processador de uso geral. Este projeto não a usa para substituir a GPU exigida pelo treino.
 - **CSV:** arquivo de texto que organiza dados em linhas e colunas.
 - **CUDA:** tecnologia que permite ao PyTorch fazer cálculos em uma GPU NVIDIA.
@@ -24,6 +27,7 @@
 - **Decoder ou decodificador:** parte do MAE que prevê os pixels dos pedaços escondidos.
 - **Dependência:** programa ou biblioteca de que o projeto precisa para funcionar.
 - **Diagrama de classes:** desenho das partes de programação e de como elas são compostas.
+- **Diagrama de estados:** desenho das situações possíveis de um processo e do que faz passar de uma para outra.
 - **Composição:** relação em que um componente é montado com partes menores.
 - **Diagrama de entidade-relacionamento:** desenho que mostra grupos de dados e suas relações. Neste guia, representa arquivos, não um banco de dados.
 - **`1..N`:** notação que significa um ou mais elementos.
@@ -33,25 +37,32 @@
 - **Dimensão do modelo:** quantidade de valores usada para representar cada pedaço dentro do modelo.
 - **DOCX:** formato editável de documentos do Microsoft Word.
 - **Encoder ou codificador:** parte do MAE que interpreta apenas os pedaços visíveis.
+- **Envelope:** limite de tempo reservado a uma atividade, como o piloto ou o treino de uma semente e taxa.
 - **Especificação:** texto que descreve o comportamento esperado de um sistema ou de uma parte dele.
+- **Estado de um evento:** marca no registro que diz se um número vem da validação, do teste ou de outra etapa.
 - **Época:** uma passagem completa pelos exemplos de treino.
 - **Feed-forward:** etapa que transforma os valores recebidos por um bloco do modelo.
 - **Forward:** operação que leva dados de entrada pelo modelo até produzir uma resposta.
 - **Grafo de código:** mapa das ligações entre funções, classes e arquivos de um programa.
 - **GPU:** processador especializado em executar muitos cálculos em paralelo.
 - **Hash:** resumo calculado a partir do conteúdo de um arquivo. Ajuda a verificar se esse conteúdo mudou.
+- **Idempotente:** tarefa que pode ser repetida sem reiniciar o trabalho já feito.
 - **Índice original:** posição de uma imagem no conjunto CIFAR-10 de origem.
 - **Jupyter Notebook:** documento com texto e blocos de código executáveis, como `codigo/notebook.ipynb`.
+- **L1:** medida de erro que soma as diferenças absolutas. É usada junto do MSE no candidato C2.
 - **LibreOffice:** conjunto de programas de escritório usado aqui para converter a apresentação em PDF.
 - **Learning rate ou taxa de aprendizado:** tamanho dos ajustes feitos nos valores do modelo. `lr` é a abreviação usada no CSV.
 - **Linear probing:** avaliação futura em que um classificador simples, um programa que escolhe uma categoria, usa as representações do modelo. Não faz parte do experimento atual.
 - **Lockfile:** arquivo que fixa as versões das dependências. Neste projeto, é `uv.lock`.
 - **MAE:** sigla de *Masked Autoencoder*, modelo que reconstrói pedaços escondidos. Aqui, não significa erro absoluto médio.
+- **Manifesto:** arquivo com as regras congeladas e o hash que as identifica.
 - **Masked modeling ou modelagem mascarada:** exercício de esconder parte dos dados e pedir ao modelo que preveja ou reconstrua o que falta.
 - **Máscara:** indicação de quais pedaços da imagem ficam escondidos e quais ficam visíveis.
+- **Máscara aninhada:** propriedade em que os pedaços ocultos de uma taxa menor também estão entre os ocultos da taxa maior.
 - **Matplotlib:** biblioteca Python usada para desenhar gráficos.
 - **Markdown:** formato simples de texto que usa sinais como `#` para criar títulos e listas.
 - **MD5:** tipo de hash usado para detectar se o arquivo CIFAR-10 baixado está íntegro.
+- **Mediana:** valor do meio de uma lista ordenada. É menos sensível a extremos que a média.
 - **Mermaid:** formato de texto usado para desenhar diagramas dentro de documentos.
 - **MSE:** erro quadrático médio. Compara valores previstos com valores corretos e dá mais peso a diferenças grandes. Aqui mede pixels escondidos.
 - **nbconvert:** ferramenta do Jupyter que executa um notebook pela linha de comando e salva seus resultados.
@@ -63,6 +74,7 @@
 - **Pandas:** biblioteca Python para organizar e analisar tabelas de dados.
 - **Patch:** pedaço quadrado de uma imagem. Neste projeto, mede 8 por 8 pixels.
 - **PDF:** formato de documento voltado à leitura e impressão.
+- **Piloto:** medição de uma única época por taxa, feita antes do treino completo, para verificar a viabilidade de tempo.
 - **Pixel:** menor ponto de uma imagem digital. Cada ponto tem valores que determinam sua cor.
 - **PNG:** formato de imagem usado para figuras e gráficos.
 - **Poppler:** conjunto de ferramentas para trabalhar com documentos PDF.
@@ -73,11 +85,14 @@
 - **Python:** linguagem de programação usada neste projeto.
 - **PyTorch:** biblioteca usada para definir e treinar o modelo.
 - **Representação:** resumo numérico interno que o modelo cria a partir dos pedaços visíveis.
+- **Residual:** variante que prevê uma correção sobre um preenchimento inicial, aqui a média RGB dos visíveis.
+- **Régua:** conjunto fixo de máscara, partição e medida usado para avaliar tudo do mesmo jeito.
 - **Script:** arquivo com instruções executadas pelo computador, como os que ficam em `scripts/`.
-- **Seed ou semente:** valor que torna escolhas aleatórias repetíveis quando o processo é repetido.
+- **Seed ou semente:** valor que fixa a sequência de sorteios para ajudar a repetir uma execução; versões e plataformas diferentes ainda podem gerar resultados distintos.
 - **SHA-256:** tipo de hash registrado para os arquivos de pesos do modelo.
 - **SimMIM:** outro método de modelagem mascarada para imagens. É comparado nos slides, não implementado aqui.
 - **Split ou divisão:** parte do conjunto de dados. Aqui, treino, validação ou teste.
+- **SSIM:** medida de semelhança estrutural entre imagens. Leva em conta luminância, contraste e estrutura.
 - **Subset ou subconjunto:** seleção menor retirada de um conjunto maior.
 - **Taxa de mascaramento:** proporção dos pedaços da imagem escondidos. As taxas testadas são 50% e 75%.
 - **Tensor:** bloco de números organizado em dimensões, como lote, cor, altura e largura da imagem.

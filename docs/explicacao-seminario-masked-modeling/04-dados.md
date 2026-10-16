@@ -23,10 +23,6 @@ erDiagram
         string classe "uma das 10"
         int indice_original "posição na origem"
     }
-    ARRAY {
-        uint8 imagens "32x32x3"
-        int64 rotulos "classe da imagem"
-    }
     CONDICAO {
         float taxa_mascara "0.5 ou 0.75"
         int seed "42"
@@ -37,11 +33,19 @@ erDiagram
         float tempo_epoca_medido_s "segundos"
         string sha256 "hash dos pesos"
     }
+    HISTORICO {
+        string candidato "C0 C1 C2"
+        int seed "10 20 30"
+        float perda_validacao "erro na validação"
+        float ssim "semelhança estrutural"
+        string estado "completo ou incompleto"
+    }
     CIFAR10 ||--o{ SUBSET : "gera seleções"
     SUBSET ||--|{ INDICE : "identifica imagens"
-    SUBSET ||--|{ ARRAY : "armazena arrays"
     SUBSET ||--o{ METRICA : "alimenta"
     CONDICAO ||--|| METRICA : "uma linha por taxa"
+    SUBSET ||--o{ HISTORICO : "mede por época"
+    CONDICAO ||--o{ HISTORICO : "taxa do registro"
 ```
 
 ## Conjunto original e seleção
@@ -100,17 +104,35 @@ Os rótulos ajudam a selecionar e conferir as classes. A função de treino usa 
 | `python`, `pytorch`, `cuda`, `driver`, `gpu` | Versões e equipamento usados na medição. |
 | `seed` | Semente usada para escolhas aleatórias, registrada como 42. |
 
-Na cópia examinada, os valores são:
+O CSV de métricas registra:
 
-| Condição | MSE do teste nos patches ocultos |
-|---|---:|
-| Máscara de 50% | 0,06084 |
-| Máscara de 75% | 0,07168 |
+| Condição | Épocas | Lote | Taxa de aprendizado | MSE do teste nos patches ocultos | Tempo por época |
+|---|---:|---:|---:|---:|---:|
+| Máscara de 50% | 200 | 256 | 0,0003 | 0,06084 | 0,5838 s |
+| Máscara de 75% | 200 | 256 | 0,0003 | 0,07168 | 0,5838 s |
 
 O menor valor indica menor diferença de reconstrução nesta medida e neste teste. A especificação do projeto proíbe tratar essa diferença como tendência geral ou como prova de melhor desempenho em outras tarefas.
 
 Os pesos do modelo ficam em `checkpoints/` quando o notebook é executado. O README informa que eles ficam fora do ZIP. O CSV guarda o SHA-256 de cada arquivo de pesos para permitir conferência.
 
+## Registros do estudo de retreinamento
+
+A rodada v1 do estudo escreve em `resultados/estudo-melhorar-reconstrucoes-mae/`. Os arquivos principais são:
+
+| Arquivo | Conteúdo |
+|---|---|
+| `manifesto.json` | Regras congeladas com o hash que as identifica. |
+| `historico.csv` | Uma linha por época ou evento, com perdas, SSIM, tempo, hashes e estado. |
+| `contador.jsonl` | Soma cumulativa do tempo gasto, com tope de 120 minutos. |
+| `resumo.json` | Resumo derivado do histórico: pilotos, treinos, controles, decisão e seleção. |
+| `estado.json` | Estado corrente do estudo, copiado de `apresentacao/estado-v1.json`. |
+| `figuras/` | Curvas de validação, melhores de validação e avaliação final. |
+| `ficha-visual/` | Reconstruções dos oito IDs de inspeção nas duas taxas e a ficha de notas. |
+
+A rodada v2, isolada, escreve em `resultados/estudo-melhorar-reconstrucoes-mae-c0-v2/` com os mesmos tipos de arquivo e um contador próprio de reserva. A pasta do arquivo do histórico tem marca de fim de linha específica, registrada em `.gitattributes`.
+
+O histórico é somente de acréscimo: linhas novas são somadas e nada é reescrito. Os resumos e relatórios consolidam esses registros sem alterar os eventos originais.
+
 ## Recursos complementares dos slides
 
-As imagens em `slides/recursos-complementares/` vêm de um experimento separado com um MAE pré-treinado público. O README e os slides identificam esse material como complementar, não como resultado gerado pelo treinamento deste repositório.
+As imagens em `slides/recursos-complementares/` vêm de um experimento separado com um MAE pré-treinado público. O README e os slides identificam esse material como complementar, não como resultado gerado pelo treinamento deste repositório. Os três arquivos são o fluxo do experimento em seis etapas, a grade de máscara e reconstrução nas taxas de 25% a 90% e o gráfico de MSE por taxa.
